@@ -2,7 +2,7 @@
 //  NERStyle+NERChainable.h
 //  NerdyUI
 //
-//  Created by CAI on 11/1/16.
+//  Created by nerdycat on 11/1/16.
 //  Copyright © 2016 nerdycat. All rights reserved.
 //
 
@@ -13,22 +13,18 @@
 /**
  * Nearly all the chainable attributes In NerdyUI can be set in Style.
  * After creation, Styles can be apply to UIView or NSAttributedStirng.
- * Style can inhert from other styles too.
- 
- * GlobalStyle can be referred globally using style name.
- * Local style allow you to create style on the fly.
+ * Style can inherit from other styles too.
+ * Style with name can be referred globally.
  
  * Example:
-    GlobalStyle(@"buttonBase").fixHeight(40).cr(20).insets(0, 15);
-    GlobalStyle(@"actionButton").styles(@"buttonBase").bgImg(@"red").highBgImg(@"blue");
-    id localButtonStyle = Style.styles(@"buttonBase").bd(1).color(@"black").highColor(@"lightGray");
+    Style(@"h1").color(@"#333333").fnt(17);
+    Style(@"button").fixHeight(30).insets(0, 10).cornerRadius(5);
+    id actionStyle = Style().styles(@"button h1").bgImg(@"red").highBgImg(@"blue").highColor(@"white");
  
-    id button1 = Button.styles(@"actionButton").str(@"Button1");
-    id button2 = Button.styles(localButtonStyle).str(@"Button2");
-    HStack(button1, button2).embedIn(self.view, 20, 20, NERNull, NERNull);
+    id foo = Label.styles(@"h1").str(@"hello world");
+    id bar = Button.styles(actionStyle).str(@"hello world");
  */
-#define GlobalStyle(name)       [NERStyle createStyleWithKey:name]
-#define Style                   [NERStyle createStyleWithKey:nil]
+#define Style(...)                [NERStyle createStyleWithKeys:@[__VA_ARGS__]]
 
 
 @interface NERStyle (NERChainable)
@@ -41,19 +37,17 @@
 NER_STYLE_PROP(Object)          styles;
 
 
+/**
+ * UIView
+ */
 NER_STYLE_PROP(Int)             tg;
 NER_STYLE_PROP(Float)           opacity;
 NER_STYLE_PROP(Object)          bgColor;
-NER_STYLE_PROP(Float)           cr;
-NER_STYLE_PROP(FloatObjectList) bd;
-NER_STYLE_PROP(FloatList)       sd;
-
-NER_STYLE_PROP(Point)           xy;
-NER_STYLE_PROP(Size)            wh;
+NER_STYLE_PROP(Float)           cornerRadius;
+NER_STYLE_PROP(FloatObjectList) border;
+NER_STYLE_PROP(FloatList)       shadow;
 NER_STYLE_PROP(Rect)            xywh;
 NER_STYLE_PROP(Point)           cxy;
-NER_STYLE_PROP(Point)           maxXY;
-
 NER_STYLE_PROP(Float)           horHugging;
 NER_STYLE_PROP(Float)           verHugging;
 NER_STYLE_PROP(Float)           horResistance;
@@ -65,12 +59,11 @@ NER_STYLE_PROP(Size)            fixWH;
 - (instancetype)clip;
 - (instancetype)touchEnable;
 - (instancetype)touchDisable;
+- (instancetype)stateDisabled;
 - (instancetype)invisible;
-
 - (instancetype)fitWidth;
 - (instancetype)fitHeight;
 - (instancetype)fitSize;
-
 - (instancetype)flexibleLeft;
 - (instancetype)flexibleRight;
 - (instancetype)flexibleTop;
@@ -78,11 +71,9 @@ NER_STYLE_PROP(Size)            fixWH;
 - (instancetype)flexibleLR;
 - (instancetype)flexibleTB;
 - (instancetype)flexibleLRTB;
-
 - (instancetype)flexibleWidth;
 - (instancetype)flexibleHeight;
 - (instancetype)flexibleWH;
-
 - (instancetype)lowHugging;
 - (instancetype)highHugging;
 - (instancetype)lowResistance;
@@ -90,15 +81,18 @@ NER_STYLE_PROP(Size)            fixWH;
 
 
 
-
+/**
+ * UILabel
+ */
 NER_STYLE_PROP(Object)          str;
 NER_STYLE_PROP(Object)          fnt;
 NER_STYLE_PROP(Object)          color;
 NER_STYLE_PROP(Object)          highColor;
-
 NER_STYLE_PROP(Int)             lines;
+NER_STYLE_PROP(Float)           lineGap;
 NER_STYLE_PROP(Float)           preferWidth;
 
+- (instancetype)multiline;
 - (instancetype)leftAlignment;
 - (instancetype)centerAlignment;
 - (instancetype)rightAlignment;
@@ -106,7 +100,9 @@ NER_STYLE_PROP(Float)           preferWidth;
 
 
 
-
+/**
+ * UIImageView
+ */
 NER_STYLE_PROP(Object)          img;
 NER_STYLE_PROP(Object)          highImg;
 
@@ -116,19 +112,25 @@ NER_STYLE_PROP(Object)          highImg;
 
 
 
-
+/**
+ * UIButton
+ */
+NER_STYLE_PROP(Object)          selectedColor;
+NER_STYLE_PROP(Object)          disabledColor;
 NER_STYLE_PROP(Object)          selectedImg;
 NER_STYLE_PROP(Object)          disabledImg;
 NER_STYLE_PROP(Object)          bgImg;
 NER_STYLE_PROP(Object)          highBgImg;
 NER_STYLE_PROP(Object)          selectedBgImg;
 NER_STYLE_PROP(Object)          disabledBgImg;
-
+NER_STYLE_PROP(Float)           gap;
 NER_STYLE_PROP(Insets)          insets;
 
 
 
-
+/**
+ * UITextField
+ */
 NER_STYLE_PROP(Object)          pstr;
 NER_STYLE_PROP(Int)             maxLength;
 
@@ -136,7 +138,6 @@ NER_STYLE_PROP(Int)             maxLength;
 - (instancetype)becomeFocus;         
 - (instancetype)clearWhenFocus;     
 - (instancetype)roundStyle;        
-
 - (instancetype)ASCIIKeyboard;
 - (instancetype)URLKeyboard;
 - (instancetype)numberKeyboard;
@@ -147,7 +148,6 @@ NER_STYLE_PROP(Int)             maxLength;
 - (instancetype)searchKeybaord;
 - (instancetype)namePhoneKeyboard;
 - (instancetype)numberPunctuationKeyboard;
-
 - (instancetype)doneReturnKey;
 - (instancetype)goReturnKey;
 - (instancetype)googleReturnKey;
@@ -156,16 +156,67 @@ NER_STYLE_PROP(Int)             maxLength;
 - (instancetype)nextRetrunKey;
 - (instancetype)joinReturnKey;
 - (instancetype)routeReturnKey;
-
 - (instancetype)showClearButton;
 - (instancetype)showClearButtonWhileEditing;
 - (instancetype)showClearButtonUnlessEditing;
 
 
 
+/**
+ * UISwitch
+ */
+NER_STYLE_PROP(Object)          onColor;
+NER_STYLE_PROP(Object)          thumbColor;
+NER_STYLE_PROP(Object)          outlineColor;
 
-NER_STYLE_PROP(Float)           gap;
 
+
+/**
+ * UISlider
+ */
+NER_STYLE_PROP(Float)           val;
+NER_STYLE_PROP(Float)           minVal;
+NER_STYLE_PROP(Float)           maxVal;
+NER_STYLE_PROP(Object)          minTrack;
+NER_STYLE_PROP(Object)          maxTrack;
+NER_STYLE_PROP(Object)          thumb;
+NER_STYLE_PROP(Object)          highThumb;
+NER_STYLE_PROP(Float)           trackHeight;
+NER_STYLE_PROP(Insets)          thumbInsets;
+
+- (instancetype)discrete;
+
+
+
+/**
+ * UIStepper
+ */
+NER_STYLE_PROP(Float)           stepVal;
+NER_STYLE_PROP(Object)          tint;
+
+
+
+/**
+ * UIPageControl
+ */
+NER_STYLE_PROP(Int)             pages;
+
+- (instancetype)hideForSingle;
+
+
+
+/**
+ * UIVisualEffectView
+ */
+- (instancetype)darkBlur;
+- (instancetype)lightBlur;
+- (instancetype)extraLightBlur;
+
+
+
+/**
+ * NERStack
+ */
 - (instancetype)topAlignment;
 - (instancetype)bottomAlignment;
 - (instancetype)baselineAlignment;
@@ -173,31 +224,46 @@ NER_STYLE_PROP(Float)           gap;
 
 
 
-
-NER_STYLE_PROP(Object)          tint;
+/**
+ * NERStaticRow
+ */
 NER_STYLE_PROP(Object)          detailStr;
 NER_STYLE_PROP(Object)          detailFnt;
 NER_STYLE_PROP(Object)          detailColor;
+NER_STYLE_PROP(Object)          accessory;
+NER_STYLE_PROP(Bool)            check;
 NER_STYLE_PROP(Float)           cellHeight;
-NER_STYLE_PROP(Float)           separatorInset;
-NER_STYLE_PROP(Float)           groupGap;
-NER_STYLE_PROP(Bool)            checked;
+NER_STYLE_PROP(Float)           separatorLeftInset;
 
+- (instancetype)cellHeightAuto;
 - (instancetype)subtitleStyle;
 - (instancetype)value2Style;
 - (instancetype)disclosure;
 
 
 
+/**
+ * NERStaticSection
+ */
+NER_STYLE_PROP(Object)          header;
+NER_STYLE_PROP(Object)          footer;
 
+- (instancetype)singleCheck;
+- (instancetype)multiCheck;
+
+
+
+/**
+ * NSMutableAttributedString
+ */
 NER_STYLE_PROP(Object)          systemLink;
-NER_STYLE_PROP(Object)          match;
 NER_STYLE_PROP(Float)           kern;
 NER_STYLE_PROP(Float)           stroke;
 NER_STYLE_PROP(Float)           oblique;
 NER_STYLE_PROP(Float)           expansion;
 NER_STYLE_PROP(Float)           baselineOffset;
-NER_STYLE_PROP(Float)           lineSpacing;
+NER_STYLE_PROP(Float)           indent;
+NER_STYLE_PROP(Object)          match;
 
 - (instancetype)matchURL;
 - (instancetype)matchHashTag;
@@ -206,6 +272,7 @@ NER_STYLE_PROP(Float)           lineSpacing;
 - (instancetype)strikeThrough;
 - (instancetype)letterpress;
 - (instancetype)linkForLabel;
+- (instancetype)ifNotExists;
 
 @end
 

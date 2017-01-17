@@ -2,8 +2,8 @@
 //  UIView+NERFrame.m
 //  NerdyUI
 //
-//  Created by admin on 16/9/28.
-//  Copyright © 2016年 nerdycat. All rights reserved.
+//  Created by nerdycat on 16/9/28.
+//  Copyright © 2016 nerdycat. All rights reserved.
 //
 
 #import "UIView+NERFrame.h"
@@ -29,35 +29,35 @@
     NER_UPDATE_FRAME(origin.y, y);
 }
 
-- (CGPoint)origin {
+- (CGPoint)xy {
     return self.frame.origin;
 }
 
-- (void)setOrigin:(CGPoint)origin {
-    NER_UPDATE_FRAME(origin, origin);
+- (void)setXy:(CGPoint)xy {
+    NER_UPDATE_FRAME(origin, xy);
 }
 
-- (CGFloat)width {
+- (CGFloat)w {
     return self.frame.size.width;
 }
 
-- (void)setWidth:(CGFloat)width {
+- (void)setW:(CGFloat)width {
     NER_UPDATE_FRAME(size.width, width);
 }
 
-- (CGFloat)height {
+- (CGFloat)h {
     return self.frame.size.height;
 }
 
-- (void)setHeight:(CGFloat)height {
+- (void)setH:(CGFloat)height {
     NER_UPDATE_FRAME(size.height, height);
 }
 
-- (CGSize)size {
+- (CGSize)wh {
     return self.frame.size;
 }
 
-- (void)setSize:(CGSize)size {
+- (void)setWh:(CGSize)size {
     NER_UPDATE_FRAME(size, size);
 }
 
@@ -93,16 +93,16 @@
     NER_UPDATE_FRAME(origin.y, maxY - rect.size.height);
 }
 
-- (CGPoint)maxPoint {
+- (CGPoint)maxXY {
     return CGPointMake(CGRectGetMaxX(self.frame), CGRectGetMaxY(self.frame));
 }
 
-- (void)setMaxPoint:(CGPoint)maxPoint {
-    NER_UPDATE_FRAME(origin, CGPointMake(maxPoint.x - rect.origin.x, maxPoint.y - rect.origin.y));
+- (void)setMaxXY:(CGPoint)maxXY {
+    NER_UPDATE_FRAME(origin, CGPointMake(maxXY.x - rect.size.width, maxXY.y - rect.size.height));
 }
 
-- (CGPoint)middle {
-    return CGPointMake(self.frame.size.width / 2, self.frame.size.height / 2);
+- (CGPoint)midPoint {
+    return CGPointMake(self.bounds.size.width / 2, self.bounds.size.height / 2);
 }
 
 @end

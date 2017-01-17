@@ -1,14 +1,118 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE plist PUBLIC "-//Apple Computer//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
-<!--
-   appList.plist
-   NerdyUIExample
-
-   Created by admin on 2017/1/11.
-   Copyright (c) 2017年 nerdycat. All rights reserved.
--->
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
-    <dict>
-    
-    </dict>
+<array>
+	<dict>
+		<key>iconName</key>
+		<string>mario.jpeg</string>
+		<key>title</key>
+		<string>Super Mario Run</string>
+		<key>category</key>
+		<string>Games</string>
+		<key>rating</key>
+		<integer>3</integer>
+		<key>commentCount</key>
+		<integer>6053</integer>
+		<key>price</key>
+		<string></string>
+		<key>iap</key>
+		<true/>
+	</dict>
+	<dict>
+		<key>iconName</key>
+		<string>bitmoji.jpeg</string>
+		<key>title</key>
+		<string>Bitmoji - Your Personal Emoji</string>
+		<key>category</key>
+		<string>Utilities</string>
+		<key>rating</key>
+		<integer>4</integer>
+		<key>commentCount</key>
+		<integer>11</integer>
+		<key>price</key>
+		<string></string>
+		<key>iap</key>
+		<false/>
+	</dict>
+	<dict>
+		<key>iconName</key>
+		<string>messenger.jpeg</string>
+		<key>title</key>
+		<string>Messenger</string>
+		<key>category</key>
+		<string>Social Netowrking</string>
+		<key>rating</key>
+		<integer>3</integer>
+		<key>commentCount</key>
+		<integer>2052</integer>
+		<key>price</key>
+		<string></string>
+		<key>iap</key>
+		<false/>
+	</dict>
+	<dict>
+		<key>iconName</key>
+		<string>youtube.jpeg</string>
+		<key>title</key>
+		<string>YouTube - Watch and Share Videos, Music &amp; Clips Support</string>
+		<key>category</key>
+		<string>Photo &amp; Video</string>
+		<key>rating</key>
+		<real>3.5</real>
+		<key>commentCount</key>
+		<integer>38</integer>
+		<key>price</key>
+		<string></string>
+		<key>iap</key>
+		<true/>
+	</dict>
+	<dict>
+		<key>iconName</key>
+		<string>snapchat.jpeg</string>
+		<key>title</key>
+		<string>Snapchat</string>
+		<key>category</key>
+		<string>Photo &amp; Video</string>
+		<key>rating</key>
+		<integer>3</integer>
+		<key>commentCount</key>
+		<integer>33</integer>
+		<key>price</key>
+		<string></string>
+		<key>iap</key>
+		<true/>
+	</dict>
+	<dict>
+		<key>iconName</key>
+		<string>fivenights.jpeg</string>
+		<key>title</key>
+		<string>Five Nights at Freddy&apos;s: Sister Location Support</string>
+		<key>category</key>
+		<string>Games</string>
+		<key>rating</key>
+		<real>4.5</real>
+		<key>commentCount</key>
+		<integer>814</integer>
+		<key>price</key>
+		<string>2.99</string>
+		<key>iap</key>
+		<false/>
+	</dict>
+	<dict>
+		<key>iconName</key>
+		<string>minecraft.jpeg</string>
+		<key>title</key>
+		<string>Minecraft: Pocket Edition Support</string>
+		<key>category</key>
+		<string>Games</string>
+		<key>rating</key>
+		<real>4.5</real>
+		<key>commentCount</key>
+		<integer>869</integer>
+		<key>price</key>
+		<string>0.99</string>
+		<key>iap</key>
+		<true/>
+	</dict>
+</array>
 </plist>

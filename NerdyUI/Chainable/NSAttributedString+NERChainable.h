@@ -12,11 +12,18 @@
 
 /**
  * Create a NSAttributedString.
- * AttStr argument can be:
+ * AttStr can take multiply arguments, and each of them can be:
    1) NSString
    2) NSAttributedString
    3) UIImage, will create an NSTextAttachment.
    4) NSData, specifically HTML data.
+ 
+ * Usages:
+    1) id att1 = AttStr(@"Hello").color(@"red");
+       id att2 = AttStr(@"Merry Christmas!").color(@"blue").range(2, 2).match(@"Christmas").underline;
+       id att = AttStr(att1, @", ", att2, Img(@"hat")).fnt(@30);
+ 
+    2) 
  */
 #define AttStr(...) [NSMutableAttributedString ner_attributedStringWithSubstrings:@[__VA_ARGS__]]
 
@@ -171,10 +178,12 @@ NER_ATT_PROP(Object)    styles;
 
 
 /**
- * Add link for Label.
+ * Marks as link for UILabel.
  * Example:
-    id str = AttStr(@"@Tim at #Apple").matchHashTag.matchNameTag.linkForLabel;
-    Label.str(str).embedIn(self.view).onLink(^(NSString *text) {
+    id att1 = AttStr(@"@Tim at #Apple").matchHashTag.matchNameTag.linkForLabel;
+    id att2 = AttStr(@"hello world").range(0, 5).linkForLabel.color(@"red");
+ 
+    Label.str(att1).embedIn(self.view).onLink(^(NSString *text) {
         Log(text);
     });
  */
@@ -183,7 +192,7 @@ NER_ATT_PROP(Object)    styles;
 
 /**
  * Only apply attribute if not exists.
- * By default, the attribute added after will override the previous value.
+ * By default, the attribute value applied later will override the previous one if they are the same attributes.
  * Usages:
     AttStr(@"hello").color(@"red").color(@"green")              //green color
     AttStr(@"hello").color(@"red").ifNotExists.color(@"green")  //red color

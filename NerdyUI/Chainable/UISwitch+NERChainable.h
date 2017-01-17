@@ -2,8 +2,8 @@
 //  UISwitch+NERChainable.h
 //  NerdyUI
 //
-//  Created by admin on 2016/12/20.
-//  Copyright © 2016年 nerdycat. All rights reserved.
+//  Created by nerdycat on 2016/12/20.
+//  Copyright © 2016 nerdycat. All rights reserved.
 //
 
 #import <UIKit/UIKit.h>
@@ -45,11 +45,11 @@ NER_SWITCH_PROP(Object)     outlineColor;
  * Use UIControlEventValueChanged event internally.
  * It support two kind of arguments:
     1) a callback block
-    2) a target/action pair
+    2) a selector string
  
  * Usages: 
     .onChange(^{}), .onChange(^(BOOL isOn){}), .onChange(^(BOOL isOn, UISwitch *switch){})
-    .onChange(self, @selector(switchValueDidChanged) / @selector(switchValueDidChanged:))
+    .onChange(@"switchValueDidChanged"), .onChange(switchValueDidChanged:")
  */
 NER_SWITCH_PROP(Callback)   onChange;
 

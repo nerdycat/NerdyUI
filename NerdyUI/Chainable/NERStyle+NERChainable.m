@@ -2,7 +2,7 @@
 //  NERStyle+NERChainable.m
 //  NerdyUI
 //
-//  Created by CAI on 11/1/16.
+//  Created by nerdycat on 11/1/16.
 //  Copyright © 2016 nerdycat. All rights reserved.
 //
 
@@ -44,7 +44,7 @@ NER_##type2##_BLOCK([self set##type1##Value:value.value forKey:@#name]);\
     NER_OBJECT_BLOCK([NERUtils applyStyleObject:value toItem:self];);
 }
 
-- (NERChainableNERStyleFloatObjectListBlock)bd {
+- (NERChainableNERStyleFloatObjectListBlock)border {
     NER_FLOAT_OBJECT_LIST_BLOCK(
                                 [self setObjectValue:@(value) forKey:@"layer.borderWidth"];
                                 if (arguments.firstObject) {
@@ -65,20 +65,22 @@ NER_##type2##_BLOCK([self set##type1##Value:value.value forKey:@#name]);\
     NER_INSETS_BLOCK([self setObjectValue:[NSValue valueWithUIEdgeInsets:value] forKey:@"insets"]);
 }
 
+- (NERChainableNERStyleInsetsBlock)thumbInsets {
+    NER_INSETS_BLOCK([self setObjectValue:[NSValue valueWithUIEdgeInsets:value] forKey:@"thumbInsets"]);
+}
+
 
 
 SYNTHSIZE_INT_METHOD(tg);
 SYNTHSIZE_FLOAT_METHOD(opacity);
-SYNTHSIZE_FLOAT_METHOD(cr);
-SYNTHSIE_FLOAT_LIST_METHOD(sd);
+SYNTHSIZE_FLOAT_METHOD(cornerRadius);
+SYNTHSIE_FLOAT_LIST_METHOD(shadow);
 SYNTHSIZE_OBJECT_METHOD(bgColor);
-
 SYNTHSIZE_POINT_METHOD(xy);
 SYNTHSIZE_SIZE_METHOD(wh);
 SYNTHSIZE_RECT_METHOD(xywh);
 SYNTHSIZE_POINT_METHOD(cxy);
 SYNTHSIZE_POINT_METHOD(maxXY);
-
 SYNTHSIZE_FLOAT_METHOD(horHugging);
 SYNTHSIZE_FLOAT_METHOD(verHugging);
 SYNTHSIZE_FLOAT_METHOD(horResistance);
@@ -86,12 +88,11 @@ SYNTHSIZE_FLOAT_METHOD(verResistance);
 SYNTHSIZE_FLOAT_METHOD(fixWidth);
 SYNTHSIZE_FLOAT_METHOD(fixHeight);
 SYNTHSIZE_SIZE_METHOD(fixWH);
-
 SYNTHSIZE_METHOD(clip);
 SYNTHSIZE_METHOD(touchEnable);
 SYNTHSIZE_METHOD(touchDisable);
+SYNTHSIZE_METHOD(stateDisabled);
 SYNTHSIZE_METHOD(invisible);
-
 SYNTHSIZE_METHOD(fitWidth);
 SYNTHSIZE_METHOD(fitHeight);
 SYNTHSIZE_METHOD(fitSize);
@@ -105,26 +106,33 @@ SYNTHSIZE_METHOD(flexibleLRTB);
 SYNTHSIZE_METHOD(flexibleWidth);
 SYNTHSIZE_METHOD(flexibleHeight);
 SYNTHSIZE_METHOD(flexibleWH);
-
 SYNTHSIZE_METHOD(lowHugging);
 SYNTHSIZE_METHOD(highHugging);
 SYNTHSIZE_METHOD(lowResistance);
 SYNTHSIZE_METHOD(highResistance);
 
 
+
+/**
+ UILabel
+ */
 SYNTHSIZE_OBJECT_METHOD(str);
 SYNTHSIZE_OBJECT_METHOD(color);
 SYNTHSIZE_OBJECT_METHOD(highColor);
 SYNTHSIZE_INT_METHOD(lines);
+SYNTHSIZE_FLOAT_METHOD(lineGap);
 SYNTHSIZE_FLOAT_METHOD(preferWidth);
-
-
+SYNTHSIZE_METHOD(multiline);
 SYNTHSIZE_METHOD(leftAlignment);
 SYNTHSIZE_METHOD(centerAlignment);
 SYNTHSIZE_METHOD(rightAlignment);
 SYNTHSIZE_METHOD(justifiedAlignment);
 
 
+
+/**
+ * UIImageView
+ */
 SYNTHSIZE_OBJECT_METHOD(img);
 SYNTHSIZE_OBJECT_METHOD(highImg);
 SYNTHSIZE_METHOD(aspectFit);
@@ -132,16 +140,27 @@ SYNTHSIZE_METHOD(aspectFill);
 SYNTHSIZE_METHOD(centerMode);
 
 
+
+/**
+ * UIButton
+ */
+SYNTHSIZE_OBJECT_METHOD(selectedColor);
+SYNTHSIZE_OBJECT_METHOD(disabledColor);
 SYNTHSIZE_OBJECT_METHOD(selectedImg);
 SYNTHSIZE_OBJECT_METHOD(disabledImg);
 SYNTHSIZE_OBJECT_METHOD(bgImg);
 SYNTHSIZE_OBJECT_METHOD(highBgImg);
 SYNTHSIZE_OBJECT_METHOD(selectedBgImg);
 SYNTHSIZE_OBJECT_METHOD(disabledBgImg);
+SYNTHSIZE_FLOAT_METHOD(gap);
 
+
+
+/**
+ * UITextField
+ */
 SYNTHSIZE_OBJECT_METHOD(pstr);
 SYNTHSIZE_INT_METHOD(maxLength);
-
 SYNTHSIZE_METHOD(secure);
 SYNTHSIZE_METHOD(becomeFocus);
 SYNTHSIZE_METHOD(clearWhenFocus);
@@ -167,33 +186,102 @@ SYNTHSIZE_METHOD(routeReturnKey);
 SYNTHSIZE_METHOD(showClearButton);
 SYNTHSIZE_METHOD(showClearButtonWhileEditing);
 SYNTHSIZE_METHOD(showClearButtonUnlessEditing);
-
-SYNTHSIZE_FLOAT_METHOD(gap);
 SYNTHSIZE_METHOD(topAlignment);
 SYNTHSIZE_METHOD(bottomAlignment);
 SYNTHSIZE_METHOD(baselineAlignment);
 SYNTHSIZE_METHOD(firstBaselineAlignment);
 
+
+
+/**
+ * UISwitch
+ */
+SYNTHSIZE_OBJECT_METHOD(onColor);
+SYNTHSIZE_OBJECT_METHOD(thumbColor);
+SYNTHSIZE_OBJECT_METHOD(outlineColor);
+
+
+
+/**
+ * UISlider
+ */
+SYNTHSIZE_FLOAT_METHOD(val);
+SYNTHSIZE_FLOAT_METHOD(minVal);
+SYNTHSIZE_FLOAT_METHOD(maxVal);
+SYNTHSIZE_OBJECT_METHOD(minTrack);
+SYNTHSIZE_OBJECT_METHOD(maxTrack);
+SYNTHSIZE_OBJECT_METHOD(thumb);
+SYNTHSIZE_OBJECT_METHOD(highThumb);
+SYNTHSIZE_FLOAT_METHOD(trackHeight);
+SYNTHSIZE_METHOD(discrete);
+
+
+
+/**
+ * UIStepper
+ */
+SYNTHSIZE_FLOAT_METHOD(stepVal);
 SYNTHSIZE_OBJECT_METHOD(tint);
+
+
+
+/**
+ * UIPageControl
+ */
+SYNTHSIZE_INT_METHOD(pages);
+SYNTHSIZE_METHOD(hideForSingle);
+
+
+
+/**
+ * UIVisualEffectView
+ */
+SYNTHSIZE_METHOD(darkBlur);
+SYNTHSIZE_METHOD(lightBlur);
+SYNTHSIZE_METHOD(extraLightBlur);
+
+
+
+/**
+ * NERStaticRow
+ */
 SYNTHSIZE_OBJECT_METHOD(detailStr);
 SYNTHSIZE_OBJECT_METHOD(detailColor);
+SYNTHSIZE_OBJECT_METHOD(accessory);
+SYNTHSIZE_INT_METHOD(check);
 SYNTHSIZE_FLOAT_METHOD(cellHeight);
-SYNTHSIZE_FLOAT_METHOD(separatorInset);
+SYNTHSIZE_FLOAT_METHOD(separatorLeftInset);
 SYNTHSIZE_FLOAT_METHOD(groupGap);
 SYNTHSIZE_INT_METHOD(checked);
 
+SYNTHSIZE_METHOD(cellHeightAuto);
 SYNTHSIZE_METHOD(subtitleStyle);
 SYNTHSIZE_METHOD(value2Style);
 SYNTHSIZE_METHOD(disclosure);
 
+
+
+/**
+ * NERStaticSection
+ */
+SYNTHSIZE_OBJECT_METHOD(header);
+SYNTHSIZE_OBJECT_METHOD(footer);
+SYNTHSIZE_METHOD(singleCheck);
+SYNTHSIZE_METHOD(multiCheck);
+
+
+
+/**
+ * NSMutableAttributedString
+ */
 SYNTHSIZE_OBJECT_METHOD(systemLink);
-SYNTHSIZE_OBJECT_METHOD(match);
 SYNTHSIZE_FLOAT_METHOD(kern);
 SYNTHSIZE_FLOAT_METHOD(stroke);
 SYNTHSIZE_FLOAT_METHOD(oblique);
 SYNTHSIZE_FLOAT_METHOD(expansion);
 SYNTHSIZE_FLOAT_METHOD(baselineOffset);
-SYNTHSIZE_FLOAT_METHOD(lineSpacing);
+SYNTHSIZE_FLOAT_METHOD(indent);
+SYNTHSIZE_OBJECT_METHOD(match);
 
 SYNTHSIZE_METHOD(matchURL);
 SYNTHSIZE_METHOD(matchHashTag);
@@ -202,6 +290,7 @@ SYNTHSIZE_METHOD(underline);
 SYNTHSIZE_METHOD(strikeThrough);
 SYNTHSIZE_METHOD(letterpress);
 SYNTHSIZE_METHOD(linkForLabel);
+SYNTHSIZE_METHOD(ifNotExists);
 
 @end
 

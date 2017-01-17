@@ -2,8 +2,8 @@
 //  UISlider+NERChainable.m
 //  NerdyUI
 //
-//  Created by admin on 2016/12/21.
-//  Copyright © 2016年 nerdycat. All rights reserved.
+//  Created by nerdycat on 2016/12/21.
+//  Copyright © 2016 nerdycat. All rights reserved.
 //
 
 #import "UISlider+NERChainable.h"
@@ -75,7 +75,7 @@
 }
 
 - (NERChainableUISliderCallbackBlock)onChange {
-    NER_CALLBACK_BLOCK([self ner_registerOnChangeHandlerWithBlock:block target:target action:action]);
+    NER_CALLBACK_BLOCK([self ner_registerOnChangeHandlerWithTarget:target object:object]);
 }
 
 - (instancetype)discrete {

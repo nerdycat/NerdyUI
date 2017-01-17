@@ -39,11 +39,12 @@
 
 - (NERChainableUITextFieldCallbackBlock)onChange {
     NER_CALLBACK_BLOCK(
-                       if (block) {
-                           self.nerTextChangeBlock = block;
-                       } else if (target && action) {
+                       if (NER_IS_BLOCK(object)) {
+                           self.nerTextChangeBlock = object;
+                       } else {
                            self.nerTextChangeBlock = ^(id text) {
-                               [target performSelector:action withObject:weakSelf];
+                               SEL action = NSSelectorFromString(object);
+                               [weakTarget performSelector:action withObject:weakSelf];
                            };
                        }
     );
@@ -51,11 +52,12 @@
 
 - (NERChainableUITextFieldCallbackBlock)onFinish {
     NER_CALLBACK_BLOCK(
-                       if (block) {
-                           self.nerEndOnExitBlock = block;
-                       } else if (target && action) {
+                       if (NER_IS_BLOCK(object)) {
+                           self.nerEndOnExitBlock = object;
+                       } else {
                            self.nerEndOnExitBlock = ^(id text) {
-                               [target performSelector:action withObject:weakSelf];
+                               SEL action = NSSelectorFromString(object);
+                               [weakTarget performSelector:action withObject:weakSelf];
                            };
                        }
     );

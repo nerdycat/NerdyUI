@@ -2,8 +2,8 @@
 //  UILabel+NERChainable.m
 //  NerdyUI
 //
-//  Created by admin on 2016/10/11.
-//  Copyright © 2016年 nerdycat. All rights reserved.
+//  Created by nerdycat on 2016/10/11.
+//  Copyright © 2016 nerdycat. All rights reserved.
 //
 
 #import "UILabel+NERChainable.h"
@@ -32,10 +32,6 @@
 }
 
 - (NERChainableUILabelIntBlock)lines {
-//    return ^(NSInteger n) {
-//        __attribute__(enable_if(n > 0 && n < 120, "你丫火星人？"));
-//        return self;
-//    };
     NER_INT_BLOCK(self.numberOfLines = value);
 }
 
@@ -51,16 +47,22 @@
     NER_CALLBACK_BLOCK(
                        self.userInteractionEnabled = YES;
                        
-                       if (block) {
-                           self.nerLinkHandler = block;
+                       if (NER_IS_BLOCK(object)) {
+                           self.nerLinkHandler = object;
                            
-                       } else if (target && action) {
+                       } else {
                            self.nerLinkHandler = ^(id text, NSRange range) {
                                id rangeValue = [NSValue valueWithRange:range];
-                               [target performSelector:action withObject:text withObject:rangeValue];
+                               SEL action = NSSelectorFromString(object);
+                               [weakTarget performSelector:action withObject:text withObject:rangeValue];
                            };
                        }
                        );
+}
+
+- (instancetype)multiline {
+    self.numberOfLines = 0;
+    return self;
 }
 
 - (instancetype)leftAlignment {

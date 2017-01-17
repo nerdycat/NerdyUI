@@ -2,8 +2,8 @@
 //  UIView+NERChainable.m
 //  NerdyUI
 //
-//  Created by admin on 16/9/28.
-//  Copyright © 2016年 nerdycat. All rights reserved.
+//  Created by nerdycat on 16/9/28.
+//  Copyright © 2016 nerdycat. All rights reserved.
 //
 
 #import "UIView+NERChainable.h"
@@ -24,7 +24,7 @@
     NER_OBJECT_BLOCK(self.backgroundColor = Color(value));
 }
 
-- (NERChainableUIViewFloatBlock)cr {
+- (NERChainableUIViewFloatBlock)cornerRadius {
     NER_FLOAT_BLOCK(
                     self.layer.cornerRadius = value;
                     if (self.layer.shadowOpacity == 0) {
@@ -33,7 +33,7 @@
                     );
 }
 
-- (NERChainableUIViewFloatObjectListBlock)bd {
+- (NERChainableUIViewFloatObjectListBlock)border {
     NER_FLOAT_OBJECT_LIST_BLOCK(
                                 self.layer.borderWidth = value;
                                 if (arguments.firstObject) {
@@ -42,7 +42,7 @@
                                 );
 }
 
-- (NERChainableUIViewFloatListBlock)sd {
+- (NERChainableUIViewFloatListBlock)shadow {
     NER_FLOAT_LIST_BLOCK(
                          self.layer.masksToBounds = NO;
                          self.layer.shadowOpacity = value.f1;
@@ -74,26 +74,28 @@
 
 - (NERChainableUIViewCallbackBlock)onClick {
     NER_CALLBACK_BLOCK(
-                       if (block) {
-                           SEL sel = @selector(ner_view_onClickHandler);
-                           objc_setAssociatedObject(self, sel, block, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
-                           return self.onClick(self, sel);
-                           
-                       } else if (target && action) {
-                           self.userInteractionEnabled = YES;
-                           
-                           if ([self isKindOfClass:[UIButton class]]) {
-                               UIButton *button = (UIButton *)self;
-                               [button addTarget:target action:action forControlEvents:UIControlEventTouchUpInside];
-                               
-                           } else {
-                               id reg = [[UITapGestureRecognizer alloc] initWithTarget:target action:action];
-                               [self addGestureRecognizer:reg];
-                           }
-                           
-                           return self;
-                       }
+                        if (NER_IS_BLOCK(object)) {
+                            SEL action = @selector(ner_view_onClickHandler);
+                            objc_setAssociatedObject(self, action, object, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+                            [self ner_view_addClickHandler:self action:action];
+                        } else {
+                            SEL action = NSSelectorFromString(object);
+                            [self ner_view_addClickHandler:target action:action];
+                        }
     );
+}
+
+- (void)ner_view_addClickHandler:(id)target action:(SEL)action {
+    self.userInteractionEnabled = YES;
+    
+    if ([self isKindOfClass:[UIButton class]]) {
+        UIButton *button = (UIButton *)self;
+        [button addTarget:target action:action forControlEvents:UIControlEventTouchUpInside];
+        
+    } else {
+        id reg = [[UITapGestureRecognizer alloc] initWithTarget:target action:action];
+        [self addGestureRecognizer:reg];
+    }
 }
 
 - (void)ner_view_onClickHandler {
@@ -147,54 +149,58 @@
 
 @implementation UIView (NERChainable_Frame)
 
-#define NER_SAFE_ASSIGN(a, b)   if (b != NERNull) a = b
-
-- (NERChainableUIViewPointBlock)xy {
-    NER_POINT_BLOCK(
-                    CGRect frame = self.frame;
-                    NER_SAFE_ASSIGN(frame.origin.x, value.value.x);
-                    NER_SAFE_ASSIGN(frame.origin.y, value.value.y);
-                    self.frame = frame;
-    );
-}
-
-- (NERChainableUIViewSizeBlock)wh {
-    NER_SIZE_BLOCK(
-                   CGRect frame = self.frame;
-                   NER_SAFE_ASSIGN(frame.size.width, value.value.width);
-                   NER_SAFE_ASSIGN(frame.size.height, value.value.height);
-                   self.frame = frame;
-    );
-}
+#define NER_SAFE_ASSIGN(a, b)   if (b != NERNull && b!= NSIntegerMin) a = b
 
 - (NERChainableUIViewRectBlock)xywh {
-    NER_RECT_BLOCK(self.frame = value.value);
+    return ^(NERRect rect) {
+        CGRect frame = rect.value;
+        CGRect newFrame = self.frame;
+        
+        //setting x
+        if (frame.size.width != NSIntegerMin) {
+            NER_SAFE_ASSIGN(newFrame.origin.x, frame.origin.x);
+            
+        //setting maxX
+        } else  if (frame.origin.x != NERNull) {
+            newFrame.origin.x = frame.origin.x - newFrame.size.width;
+        }
+        
+        //setting y
+        if (frame.size.height != NSIntegerMin) {
+            NER_SAFE_ASSIGN(newFrame.origin.y, frame.origin.y);
+            
+        //setting maxY
+        } else if (frame.origin.y != NERNull) {
+            newFrame.origin.y = frame.origin.y - newFrame.size.height;
+        }
+        
+        NER_SAFE_ASSIGN(newFrame.size.width, frame.size.width);
+        NER_SAFE_ASSIGN(newFrame.size.height, frame.size.height);
+        
+        self.frame = newFrame;
+        return self;
+    };
 }
 
 - (NERChainableUIViewPointBlock)cxy {
-    NER_POINT_BLOCK(
-                    CGPoint center = self.center;
-                    NER_SAFE_ASSIGN(center.x, value.value.x);
-                    NER_SAFE_ASSIGN(center.y, value.value.y);
-                    self.center = center;
-    );
-}
-
-- (NERChainableUIViewPointBlock)maxXY {
-    NER_POINT_BLOCK(
-                    CGRect frame = self.frame;
-                    if (value.value.x != NERNull) frame.origin.x = value.value.x - frame.size.width;
-                    if (value.value.y != NERNull) frame.origin.y = value.value.y - frame.size.height;
-                    self.frame = frame;
-    );
+    return ^(NERPoint point) {
+        CGPoint center = point.value;
+        CGPoint newCenter = self.center;
+        
+        NER_SAFE_ASSIGN(newCenter.x, center.x);
+        NER_SAFE_ASSIGN(newCenter.y, center.y);
+        
+        self.center = newCenter;
+        return self;
+    };
 }
 
 - (instancetype)fitWidth {
-    return self.w([self sizeThatFits:CGSizeMake(MAXFLOAT, self.height)].width);
+    return self.w([self sizeThatFits:CGSizeMake(MAXFLOAT, self.h)].width);
 }
 
 - (instancetype)fitHeight {
-    return self.h([self sizeThatFits:CGSizeMake(self.width, MAXFLOAT)].height);
+    return self.h([self sizeThatFits:CGSizeMake(self.w, MAXFLOAT)].height);
 }
 
 - (instancetype)fitSize {

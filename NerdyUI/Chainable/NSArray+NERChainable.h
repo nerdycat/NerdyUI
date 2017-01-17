@@ -2,13 +2,34 @@
 //  NSArray+NERChainable.h
 //  NerdyUI
 //
-//  Created by admin on 2016/12/5.
-//  Copyright © 2016年 nerdycat. All rights reserved.
+//  Created by nerdycat on 2016/12/5.
+//  Copyright © 2016 nerdycat. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
 
 @interface NSArray (NERChainable)
+
+
+/**
+ * Execute a provided method or block once per array element.
+ * Argument can be:
+    1) method name
+    2) A block
+ 
+ * Block arguments:
+    1) value: The current element being processed in the array. Can either be object or primitive.
+    2) index: The index of the current element being processed in the array. Optional.
+    3) array: The array map was called upon. Optional.
+ 
+ * Usages:
+    subviews.forEach(@"removeFromSuperview");
+    subviews.forEach(^(UIView *view) {
+        [view removeFromSuperview];
+    };
+ */
+- (NSArray *(^)(id))forEach;
+
 
 /**
  * Creates a new array with the results of calling a provided block on every element in this array.

@@ -2,8 +2,8 @@
 //  UIImage+NERChainable.m
 //  NerdyUI
 //
-//  Created by admin on 2016/12/13.
-//  Copyright © 2016年 nerdycat. All rights reserved.
+//  Created by nerdycat on 2016/12/13.
+//  Copyright © 2016 nerdycat. All rights reserved.
 //
 
 #import "UIImage+NERChainable.h"
@@ -11,16 +11,29 @@
 
 @implementation UIImage (NERChainable)
 
-- (NERChainableUIImageSizeBlock)wh {
-    NER_SIZE_BLOCK(
-                   CGRect rect = CGRectMake(0, 0, value.value.width, value.value.height);
-                   BOOL hasAlpha = [NERUtils imageHasAlphaChannel:self];
+- (NERChainableUIImageRectBlock)subImg {
+    NER_RECT_BLOCK(
+                   CGRect rect = value.value;
+                   rect.origin.x *= self.scale;
+                   rect.origin.y *= self.scale;
+                   rect.size.width *= self.scale;
+                   rect.size.height *= self.scale;
                    
-                   UIGraphicsBeginImageContextWithOptions(rect.size, !hasAlpha, self.scale);
-                   [self drawInRect:rect];
-                   UIImage *newImage = UIGraphicsGetImageFromCurrentImageContext();
-                   UIGraphicsEndImageContext();
-                   return newImage;
+                   CGImageRef ref = CGImageCreateWithImageInRect(self.CGImage, rect);
+                   return [UIImage imageWithCGImage:ref scale:self.scale orientation:self.imageOrientation];
+                   );
+}
+
+- (NERChainableUIImageTwoFloatBlock)resize {
+    NER_TWO_FLOAT_BLOCK(
+                        CGRect rect = CGRectMake(0, 0, value1, value2);
+                        BOOL hasAlpha = [NERUtils imageHasAlphaChannel:self];
+                   
+                        UIGraphicsBeginImageContextWithOptions(rect.size, !hasAlpha, self.scale);
+                        [self drawInRect:rect];
+                        UIImage *newImage = UIGraphicsGetImageFromCurrentImageContext();
+                        UIGraphicsEndImageContext();
+                        return newImage;
     );
 }
 

@@ -2,8 +2,8 @@
 //  NERConstraintMaker.m
 //  NerdyUI
 //
-//  Created by admin on 2016/10/10.
-//  Copyright © 2016年 nerdycat. All rights reserved.
+//  Created by nerdycat on 2016/10/10.
+//  Copyright © 2016 nerdycat. All rights reserved.
 //
 
 @import ObjectiveC;

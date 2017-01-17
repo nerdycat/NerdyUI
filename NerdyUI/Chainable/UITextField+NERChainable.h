@@ -70,11 +70,11 @@ NER_TF_PROP(Insets)     insets;
  * Use UIControlEventEditingChanged event internally.
  * It support two kind of arguments:
     1) a callback block
-    2) a target/action pair
+    2) a selector string
  
  * Usages: 
     .onChange(^{}), .onChange(^(NSString *text){}), .onChange(^(NSString *text, UITextField *textField){})
-    .onChange(self, @selector(textFieldValueDidChange) / @selector(textFieldValueDidChange:))
+    .onChange(@"textFieldValueDidChange"), onChange(@"textFieldValueDidChange:")
  */
 NER_TF_PROP(Callback)   onChange;
 
@@ -83,11 +83,11 @@ NER_TF_PROP(Callback)   onChange;
  * Use UIControlEventEditingDidEndOnExit event internally.
  * It support two kind of arguments:
     1) a callback block
-    2) a target/action pair
+    2) a selector string
  
  * Usages: 
     .onFinish(^{}), .onFinish(^(NSString *text){}), .onFinish(^(NSString *text, UITextField *textField){})
-    .onFinish(self, @selector(textFieldDidFinishEnter) / @selector(textFieldDidFinishEnter:))
+    .onFinish(@"textFieldDidFinishEnter"), .onFinish(@"textFieldDidFinishEnter:")
  */
 NER_TF_PROP(Callback)   onFinish;
 

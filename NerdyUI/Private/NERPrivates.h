@@ -2,7 +2,7 @@
 //  NERPrivates.h
 //  NerdyUI
 //
-//  Created by CAI on 10/3/16.
+//  Created by nerdycat on 10/3/16.
 //  Copyright © 2016 nerdycat. All rights reserved.
 //
 
@@ -70,6 +70,7 @@
 - (UIImage *)ner_snapShot;
 
 - (void)ner_addChild:(id)value;
+- (instancetype)ner_updateFrame:(NERRect)rect;
 
 + (instancetype)ner_littleHigherHuggingAndResistanceView;
 
@@ -166,7 +167,7 @@
 
 @interface UIControl (NERPriavte)
 
-- (instancetype)ner_registerOnChangeHandlerWithBlock:(id)block target:(id)target action:(SEL)action;
+- (instancetype)ner_registerOnChangeHandlerWithTarget:(id)target object:(id)object;
 
 @end
 

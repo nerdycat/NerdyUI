@@ -75,7 +75,7 @@ NER_TV_PROP(Insets)     insets;
  
  * Usages: 
     .onChange(^{}), .onChange(^(NSString *text){}), .onChange(^(NSString *text, id textView){})
-    .onChange(self, @selector(textViewValueDidChange) / @selector(textViewValueDidChange:))
+    .onChange(@"textViewValueDidChange"), .onChange(@"textViewValueDidChange:")
  */
 NER_TV_PROP(Callback)   onChange;
 

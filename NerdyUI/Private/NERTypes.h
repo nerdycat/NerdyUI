@@ -2,7 +2,7 @@
 //  NERTypes.h
 //  NerdyUI
 //
-//  Created by CAI on 10/1/16.
+//  Created by nerdycat on 10/1/16.
 //  Copyright © 2016 nerdycat. All rights reserved.
 //
 

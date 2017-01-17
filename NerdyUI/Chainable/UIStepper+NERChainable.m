@@ -2,8 +2,8 @@
 //  UIStepper+NERChainable.m
 //  NerdyUI
 //
-//  Created by admin on 2016/12/30.
-//  Copyright © 2016年 nerdycat. All rights reserved.
+//  Created by nerdycat on 2016/12/30.
+//  Copyright © 2016 nerdycat. All rights reserved.
 //
 
 #import "UIStepper+NERChainable.h"
@@ -32,7 +32,7 @@
 }
 
 - (NERChainableUIStepperCallbackBlock)onChange {
-    NER_CALLBACK_BLOCK(return [self ner_registerOnChangeHandlerWithBlock:block target:target action:action];);
+    NER_CALLBACK_BLOCK(return [self ner_registerOnChangeHandlerWithTarget:target object:object];);
 }
 
 @end

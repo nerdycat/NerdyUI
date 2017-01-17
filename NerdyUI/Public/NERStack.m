@@ -2,15 +2,14 @@
 //  NERStack.m
 //  NerdyUI
 //
-//  Created by admin on 2016/11/1.
-//  Copyright © 2016年 nerdycat. All rights reserved.
+//  Created by nerdycat on 2016/11/1.
+//  Copyright © 2016 nerdycat. All rights reserved.
 //
 
 #import "NERStack.h"
 #import "NERDefs.h"
 #import "NERPrivates.h"
 
-//const static CGFloat kDefaultPriority = 950;
 
 #define SAFE_ADD(a, o)                  ({  id obj = o; \
                                         if (obj) [obj isKindOfClass:NSArray.class]? \
@@ -25,6 +24,7 @@
                                         :NSLayoutRelation##r :i2 :NSLayoutAttribute##a2 :1 :0 :p]
 
 
+
 @interface UIView (NERStack)
 
 @property (nonatomic, strong) NSNumber *nerAttachSpace;
@@ -36,6 +36,19 @@
 NER_SYNTHESIZE(nerAttachSpace, setNerAttachSpace);
 
 @end
+
+
+
+@interface NERTransformLayer : CATransformLayer
+
+@end
+
+@implementation NERTransformLayer
+
+- (void)setOpaque:(BOOL)opaque { }
+
+@end
+
 
 
 @interface NERStackSpring ()
@@ -59,6 +72,14 @@ NER_SYNTHESIZE(nerAttachSpace, setNerAttachSpace);
 
 
 @implementation NERStack
+
+
+#pragma mark- Override
+
+- (void)setBackgroundColor:(UIColor *)backgroundColor { }
+- (void)setOpaque:(BOOL)opaque { }
+- (void)setClipsToBounds:(BOOL)clipsToBounds { }
+
 
 
 #pragma mark- Accessors
@@ -568,7 +589,7 @@ NER_SYNTHESIZE(nerAttachSpace, setNerAttachSpace);
 }
 
 + (Class)layerClass {
-    return [CATransformLayer class];
+    return [NERTransformLayer class];
 }
 
 @end
@@ -579,6 +600,15 @@ NER_SYNTHESIZE(nerAttachSpace, setNerAttachSpace);
 
 
 @implementation NERStackSpring
+
+#pragma mark- Override
+
+- (void)setBackgroundColor:(UIColor *)backgroundColor { }
+- (void)setOpaque:(BOOL)opaque { }
+- (void)setClipsToBounds:(BOOL)clipsToBounds { }
+
+
+#pragma mark- Normal
 
 - (instancetype)init {
     self = [super init];
@@ -611,7 +641,7 @@ NER_SYNTHESIZE(nerAttachSpace, setNerAttachSpace);
 }
 
 + (Class)layerClass {
-    return [CATransformLayer class];
+    return [NERTransformLayer class];
 }
 
 @end

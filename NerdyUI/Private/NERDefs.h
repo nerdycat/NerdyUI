@@ -2,8 +2,8 @@
 //  NERDefs.h
 //  NerdyUI
 //
-//  Created by admin on 16/9/28.
-//  Copyright © 2016年 nerdycat. All rights reserved.
+//  Created by nerdycat on 16/9/28.
+//  Copyright © 2016 nerdycat. All rights reserved.
 //
 
 @import ObjectiveC;
@@ -51,7 +51,7 @@ typedef void (^NERSimpleBlock)();
 typedef void (^NERObjectBlock)(id);
 
 
-#define NERNull             NSNotFound
+#define NERNull             NSIntegerMax
 
 #define Exp(x)              ({x;})
 
@@ -111,6 +111,7 @@ NER_CHAINABLE_TYPE(x, TwoInt)(NSInteger, NSInteger);\
 NER_CHAINABLE_TYPE(x, IntOrObject)(id);\
 NER_CHAINABLE_TYPE(x, Float)(CGFloat);\
 NER_CHAINABLE_TYPE(x, TwoFloat)(CGFloat, CGFloat);\
+NER_CHAINABLE_TYPE(x, FourFloat)(CGFloat, CGFloat, CGFloat, CGFloat);\
 NER_CHAINABLE_TYPE(x, FloatList)(NERFloatList);\
 NER_CHAINABLE_TYPE(x, FloatObjectList)(CGFloat, ...);\
 NER_CHAINABLE_TYPE(x, Rect)(NERRect);\
@@ -119,7 +120,7 @@ NER_CHAINABLE_TYPE(x, Point)(NERPoint);\
 NER_CHAINABLE_TYPE(x, Range)(NERRange);\
 NER_CHAINABLE_TYPE(x, Insets)(UIEdgeInsets);\
 NER_CHAINABLE_TYPE(x, Embed)(id, UIEdgeInsets);\
-NER_CHAINABLE_TYPE(x, Callback)(id, ...);\
+NER_CHAINABLE_TYPE(x, Callback)(id, id);\
 NER_CHAINABLE_TYPE(x, Block)(id);
 
 NER_GENERATE_CHAINABLE_TYPES(UIView);
@@ -163,23 +164,7 @@ NER_GENERATE_CHAINABLE_TYPES(NERStaticSection);
 #define NER_TWO_FLOAT_BLOCK(...)            return ^(CGFloat value1, CGFloat value2) {__VA_ARGS__; return self;}
 #define NER_FLOAT_OBJECT_LIST_BLOCK(...)    return ^(CGFloat value, ...) {NER_GET_VARIABLE_OBJECT_ARGUMENTS(value); __VA_ARGS__; return self;}
 
-#define NER_CALLBACK_BLOCK(...)     return ^(id targetOrBlock, ...) {\
-__weak typeof(self) weakSelf = self; weakSelf;\
-id block = nil;\
-__weak id target = nil;\
-SEL action = NULL;\
-if (NER_IS_BLOCK(targetOrBlock)) {\
-    block = targetOrBlock;\
-} else {\
-    target = targetOrBlock;\
-    va_list argList;\
-    va_start(argList, targetOrBlock);\
-    action = va_arg(argList, SEL);\
-    va_end(argList);\
-}\
-__VA_ARGS__;\
-return self;\
-};
+#define NER_CALLBACK_BLOCK(...)     return ^(id target, id object) {__weak id weakTarget = target; __weak id weakSelf = self; __VA_ARGS__; weakTarget = nil; weakSelf = nil; return self;}
 
 
 /*
@@ -269,7 +254,8 @@ _61,_62,_63,N,...) N
 9,8,7,6,5,4,3,2,1,0
 
 
-#define ws()    autoreleasepool {} __weak typeof(self) weakSelf = self; weakSelf;
+#define WeakifySelf()       __weak typeof(self) weakSelf = self; weakSelf;
+#define StrongifySelf()     typeof(weakSelf) self = weakSelf; self;
 
 
 #define NER_SYNTHESIZE(getter, setter, ...) \

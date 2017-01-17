@@ -2,8 +2,8 @@
 //  UIImage+NERChainable.h
 //  NerdyUI
 //
-//  Created by admin on 2016/12/13.
-//  Copyright © 2016年 nerdycat. All rights reserved.
+//  Created by nerdycat on 2016/12/13.
+//  Copyright © 2016 nerdycat. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
@@ -31,10 +31,16 @@
 @interface UIImage (NERChainable)
 
 /**
- * Resize image.
- * Usages: .wh(100, 100)
+ * Create subImage in rect.
+ * Usages: .subImg(10, 10, 50, 50), .subImg(rect)
  */
-NER_IMG_PROP(Size)      wh;
+NER_IMG_PROP(Rect)      subImg;
+
+/**
+ * Resize image.
+ * Usages: .resize(100, 100)
+ */
+NER_IMG_PROP(TwoFloat)  resize;
 
 /**
  * resizableImage with UIImageResizingModeTile.
@@ -74,6 +80,7 @@ NER_IMG_PROP(Float)     blur;
 @end
 
 
+#define subImg(...)             subImg((NERRect){__VA_ARGS__})
 #define tileInsets(...)         tileInsets(NER_NORMALIZE_INSETS(__VA_ARGS__))
 #define stretchInsets(...)      stretchInsets(NER_NORMALIZE_INSETS(__VA_ARGS__))
 

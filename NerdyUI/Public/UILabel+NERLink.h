@@ -13,13 +13,16 @@ typedef void (^NERLinkHandler)(NSString *text, NSRange range);
 
 @interface UILabel (NERLink)
 
-@property (nonatomic, assign) CGFloat nerLineGap;
-
-@property (nonatomic, strong)   UIColor *nerLinkSelectedColor;
-@property (nonatomic, assign)   CGFloat nerLinkSelectedCornerRadius;
-
+@property (nonatomic, assign)   CGFloat nerLineGap;
 @property (nonatomic, strong)   NERLinkHandler nerLinkHandler;
 @property (nonatomic, readonly) NSLayoutManager *nerLayoutManager;
+
+
+/**
+ * Setting link selection style
+ */
+@property (nonatomic, strong)   UIColor *nerLinkSelectedColor;
+@property (nonatomic, assign)   CGFloat nerLinkSelectedCornerRadius;
 
 + (void)setDefaultLinkSelectedBackgroundColor:(UIColor *)color corderRadius:(CGFloat)cornerRadius;
 

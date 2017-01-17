@@ -13,6 +13,7 @@
 
 + (instancetype)styleWithKey:(id <NSCopying>)key;
 + (instancetype)createStyleWithKey:(id <NSCopying>)key;
++ (instancetype)createStyleWithKeys:(NSArray *)keys;
 
 - (void)setObjectValue:(id)value forKey:(NSString *)Key;
 - (void)setIntValue:(NSInteger)value forKey:(NSString *)key;

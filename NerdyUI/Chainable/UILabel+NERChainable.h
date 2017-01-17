@@ -2,8 +2,8 @@
 //  UILabel+NERChainable.h
 //  NerdyUI
 //
-//  Created by admin on 2016/10/11.
-//  Copyright © 2016年 nerdycat. All rights reserved.
+//  Created by nerdycat on 2016/10/11.
+//  Copyright © 2016 nerdycat. All rights reserved.
 //
 
 #import <UIKit/UIKit.h>
@@ -72,16 +72,16 @@ NER_LABEL_PROP(Float)       preferWidth;
  * Add Link selection handler.
  * It support two kind of arguments:
    1) a callback block
-   2) a target/action pair
+   2) a selector string
  
  * Usages:
     .onLink(^{});
     .onLink(^(id text) {});
     .onLink(^(id text, NSRange range) {});
-    .onLink(self, @selector(onLink) / @selector(onLink:) / @selector(onLink:range:));
+    .onLink(@"onLink"), .onLink(@"onLink:"), .onLink(@"onLink:range:")
  
  * Link example:
-    id att = AttStr(@"Hello World").match(@"World").linkForLabel;
+    id att = AttStr(@"hello world").match(@"hello").linkForLabel;
     Label.str(att).embedIn(self.view).onLink(^(id text) {
         Log(text);
     });
@@ -90,6 +90,12 @@ NER_LABEL_PROP(Float)       preferWidth;
  */
 NER_LABEL_PROP(Callback)    onLink;
 
+
+/**
+ * Enable multiline, same as .lines(0)
+ * Usages: .multiline
+ */
+- (instancetype)multiline;
 
 /**
  * TextAlignment

@@ -2,8 +2,8 @@
 //  UIView+NERChainable.h
 //  NerdyUI
 //
-//  Created by admin on 16/9/28.
-//  Copyright © 2016年 nerdycat. All rights reserved.
+//  Created by nerdycat on 16/9/28.
+//  Copyright © 2016 nerdycat. All rights reserved.
 //
 
 #import <UIKit/UIKit.h>
@@ -39,23 +39,23 @@ NER_PROP(v, Object)             bgColor;\
 /**
  * layer.cornerRadius
  * Will set masksToBounds to YES if there are not shadows existed.
- * Usages: .cr(10)
+ * Usages: .cornerRadius(10)
  */\
-NER_PROP(v, Float)              cr;\
+NER_PROP(v, Float)              cornerRadius;\
 \
 /**
  * Setting layer.borderWidth and layer.borderColor(optional) at the same time.
  * bd use Color() for its second argument internally, so it can take any kind of arguments that Color() supported.
- * Usages: .bd(1), .bd(2, @"red"), bd(2, @"#FF00FF,0.5")
+ * Usages: .border(1), .border(2, @"red"), border(2, @"#FF00FF,0.5")
  * See UIColor+NERChainable.h for more information.
  */\
-NER_PROP(v, FloatObjectList)    bd;\
+NER_PROP(v, FloatObjectList)    border;\
 \
 /**
  * Setting layer.shadowOpacity, layer.shadowRadius(Optional), layer.shadowOffset(Optional) at the same time.
- * Usages: .sd(1), .sd(0.8, 1), .sd(1, 2, 2, 2);
+ * Usages: .shadow(1), .shadow(0.8, 1), .shadow(1, 2, 2, 2);
  */\
-NER_PROP(v, FloatList)          sd;\
+NER_PROP(v, FloatList)          shadow;\
 \
 /**
  * Apply styles to the view.
@@ -72,11 +72,11 @@ NER_PROP(v, Object)             styles;\
  * Will set userInteractionEnabled to YES as well.
  * It support two kind of arguments:
     1) a callback block
-    2) a target/action pair
+    2) a selector string
 
  * Usages: 
     .onClick(^{}), .onClick(^(id view) {}),
-    .onClick(self, @selector(viewDidClick) / @selector(viewDidClick:))
+    .onClick(@"viewDidClick"), .onClick(@"viewDidClick:")
  */\
 NER_PROP(v, Callback)           onClick;\
 \
@@ -94,10 +94,11 @@ NER_PROP(v, Object)             addTo;\
 NER_PROP(v, Object)             addChild;
 
 
-
-#define bd(...)                 bd(__VA_ARGS__, nil)
-#define sd(...)                 sd(NER_MAKE_FLOAT_LIST(__VA_ARGS__))
+#define border(...)             border(__VA_ARGS__, nil)
+#define shadow(...)             shadow(NER_MAKE_FLOAT_LIST(__VA_ARGS__))
 #define addChild(...)           addChild(@[__VA_ARGS__])
+
+
 
 
 
@@ -127,86 +128,72 @@ NER_VIEW_PROPS(UIView);
 
 
 
-
+/**
+ * Setting view's position and size.
+ * Usages: 
+    .xywh(10, 10, 50, 50)
+    .x(someView.x).y(someView.maxY + 10).wh(someView.wh)
+    .cxy(someView.center).w(someView.w / 2).h(100)
+ */
 #define NER_VIEW_FRAME_PROPS(v) \
-\
-/**
- * Setting frame.origin value.
- * It support two kind of arguments:
-    1) a CGPoint
-    2) two CGFloat
- * Usages: .xy(CGPointMake(10, 10)), .xy(10, 10)
- */\
-NER_PROP(v, Point)              xy;\
-/**
- * Setting frame.size value.
- * It support two kind of arguments:
-    1) a CGSize
-    2) two CGFloat
- * Usages: .wh(someView.frame.size), .wh(50, 50)
- */\
-NER_PROP(v, Size)               wh;\
-\
+NER_PROP(v, Rect)               xywh;\
+NER_PROP(v, Point)              cxy;
+
 /**
  * Setting frame value.
  * It support two kind of arguments:
     1) a CGRect
     2) four CGFloat
- * Usages: .xwyh(someView.frame), .xywh(10, 10, 50, 50)
- */\
-NER_PROP(v, Rect)               xywh;\
-\
+ * Usages: .xywh(someView.frame), .xywh(10, 10, 50, 50)
+ */
+#define xywh(...)               xywh((NERRect){__VA_ARGS__})
+
+/**
+ * Setting frame.origin value.
+ * It support two kind of arguments:
+    1) a CGPoint
+    2) two CGFloat
+ * Usages: .xy(someView.xy), .xy(10, 10), .x(10).y(10)
+ 
+ */
+#define xy(...)                 xywh(((NERPoint){__VA_ARGS__}).value, NERNull, NERNull)
+#define x(x)                    xywh(x, NERNull, NERNull, NERNull)
+#define y(y)                    xywh(NERNull, y, NERNull, NERNull)
+
+/**
+ * Setting frame.size value.
+ * It support two kind of arguments:
+    1) a CGSize
+    2) two CGFloat
+ * Usages: .wh(someView.wh), .wh(50, 50), .w(50).h(50)
+ */
+#define wh(...)                 xywh(NERNull, NERNull, ((NERSize){__VA_ARGS__}).value)
+#define w(w)                    xywh(NERNull, NERNull, w, NERNull)
+#define h(h)                    xywh(NERNull, NERNull, NERNull, h)
+
 /**
  * Setting center value.
  * It support two kind of arguments:
-    1) a CGPoint
-    2) two CGFloat
- * Usages: .cxy(someView.center), .cxy(50, 50)
- */\
-NER_PROP(v, Point)              cxy;\
-\
-/**
- * Setting frame.origin by providing bottom-right point of the frame.
- * It support two kind of arguments:
-    1) a CGPoint
-    2) two CGFloat
- * Usages: .maxXY(CGPointMake(50, 50)), .maxXY(50, 50)
- */\
-NER_PROP(v, Point)              maxXY;\
-
-
-//frame.origin.x
-#define x(a)                    xy(a, NERNull)
-
-//frame.origin.y
-#define y(a)                    xy(NERNull, a)
-
-//frame.size.width
-#define w(a)                    wh(a, NERNull)
-
-//frame.size.height
-#define h(a)                    wh(NERNull, a)
-
-//center.x
-#define cx(a)                   cxy(a, NERNull)
-
-//center.y
-#define cy(a)                   cxy(NERNull, a)
-
-//frame.origin.x = a - frame.size.width
-#define maxX(a)                 maxXY(a, NERNull)
-
-//frame.origin.y = a = frame.size.height
-#define maxY(a)                 maxXY(NERNull, a)
-
-//Usages: .x(10).y(10).w(50).h(50).cx(100).cy(100)
-
-
-#define xy(...)                 xy((NERPoint){__VA_ARGS__})
-#define wh(...)                 wh((NERSize){__VA_ARGS__})
-#define xywh(...)               xywh((NERRect){__VA_ARGS__})
+ 1) a CGPoint
+ 2) two CGFloat
+ * Usages: .cxy(someView.center), .cxy(50, 50), .cx(50).cy(50)
+ */
 #define cxy(...)                cxy((NERPoint){__VA_ARGS__})
-#define maxXY(...)              maxXY((NERPoint){__VA_ARGS__})
+#define cx(x)                   cxy(x, NERNull)
+#define cy(y)                   cxy(NERNull, y)
+
+/**
+ * Setting frame by providing bottom-right point of the frame.
+ * It support two kind of arguments:
+ 1) a CGPoint
+ 2) two CGFloat
+ * Usages: .maxXY(someView.maxXY), .maxXY(200, 200), .maxX(200).maxY(200)
+ */
+#define maxXY(...)              xywh(((NERPoint){__VA_ARGS__}).value, NSIntegerMin, NSIntegerMin)
+#define maxX(x)                 maxXY(x, NERNull)
+#define maxY(y)                 maxXY(NERNull, y)
+
+
 
 
 
@@ -335,7 +322,7 @@ NER_PROP(v, Embed)              embedIn;\
     .updateCons(^{
         make.width.equal.view(someView).height;
     })
- * You can use make object out of box without declare it.
+ * You can use make object out of box without the need to declare it.
  * See NERConstraint+NERChainable.h for more information.
  */\
 NER_PROP(v, Object)             makeCons;\
@@ -442,6 +429,8 @@ NER_ALL_VIEW_PROPS(NERStaticTableView);
 #define insets(...)     insets(NER_NORMALIZE_INSETS(__VA_ARGS__))
 
 
-
-
+#define onClick(x)      onClick(self, ({ id __self = self; __weak typeof(self) self = __self; __self = self; x; }) )
+#define onLink(x)       onLink(self, ({ id __self = self; __weak typeof(self) self = __self; self; x; }) )
+#define onChange(x)     onChange(self, ({ id __self = self; __weak typeof(self) self = __self; __self = self; x; }) )
+#define onFinish(x)     onFinish(self, ({ id __self = self; __weak typeof(self) self = __self; self; x; }) )
 

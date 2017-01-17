@@ -2,8 +2,8 @@
 //  UIPageControl+NERChainable.h
 //  NerdyUI
 //
-//  Created by admin on 2016/12/20.
-//  Copyright © 2016年 nerdycat. All rights reserved.
+//  Created by nerdycat on 2016/12/20.
+//  Copyright © 2016 nerdycat. All rights reserved.
 //
 
 #import <UIKit/UIKit.h>
@@ -42,11 +42,11 @@ NER_PC_PROP(Object)     highColor;
  * Use UIControlEventValueChanged event internally.
  * It support two kind of arguments:
     1) a callback block
-    2) a target/action pair
+    2) a selector string
  
  * Usages: 
     .onChange(^{}), .onChange(^(NSInteger currentPage){}), .onChange(^(NSInteger currentPage, id pageControl){})
-    .onChange(self, @selector(switchValueDidChange) / @selector(switchValueDidChange:))
+    .onChange(@"switchValueDidChange"), .onChange(@"switchValueDidChange:")
  */
 NER_PC_PROP(Callback)   onChange;
 

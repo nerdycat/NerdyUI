@@ -2,13 +2,16 @@
 //  NerdyUI.h
 //  NerdyUI
 //
-//  Created by admin on 16/9/28.
-//  Copyright © 2016年 nerdycat. All rights reserved.
+//  Created by nerdycat on 16/9/28.
+//  Copyright © 2016 nerdycat. All rights reserved.
 //
 
 #import <UIKit/UIKit.h>
+#import "NERPrivates.h"
 
-#import "NERUtils.h"
+#import "UIImage+NERChainable.h"
+#import "UIColor+NERChainable.h"
+#import "UIFont+NERChainable.h"
 
 #import "UIView+NERChainable.h"
 #import "UILabel+NERChainable.h"
@@ -22,10 +25,6 @@
 #import "UIStepper+NERChainable.h"
 #import "UISegmentedControl+NERChainable.h"
 #import "UIVisualEffectView+NERChainable.h"
-
-#import "UIImage+NERChainable.h"
-#import "UIColor+NERChainable.h"
-#import "UIFont+NERChainable.h"
 
 #import "NERStack+NERChainable.h"
 #import "NERStaticTableView+NERChainable.h"

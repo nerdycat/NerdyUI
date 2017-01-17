@@ -2,7 +2,7 @@
 //  NERPrivates.m
 //  NerdyUI
 //
-//  Created by CAI on 10/3/16.
+//  Created by nerdycat on 10/3/16.
 //  Copyright © 2016 nerdycat. All rights reserved.
 //
 
@@ -352,6 +352,27 @@ NER_SYNTHESIZE(nerEffectedRanges, setNerEffectedRanges);
     UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
     UIGraphicsEndImageContext();
     return image;
+}
+
+- (instancetype)ner_updateFrame:(NERRect)rect {
+    CGRect frame = rect.value;
+    CGRect newFrame = self.frame;
+    
+    if (frame.origin.x != NERNull) {
+        newFrame.origin.x = frame.origin.x;
+    }
+    if (frame.origin.y != NERNull) {
+        newFrame.origin.y = frame.origin.y;
+    }
+    if (frame.size.width != NERNull) {
+        newFrame.size.width = frame.size.height;
+    }
+    if (frame.size.height != NERNull) {
+        newFrame.size.height = frame.size.height;
+    }
+    
+    self.frame = newFrame;
+    return self;
 }
 
 + (instancetype)ner_littleHigherHuggingAndResistanceView {
@@ -760,13 +781,15 @@ NER_SYNTHESIZE(nerVibrancyEffectView, setNerVibrancyEffectView);
 
 @implementation UIControl (NERPriavte)
 
-- (instancetype)ner_registerOnChangeHandlerWithBlock:(id)block target:(id)target action:(SEL)action {
-    if (block) {
-        SEL sel = @selector(ner_control_onChangeHandler);
-        objc_setAssociatedObject(self, sel, block, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
-        return [self ner_registerOnChangeHandlerWithBlock:nil target:self action:sel];
+- (instancetype)ner_registerOnChangeHandlerWithTarget:(id)target object:(id)object {
+    if (NER_IS_BLOCK(object)) {
+        SEL action = @selector(ner_control_onChangeHandler);
+        objc_setAssociatedObject(self, action, object, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+        return [self ner_registerOnChangeHandlerWithTarget:self object:@"ner_control_onChangeHandler"];
+//        return [self ner_registerOnChangeHandlerWithBlock:nil target:self action:sel];
         
-    } else if (target && action) {
+    } else {
+        SEL action = NSSelectorFromString(object);
         [self addTarget:target action:action forControlEvents:UIControlEventValueChanged];
     }
     

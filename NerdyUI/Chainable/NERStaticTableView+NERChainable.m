@@ -2,8 +2,8 @@
 //  NERStaticTableView+NERChainable.m
 //  NerdyUI
 //
-//  Created by admin on 2016/11/9.
-//  Copyright © 2016年 nerdycat. All rights reserved.
+//  Created by nerdycat on 2016/11/9.
+//  Copyright © 2016 nerdycat. All rights reserved.
 //
 
 #import "NERStaticTableView+NERChainable.h"
@@ -156,11 +156,13 @@
 
 - (NERChainableNERStaticRowCallbackBlock)onClick {
     NER_CALLBACK_BLOCK(
-                       if (block) {
-                           [self setValue:block forKey:@"selectionBlock"];
-                       } else if (target && action) {
-                           block = ^{
-                               [target performSelector:action withObject:nil];
+                       if (NER_IS_BLOCK(object)) {
+                           [self setValue:object forKey:@"selectionBlock"];
+                           
+                       } else {
+                           id block = ^{
+                               SEL action = NSSelectorFromString(object);
+                               [weakTarget performSelector:action withObject:nil];
                            };
                            
                            [self setValue:block forKey:@"selectionBlock"];
@@ -172,7 +174,7 @@
     NER_OBJECT_BLOCK([self setValue:value forKey:@"accessoryView"]);
 }
 
-- (NERChainableNERStaticRowBoolBlock)checked {
+- (NERChainableNERStaticRowBoolBlock)check {
     NER_INT_BLOCK(
                   id n = @(value? UITableViewCellAccessoryCheckmark: UITableViewCellAccessoryNone);
                   [self setValue:n forKey:@"accessoryType"];
@@ -204,16 +206,6 @@
 
 - (instancetype)disclosure {
     [self setValue:@(UITableViewCellAccessoryDisclosureIndicator) forKey:@"accessoryType"];
-    return self;
-}
-
-- (instancetype)check {
-    [self setValue:@(UITableViewCellAccessoryCheckmark) forKey:@"accessoryType"];
-    return self;
-}
-
-- (instancetype)uncheck {
-    [self setValue:@(UITableViewCellAccessoryNone) forKey:@"accessoryType"];
     return self;
 }
 

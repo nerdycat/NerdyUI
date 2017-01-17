@@ -2,8 +2,8 @@
 //  UIFont+NERChainable.h
 //  NerdyUI
 //
-//  Created by admin on 2016/12/14.
-//  Copyright © 2016年 nerdycat. All rights reserved.
+//  Created by nerdycat on 2016/12/14.
+//  Copyright © 2016 nerdycat. All rights reserved.
 //
 
 #import <UIKit/UIKit.h>
@@ -21,7 +21,7 @@
  
  * Usages: Fnt(15), Fnt(@15), Fnt(@"body"), Fnt(@"Helvetica,15")
  */
-#define Fnt(x)      [NERUtils fontWithFontObject:NER_CONVERT_INT_TO_STRING(x)]
+#define Fnt(x)  [NERUtils fontWithFontObject:NER_CONVERT_INT_TO_STRING(x)]
 
 
 @interface UIFont (NERChainable)

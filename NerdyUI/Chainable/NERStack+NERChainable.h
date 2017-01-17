@@ -2,8 +2,8 @@
 //  NERStack+NERChainable.h
 //  NerdyUI
 //
-//  Created by admin on 2016/11/4.
-//  Copyright © 2016年 nerdycat. All rights reserved.
+//  Created by nerdycat on 2016/11/4.
+//  Copyright © 2016 nerdycat. All rights reserved.
 //
 
 #import "NERStack.h"
@@ -26,7 +26,7 @@
     HStack(view1, @5, view2, @10, view3)
     Hstack(view1, view2, view3).gap(5)
  */
-#define HStack(...)         [NERStack horizontalStackWithItems:@[__VA_ARGS__]]
+#define HorStack(...)       [NERStack horizontalStackWithItems:@[__VA_ARGS__]]
 
 /**
  * Vertical Stack with items.
@@ -36,7 +36,7 @@
     VStack(view1, @5, view2, @10, view3)
     VStack(view1, view2, view3).gap(5)
  */
-#define VStack(...)         [NERStack verticalStackWithItems:@[__VA_ARGS__]]
+#define VerStack(...)       [NERStack verticalStackWithItems:@[__VA_ARGS__]]
 
 /**
  * Unlike gap create a fix spacing, NERSpring carete an spacing that can shrink or expand.

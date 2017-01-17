@@ -2,7 +2,7 @@
 //  NSString+NERChainable.h
 //  NerdyUI
 //
-//  Created by CAI on 10/2/16.
+//  Created by nerdycat on 10/2/16.
 //  Copyright © 2016 nerdycat. All rights reserved.
 //
 
@@ -44,6 +44,12 @@
 #endif
 
 
+/**
+ * Create an NSURL from URL string.
+ */
+#define Url(s)                  [NSURL URLWithString:s]
+
+
 
 @interface NSString (NERChainable)
 
@@ -52,7 +58,7 @@
  * a use Str() internally, so it can take any kind of arguments that Str() supported.
  * Usages: @"1".a(@"2").a(3).a(nil).a(4.0f).a(@5).a(@"%d", 6);      //@"123456"
  */
-NER_STRING_PROP(Object)         as;
+NER_STRING_PROP(Object)         a;
 
 /**
  * Appending path component.
@@ -98,7 +104,7 @@ NER_STRING_PROP(Object)         subMatch;
 NER_STRING_PROP(TwoObject)      subReplace;
 
 
-#define as(...)                 as(Str(__VA_ARGS__))
+#define a(...)                  a(Str(__VA_ARGS__))
 #define ap(...)                 ap(Str(__VA_ARGS__))
 #define subFrom(x)              subFrom(NER_CONVERT_INT_TO_NUMBER(x))
 #define subTo(x)                subTo(NER_CONVERT_INT_TO_NUMBER(x))

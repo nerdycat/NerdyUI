@@ -2,8 +2,8 @@
 //  NERStaticTableView+NERChainable.h
 //  NerdyUI
 //
-//  Created by admin on 2016/11/9.
-//  Copyright © 2016年 nerdycat. All rights reserved.
+//  Created by nerdycat on 2016/11/9.
+//  Copyright © 2016 nerdycat. All rights reserved.
 //
 
 #import "NERStaticTableView.h"
@@ -188,9 +188,9 @@ NER_ROW_PROP(Object)        accessory;
 /**
  * Whether or not to check the cell.
  * Use UITableViewCellAccessoryCheckmark internally.
- * Usages: .checked(YES), .checked(NO)
+ * Usages: .check(YES), .check(NO)
  */
-NER_ROW_PROP(Bool)          checked;
+NER_ROW_PROP(Bool)          check;
 
 /**
  * Cell height

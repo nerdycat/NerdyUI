@@ -2,8 +2,8 @@
 //  UISegmentedControl+NERChainable.h
 //  NerdyUI
 //
-//  Created by admin on 2016/12/29.
-//  Copyright © 2016年 nerdycat. All rights reserved.
+//  Created by nerdycat on 2016/12/29.
+//  Copyright © 2016 nerdycat. All rights reserved.
 //
 
 #import <UIKit/UIKit.h>
@@ -32,11 +32,11 @@ NER_SEGMENTED_PROP(Object)      tint;
  * Use UIControlEventValueChanged event internally.
  * It support two kind of arguments:
     1) a callback block
-    2) a target/action pair
+    2) a selector string
  
  * Usages: 
     .onChange(^{}), .onChange(^(NSInteger selectedIndex){}), .onChange(^(NSInteger selectedIndex, id segmentedControl){})
-    .onChange(self, @selector(segmentedControlValueDidChange) / @selector(segmentedControlValueDidChange:))
+    .onChange(@"segmentedControlValueDidChange"), .onChange(@"segmentedControlValueDidChange:")
  */
 NER_SEGMENTED_PROP(Callback)    onChange;
 

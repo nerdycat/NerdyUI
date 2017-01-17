@@ -2,8 +2,8 @@
 //  UIColor+NERChainable.h
 //  NerdyUI
 //
-//  Created by admin on 2016/12/14.
-//  Copyright © 2016年 nerdycat. All rights reserved.
+//  Created by nerdycat on 2016/12/14.
+//  Copyright © 2016 nerdycat. All rights reserved.
 //
 
 #import <UIKit/UIKit.h>
@@ -23,8 +23,10 @@
  * All the string representation can have an optional alpha value.
  
  * Usages: Color([UIColor redColor]), 
-           Color(@"red"), Color(@"red,0.5"), 
-           Color(@"255,0,0,1"), Color(@"#F00,0.5"), 
+           Color(@"red"), 
+           Color(@"red,0.5"),
+           Color(@"255,0,0,1"), 
+           Color(@"#F00,0.5"),
            Color(@"random,0.5")
            Color(imageObject)
  */

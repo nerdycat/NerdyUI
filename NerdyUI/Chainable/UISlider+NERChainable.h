@@ -2,8 +2,8 @@
 //  UISlider+NERChainable.h
 //  NerdyUI
 //
-//  Created by admin on 2016/12/21.
-//  Copyright © 2016年 nerdycat. All rights reserved.
+//  Created by nerdycat on 2016/12/21.
+//  Copyright © 2016 nerdycat. All rights reserved.
 //
 
 #import <UIKit/UIKit.h>
@@ -85,11 +85,11 @@ NER_SLIDER_PROP(Insets)     thumbInsets;
  * Use UIControlEventValueChanged event internally.
  * It support two kind of arguments:
     1) a callback block
-    2) a target/action pair
+    2) a selector string
  
  * Usages: 
-    .onChange(^{}), .onChange(^(CGFloat value){}), onChange(^(CGFloat value, UISlider *slider){})
-    .onChange(self, @selector(sliderValueDidChange) / @selector(sliderValueDidChange:))
+    .onChange(^{}), .onChange(^(CGFloat value){}), .onChange(^(CGFloat value, UISlider *slider){})
+    .onChange(@"sliderValueDidChange"), .onChange(@"sliderValueDidChange:")
  */
 NER_SLIDER_PROP(Callback)   onChange;
 

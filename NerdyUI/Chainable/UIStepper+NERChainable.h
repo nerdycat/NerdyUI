@@ -2,8 +2,8 @@
 //  UIStepper+NERChainable.h
 //  NerdyUI
 //
-//  Created by admin on 2016/12/30.
-//  Copyright © 2016年 nerdycat. All rights reserved.
+//  Created by nerdycat on 2016/12/30.
+//  Copyright © 2016 nerdycat. All rights reserved.
 //
 
 #import <UIKit/UIKit.h>
@@ -51,11 +51,11 @@ NER_STEPPER_PROP(Object)    tint;
  * Use UIControlEventValueChanged event internally.
  * It support two kind of arguments:
  1) a callback block
- 2) a target/action pair
+ 2) a selector string
  
  * Usages:
     .onChange(^{}), .onChange(^(NSInteger value){}), .onChange(^(NSInteger value, id stepper){})
-    .onChange(self, @selector(stepperValueDidChange) / @selector(stepperValueDidChange:))
+    .onChange(@"stepperValueDidChange"), .onChange(@"stepperValueDidChange:")
  */
 NER_STEPPER_PROP(Callback)  onChange;
 

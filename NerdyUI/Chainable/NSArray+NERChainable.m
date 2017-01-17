@@ -2,8 +2,8 @@
 //  NSArray+NERChainable.m
 //  NerdyUI
 //
-//  Created by admin on 2016/12/5.
-//  Copyright © 2016年 nerdycat. All rights reserved.
+//  Created by nerdycat on 2016/12/5.
+//  Copyright © 2016 nerdycat. All rights reserved.
 //
 
 #import "NSArray+NERChainable.h"
@@ -80,6 +80,24 @@
     return self;
 }
 
+
+- (NSArray *(^)(id))forEach {
+    return ^(id object) {
+        if ([object isKindOfClass:NSString.class]) {
+            [self makeObjectsPerformSelector:NSSelectorFromString(object)];
+            
+        } else {
+            NERBlockInfo *blockInfo = [[NERBlockInfo alloc] initWithBlock:object];
+            if (blockInfo.argumentCount > 0) {
+                for (NSInteger i = 0; i < self.count; ++i) {
+                    [self ner_invokeBlock:blockInfo withValue:self[i] atIndex:i];
+                }
+            }
+        }
+        
+        return self;
+    };
+}
 
 - (NSArray *(^)(id))map {
     return ^(id block) {

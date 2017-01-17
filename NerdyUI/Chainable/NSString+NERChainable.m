@@ -2,7 +2,7 @@
 //  NSString+NERChainable.m
 //  NerdyUI
 //
-//  Created by CAI on 10/2/16.
+//  Created by nerdycat on 10/2/16.
 //  Copyright © 2016 nerdycat. All rights reserved.
 //
 
@@ -12,7 +12,7 @@
 
 @implementation NSString (NERChainable)
 
-- (NERChainableNSStringObjectBlock)as {
+- (NERChainableNSStringObjectBlock)a {
     NER_OBJECT_BLOCK(return [self stringByAppendingString:value]);
 }
 

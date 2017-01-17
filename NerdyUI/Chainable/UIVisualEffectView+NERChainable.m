@@ -2,8 +2,8 @@
 //  UIVisualEffectView+NERChainable.m
 //  NerdyUI
 //
-//  Created by admin on 2016/12/30.
-//  Copyright © 2016年 nerdycat. All rights reserved.
+//  Created by nerdycat on 2016/12/30.
+//  Copyright © 2016 nerdycat. All rights reserved.
 //
 
 #import "UIVisualEffectView+NERChainable.h"

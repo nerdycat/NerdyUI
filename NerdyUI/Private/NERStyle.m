@@ -166,4 +166,8 @@ static NSMutableDictionary *ner_styleDict = nil;
     return style;
 }
 
++ (instancetype)createStyleWithKeys:(NSArray *)keys {
+    return [self createStyleWithKey:keys.firstObject];
+}
+
 @end
