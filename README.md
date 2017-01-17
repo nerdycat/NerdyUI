@@ -1,5 +1,5 @@
 # NerdyUI
-An easy way to create and layout UI components for iOS.
+An easy way to create and layout UI components for iOS 8 and above.
 
 ---
 ## Macros for create Strings, Fonts, Colors, Images and Common structs.
