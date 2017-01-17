@@ -1,0 +1,62 @@
+//
+//  UIStepper+NERChainable.h
+//  NerdyUI
+//
+//  Created by admin on 2016/12/30.
+//  Copyright © 2016年 nerdycat. All rights reserved.
+//
+
+#import <UIKit/UIKit.h>
+#import "NERDefs.h"
+
+#define Stepper     [UIStepper new]
+
+@interface UIStepper (NERChainable)
+
+/**
+ * value, this value will be pinned to min/max.
+ * It's better to set minVal/maxVal before setting val.
+ * Usages: .val(50)
+ */
+NER_STEPPER_PROP(Float)     val;
+
+/**
+ * minimumValue
+ * Usages: .minVal(0)
+ */
+NER_STEPPER_PROP(Float)     minVal;
+
+/**
+ * maximumValue
+ * Usages: .maxVal(100)
+ */
+NER_STEPPER_PROP(Float)     maxVal;
+
+/**
+ * stepValue
+ * Usages: .stepVal(2)
+ */
+NER_STEPPER_PROP(Float)     stepVal;
+
+/**
+ * tintColor
+ * tint use Color() internally, so it can take any kind of arguments that Color() supported.
+ * Usages: .tint(@"red"), .tint(@"#F00"), .tint(255,0,0), etc.
+ * See UIColor+NERChainable.h for more information.
+ */
+NER_STEPPER_PROP(Object)    tint;
+
+/**
+ * Value did change callback.
+ * Use UIControlEventValueChanged event internally.
+ * It support two kind of arguments:
+ 1) a callback block
+ 2) a target/action pair
+ 
+ * Usages:
+    .onChange(^{}), .onChange(^(NSInteger value){}), .onChange(^(NSInteger value, id stepper){})
+    .onChange(self, @selector(stepperValueDidChange) / @selector(stepperValueDidChange:))
+ */
+NER_STEPPER_PROP(Callback)  onChange;
+
+@end
