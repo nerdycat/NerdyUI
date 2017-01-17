@@ -7,6 +7,8 @@
 //
 
 #import "NERAlert+NERChainable.h"
+#import "UIColor+NERChainable.h"
+#import "NERUtils.h"
 
 @implementation NERAlertMaker (NERChainable)
 
@@ -19,7 +21,7 @@
 }
 
 - (NERChainableNERAlertMakerObjectBlock)tint {
-    NER_OBJECT_BLOCK([self setValue:value forKey:@"tintObject"]);
+    NER_OBJECT_BLOCK([self setValue:Color(value) forKey:@"tintObject"]);
 }
 
 - (NERChainableNERAlertMakerActionBlock)action {

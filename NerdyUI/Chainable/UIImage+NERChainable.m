@@ -7,7 +7,7 @@
 //
 
 #import "UIImage+NERChainable.h"
-#import "NerdyUI.h"
+#import "NERPrivates.h"
 
 @implementation UIImage (NERChainable)
 
@@ -50,10 +50,7 @@
 }
 
 - (instancetype)stretchable {
-    CGFloat halfWidth = floorf(self.size.width / 2);
-    CGFloat halfHeight = floorf(self.size.height / 2);
-    UIEdgeInsets insets = UIEdgeInsetsMake(halfHeight - 1, halfWidth - 1, halfHeight, halfWidth);
-    return [self resizableImageWithCapInsets:insets resizingMode:UIImageResizingModeStretch];
+    return [self ner_stretchableImage];
 }
 
 - (instancetype)template {

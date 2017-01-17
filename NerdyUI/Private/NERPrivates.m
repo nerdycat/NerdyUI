@@ -8,7 +8,8 @@
 
 @import Accelerate;
 #import <CommonCrypto/CommonDigest.h>
-#import "NerdyUI.h"
+#import "NERPrivates.h"
+#import "NERUtils.h"
 
 
 @implementation NSObject (NERPrivate)
@@ -741,10 +742,9 @@ NER_SYNTHESIZE(nerVibrancyEffectView, setNerVibrancyEffectView);
             vibrancyView = [UIVisualEffectView new];
             vibrancyView.effect = [UIVibrancyEffect effectForBlurEffect:(id)self.effect];
             
+            vibrancyView.frame  = self.contentView.bounds;
+            vibrancyView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
             [self.contentView insertSubview:vibrancyView atIndex:0];
-            vibrancyView.makeCons(^{
-                make.edge.equal.constants(0);
-            });
             
             self.nerVibrancyEffectView = vibrancyView;
         }
@@ -822,7 +822,14 @@ NER_SYNTHESIZE(nerVibrancyEffectView, setNerVibrancyEffectView);
 
 @implementation UIImage (NERPrivate)
 
-- (UIImage*)ner_blueWithRadius:(CGFloat)blurRadius tintColor:(UIColor *)tintColor saturationDeltaFactor:(CGFloat)saturationDeltaFactor maskImage:(UIImage *)maskImage
+- (UIImage *)ner_stretchableImage {
+    CGFloat halfWidth = floorf(self.size.width / 2);
+    CGFloat halfHeight = floorf(self.size.height / 2);
+    UIEdgeInsets insets = UIEdgeInsetsMake(halfHeight - 1, halfWidth - 1, halfHeight, halfWidth);
+    return [self resizableImageWithCapInsets:insets resizingMode:UIImageResizingModeStretch];
+}
+
+- (UIImage *)ner_blueWithRadius:(CGFloat)blurRadius tintColor:(UIColor *)tintColor saturationDeltaFactor:(CGFloat)saturationDeltaFactor maskImage:(UIImage *)maskImage
 {
 #define ENABLE_BLUR                     1
 #define ENABLE_SATURATION_ADJUSTMENT    1

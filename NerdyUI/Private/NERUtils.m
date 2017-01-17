@@ -9,8 +9,7 @@
 #import "NERUtils.h"
 #import "NERDefs.h"
 #import "NERStyle.h"
-#import "UIImage+NERChainable.h"
-#import "UIColor+NERChainable.h"
+#import "NERPrivates.h"
 
 
 @implementation NERUtils
@@ -161,12 +160,12 @@
                 image = [UIImage imageNamed:object];     //fallback
                 
             } else {
-                return image.stretchable;
+                return [image ner_stretchableImage];
             }
         }
         
         if (allowColorImage && !image) {
-            image = [self onePointImageWithColor:Color(object)];
+            image = [self onePointImageWithColor:[NERUtils colorWithColorObject:object]];
         }
 
         return image;

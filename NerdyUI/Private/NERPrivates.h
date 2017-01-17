@@ -56,6 +56,7 @@
 + (instancetype)ner_attributedStringWithSubstrings:(NSArray *)substrings;
 
 - (void)ner_applyAttribute:(NSString *)name withValue:(id)value;
+- (void)ner_addAttributeIfNotExist:(NSString *)name value:(id)value range:(NSRange)range;
 - (void)ner_setParagraphStyleValue:(id)value forKey:(NSString *)key;
 - (void)ner_setParagraphStyleValue:(id)value forKey:(NSString *)key range:(NSRange)range;
 
@@ -188,6 +189,9 @@
 
 @interface UIImage (NERPrivate)
 
+- (UIImage *)ner_stretchableImage;
+
+
 //https://developer.apple.com/library/content/samplecode/UIImageEffects/Introduction/Intro.html#//apple_ref/doc/uid/DTS40013396
 
 //| ----------------------------------------------------------------------------
@@ -209,7 +213,7 @@
 //!         by this mask.  This must be an image mask or it must meet the
 //!         requirements of the mask parameter of CGContextClipToMask.
 
-- (UIImage*)ner_blueWithRadius:(CGFloat)blurRadius tintColor:(UIColor *)tintColor saturationDeltaFactor:(CGFloat)saturationDeltaFactor maskImage:(UIImage *)maskImage;
+- (UIImage *)ner_blueWithRadius:(CGFloat)blurRadius tintColor:(UIColor *)tintColor saturationDeltaFactor:(CGFloat)saturationDeltaFactor maskImage:(UIImage *)maskImage;
 
 @end
 

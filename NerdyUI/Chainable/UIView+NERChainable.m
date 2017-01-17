@@ -7,7 +7,10 @@
 //
 
 #import "UIView+NERChainable.h"
-#import "NerdyUI.h"
+#import "UIColor+NERChainable.h"
+#import "NERConstraint+NERChainable.h"
+#import "NERUtils.h"
+#import "NERPrivates.h"
 
 
 @implementation UIView (NERChainable)

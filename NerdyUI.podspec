@@ -14,8 +14,27 @@ Pod::Spec.new do |s|
 
   s.platform     = :ios, "8.0"
   s.source       = { :git => "https://github.com/nerdycat/NerdyUI.git", :tag => "#{s.version}" }
-  s.source_files  = "NerdyUI/**/*.{h,m}"
-  
   s.requires_arc = true
 
+  s.source_files  = "NerdyUI/NerdyUI.h"
+  s.public_header_files = "NerdyUI/NerdyUI.h"
+
+  s.subspec "Private" do |ss|
+    ss.source_files = "NerdyUI/Private/*.{h,m}"
+    ss.public_header_files = "NerdyUI/Private/*.h"
+  end
+
+  s.subspec "Public" do |ss|
+    ss.source_files = "NerdyUI/Public/*.{h,m}"
+    ss.public_header_files = "NerdyUI/Public/*.h"
+    ss.dependency 'NerdyUI/Private'
+  end
+
+  s.subspec "Chainable" do |ss|
+    ss.source_files = "NerdyUI/Chainable/*.{h,m}"
+    ss.public_header_files = "NerdyUI/Chainable/*.h"
+    ss.dependency 'NerdyUI/Private'
+    ss.dependency 'NerdyUI/Public'
+  end
+  
 end

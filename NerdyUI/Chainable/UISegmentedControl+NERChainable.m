@@ -7,7 +7,8 @@
 //
 
 #import "UISegmentedControl+NERChainable.h"
-#import "NerdyUI.h"
+#import "UIColor+NERChainable.h"
+#import "NERUtils.h"
 
 @implementation UISegmentedControl (NERChainable)
 

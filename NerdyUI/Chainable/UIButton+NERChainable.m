@@ -7,7 +7,9 @@
 //
 
 #import "UIButton+NERChainable.h"
-#import "NerdyUI.h"
+#import "UIFont+NERChainable.h"
+#import "UIColor+NERChainable.h"
+#import "UIImage+NERChainable.h"
 
 @implementation UIButton (NERChainable)
 

@@ -7,8 +7,7 @@
 //
 
 #import "NERAlertMaker.h"
-#import "NerdyUI.h"
-
+#import "NERUtils.h"
 
 @interface NERAlertMaker ()
 
@@ -80,7 +79,7 @@
     }
     
     if (self.tintObject) {
-        alert.view.tintColor = Color(self.tintObject);
+        alert.view.tintColor = self.tintObject;
     }
     
     UIViewController *topVC = [NERUtils getVisibleViewController];

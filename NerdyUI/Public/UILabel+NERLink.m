@@ -9,7 +9,6 @@
 
 #import <UIkit/UIGestureRecognizerSubclass.h>
 #import "UILabel+NERLink.h"
-#import "NSAttributedString+NERChainable.h"
 #import "NERDefs.h"
 #import "NERPrivates.h"
 
@@ -165,7 +164,8 @@ static CGFloat nerPrivateDefaultLinkSelectedCornerRadius = 0;
         objc_setAssociatedObject(self, nerPrivateTextStorageKey, textStorage, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
     }
     
-    NSMutableAttributedString *att = AttStr(self.attributedText).ifNotExists.fnt(self.font);
+    NSMutableAttributedString *att = [[NSMutableAttributedString alloc] initWithAttributedString:self.attributedText];
+    [att ner_addAttributeIfNotExist:NSFontAttributeName value:self.font range:[att.string ner_fullRange]];
     
     if (self.numberOfLines != 1 && self.lineBreakMode != NSLineBreakByCharWrapping && self.lineBreakMode != NSLineBreakByWordWrapping) {
         [att ner_setParagraphStyleValue:@(NSLineBreakByWordWrapping) forKey:@"lineBreakMode" range:NSMakeRange(0, att.string.length)];

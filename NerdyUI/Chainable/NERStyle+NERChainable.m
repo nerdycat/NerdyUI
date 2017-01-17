@@ -7,7 +7,9 @@
 //
 
 #import "NERStyle+NERChainable.h"
-#import "NerdyUI.h"
+#import "NERUtils.h"
+#import "UIColor+NERChainable.h"
+#import "UIFont+NERChainable.h"
 
 #define SYNTHSIZE_METHOD(name) \
 - (instancetype)name {\

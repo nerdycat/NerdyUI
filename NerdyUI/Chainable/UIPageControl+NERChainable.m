@@ -7,7 +7,9 @@
 //
 
 #import "UIPageControl+NERChainable.h"
-#import "NerdyUI.h"
+#import "UIColor+NERChainable.h"
+#import "NERPrivates.h"
+#import "NERUtils.h"
 
 @implementation UIPageControl (NERChainable)
 

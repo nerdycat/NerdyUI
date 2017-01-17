@@ -7,7 +7,8 @@
 //
 
 #import "NSAttributedString+NERChainable.h"
-#import "NerdyUI.h"
+#import "UIFont+NERChainable.h"
+#import "UIColor+NERChainable.h"
 
 
 @implementation NSAttributedString (NERChainable)

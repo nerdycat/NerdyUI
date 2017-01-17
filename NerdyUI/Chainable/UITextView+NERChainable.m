@@ -7,7 +7,10 @@
 //
 
 #import "UITextView+NERChainable.h"
-#import "NerdyUI.h"
+#import "UIColor+NERChainable.h"
+#import "UIFont+NERChainable.h"
+#import "NERPrivates.h"
+#import "NERUtils.h"
 
 #pragma clang diagnostic ignored "-Warc-performSelector-leaks"
 

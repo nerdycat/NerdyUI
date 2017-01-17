@@ -7,7 +7,6 @@
 //
 
 #import "NERStyle.h"
-#import "NerdyUI.h"
 
 #pragma clang diagnostic ignored "-Warc-performSelector-leaks"
 
@@ -101,11 +100,6 @@ static NSMutableDictionary *ner_styleDict = nil;
                 }
             }
             
-//            const char *type = [object objCType];
-//            if (NER_CHECK_IS_INT(type[0])) {
-//                
-//            }
-            
         } else if ([object isKindOfClass:NSValue.class]) {
             const char *ocType = [object objCType];
             
@@ -134,7 +128,7 @@ static NSMutableDictionary *ner_styleDict = nil;
                 [object getValue:&floatList];
                 CALL_METHOD_WITH_VALUE(NERFloatList, floatList);
             } else {
-                Log(ocType);
+//                Log(ocType);
             }
             
         } else {

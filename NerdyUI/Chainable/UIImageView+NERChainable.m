@@ -7,7 +7,8 @@
 //
 
 #import "UIImageView+NERChainable.h"
-#import "NerdyUI.h"
+#import "UIImage+NERChainable.h"
+#import "NSArray+NERChainable.h"
 
 @implementation UIImageView (NERChainable)
 

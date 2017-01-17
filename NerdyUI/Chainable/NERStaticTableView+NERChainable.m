@@ -7,7 +7,10 @@
 //
 
 #import "NERStaticTableView+NERChainable.h"
-#import "NerdyUI.h"
+#import "UIColor+NERChainable.h"
+#import "UIFont+NERChainable.h"
+#import "UIView+NERChainable.h"
+#import "UIImage+NERChainable.h"
 
 #pragma clang diagnostic ignored "-Warc-performSelector-leaks"
 

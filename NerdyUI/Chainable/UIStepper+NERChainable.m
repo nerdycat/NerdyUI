@@ -7,7 +7,9 @@
 //
 
 #import "UIStepper+NERChainable.h"
-#import "NerdyUI.h"
+#import "UIColor+NERChainable.h"
+#import "NERUtils.h"
+#import "NERPrivates.h"
 
 @implementation UIStepper (NERChainable)
 
