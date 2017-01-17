@@ -71,7 +71,7 @@ These macros exist not only because they simplify the process of creating common
 	someView.y = someView.x;
 	someView.xy = XY(10, 10);
 	someView.w = 50;				//width
-	someView.h = someView.w;	//height
+	someView.h = someView.w;		//height
 	someView.wh = WH(50, 50);
 	someView.frame = XYWH(10, 10, 50, 50);
 	
@@ -157,6 +157,7 @@ You can add link to UILabel as well. All you have to do is create an NSAttribute
 
 	id str = @"Lorem ipsum 20 dolor sit er elit lamet, consectetaur cillium #adipisicing pecu, sed do #eiusmod tempor incididunt ut labore et 3.14 dolore magna aliqua.";
     id attStr = AttStr(str).range(0, 5).match(@"lamet").match(@"[0-9.]+").matchHashTag.linkForLabel;
+	
 	Label.str(attStr).multiline.lineGap(10).xywh(self.view.bounds).onLink(^(NSString *text) {
         Log(text);
     }).addTo(self.view);
@@ -237,7 +238,7 @@ Adding constraints for every views by hand could be tedious. Luckily, you can bu
 
 <img src="./res/appcell.png" alt="appcell" width="60%" />
 
-Here we create a cell mimic the AppStore Top Charts list. As you can see, the usage of HorStack and VerStack are quite simple. You divide your UI into small part of stacks, and embed them together with optional spacing. You can see how they are stack visually by click "Debug View Hierarchy". 
+Here we create a cell mimic the AppStore Top Charts list cell. As you can see, the usage of HorStack and VerStack are quite simple. You divide your UI into small part of stacks, and embed them together with optional spacing. You can see how they are stack visually by click "Debug View Hierarchy". 
 
 <img src="./res/appcell2.png" alt="appcell2" width="60%" />
 
