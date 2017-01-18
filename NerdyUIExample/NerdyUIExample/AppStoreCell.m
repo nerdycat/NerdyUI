@@ -54,14 +54,14 @@
     
     //.gap() will add spacing between all items.
     id ratingStack = HorStack(_ratingLabel, _countLabel).gap(5);
-    id titleStack = VerStack(_titleLabel, _categoryLabel, ratingStack).gap(4);
+    id midStack = VerStack(_titleLabel, _categoryLabel, ratingStack).gap(4);
     id actionStack = VerStack(_actionButton, _iapLabel).gap(4).centerAlignment;
     
     HorStack(
              _indexLabel,
              _iconView,
              @10,           //Add spacing individually.
-             titleStack,
+             midStack,
              NERSpring,     //Using spring to ensure actionStack stay in the right most position.
              actionStack
     ).embedIn(self.contentView, 10, 0, 10, 15);

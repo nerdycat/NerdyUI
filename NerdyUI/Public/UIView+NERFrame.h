@@ -10,9 +10,27 @@
 
 #define XY(x, y)                CGPointMake(x, y)
 #define WH(w, h)                CGSizeMake(w, h)
-#define XYWH(x, y, w, h)        CGRectMake(x, y, w, h)
+
+/**
+ * Usages:
+    XYWH(10, 10, 50, 50)
+    XYWH(XY(10, 10), WH(50, 50))
+    XYWH(XY(10, 10), 50, 50)
+    XYWH(10, 10, WH(50, 50))
+ */
+#define XYWH(...)               ((NERRect){__VA_ARGS__}).value
+
 #define Range(s, l)             NSMakeRange(s, l)
+
+/**
+ * Usages:
+    Insets(10)                  //{10, 10, 10, 10}
+    Insets(10, 20)              //{10, 20, 10, 20}
+    Insets(10, 20, 30)          //{10, 20, 30, 20}
+    Insets(10, 20, 30, 40)      //{10, 20, 30, 40}
+ */
 #define Insets(...)             NER_NORMALIZE_INSETS(__VA_ARGS__)
+
 
 /**
  * Easy access and update frame property.

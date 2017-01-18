@@ -1,4 +1,7 @@
 # NerdyUI
+[![Platform](http://cocoapod-badges.herokuapp.com/p/NerdyUI/badge.png)](https://cocoapods.org/pods/NerdyUI)
+[![Version](http://cocoapod-badges.herokuapp.com/v/NerdyUI/badge.png)](https://cocoapods.org/pods/NerdyUI)
+[![License](http://cocoapod-badges.herokuapp.com/l/NerdyUI/badge.png)](https://cocoapods.org/pods/NerdyUI)   
 An easy way to create and layout UI components for iOS 8 and above.
 
 ---
@@ -54,7 +57,12 @@ You also can create CGPoint, CGSize, CGRect, NSRange and UIEdgeInsets with `XY()
 
 	CGPoint		p = XY(20, 20);
 	CGSize	 	s = WH(50, 50);
-	CGRect	 	f = XYWH(20, 20, 50, 50);
+	
+	CGRect	 	f1 = XYWH(20, 20, 50, 50);
+	CGRect		f2 = XYWH(f1.origin, f1.size);
+	CGRect		f3 = XYWH(f2.origin, 50, 50);
+	CGRect		f4 = XYWH(20, 20, f3.size);
+	
 	NSRange		r = Range(10, 20);
 	
 	UIEdgeInsets i1 = Insets(10);				//{10, 10, 10, 10}
@@ -113,7 +121,7 @@ NerdyUI make it very easy to create UI components and config properties by using
 <img src="./res/button.gif" alt="button" width="50%" />
 
     id pinField = TextField.x(button1.x).y(button1.maxY + 15).wh(170, 30).onChange(^(NSString *text) {
-    	//self has been auto weakify here
+    	//self has been weakified, no need to warry about retain cycle.
         [(id)[self.view viewWithTag:101] setText:text];
     }).numberKeyboard.maxLength(4).pstr(@"pin code").fnt(15).roundStyle;
     
@@ -126,15 +134,15 @@ Some of them are very versatile and can take many kind of arguments.
 
 You use `.opacity()` and `.tg()` to set view's alpha and tag.
 
-You use `.x()`, `.y()`, `.xy()`, `.w()`, `.h()`, `.wh()`, `.xywh()`, `.cx()`, `.cy()`, `.cxy()`, `.maxX()`, `.maxY()`, `.maxXY()` to set view's position and size.
+You use `.x()`, `.y()`, `.xy()`, `.w()`, `.h()`, `.wh()`, `.xywh()`, `.cx()`, `.cy()`, `.cxy()`, `.maxX()`, `.maxY()`, `.maxXY()` to set view's position and size. 
 
-You use `.fnt()` to set font with the same syntax as `Fnt()`.
+You use `.fnt()` to set font with the same format as `Fnt()`.
 
-You use `.str()` to set text or attribtedText with the same syntax as `Str()`.
+You use `.str()` to set text or attribtedText with the same format as `Str()`.
 
-You use `.img()`, `.highImg()`, `.bgImg()` and `.highBgImg()` to set image, highlighted image, backgroundImage and highlighted backgroundImage, with the same syntax as `Img()`.
+You use `.img()`, `.highImg()`, `.bgImg()` and `.highBgImg()` to set image, highlighted image, backgroundImage and highlighted backgroundImage, with the same format as `Img()`.
 
-You use `.color()`, `.bgColor()`, `.highColor()` to set text color, background color and highlighted text color, with the same syntax as `Color()`.
+You use `.color()`, `.bgColor()`, `.highColor()` to set text color, background color and highlighted text color, with the same format as `Color()`.
 
 You use `.border()`, `.cornerRadius()` and `.shadow()` to config border styles and drop shadows.
 
@@ -224,21 +232,21 @@ Adding constraints for every views by hand could be tedious. Luckily, you can bu
     
     //.gap() will add spacing between all items.
     id ratingStack = HorStack(_ratingLabel, _countLabel).gap(5);
-    id titleStack = VerStack(_titleLabel, _categoryLabel, ratingStack).gap(4);
+    id midStack = VerStack(_titleLabel, _categoryLabel, ratingStack).gap(4);
     id actionStack = VerStack(_actionButton, _iapLabel).gap(4).centerAlignment;
     
     HorStack(
              _indexLabel,
              _iconView,
              @10,           //Add spacing betweens two items.
-             titleStack,
+             midStack,
              NERSpring,     //Using spring to ensure actionStack always stay in the right most position.
              actionStack
     ).embedIn(self.contentView, 10, 0, 10, 15);
 
 <img src="./res/appcell.png" alt="appcell" width="60%" />
 
-Here we create a cell mimic the AppStore Top Charts list cell. As you can see, the usage of HorStack and VerStack are quite simple. You divide your UI into small part of stacks, and embed them together with optional spacing. You can see how they are stack visually by click "Debug View Hierarchy". 
+Here we create a cell mimic the AppStore Top Charts list cell. As you can see, the usages of HorStack and VerStack are quite simple. You divide your UI into small part of stacks, and embed them together with optional spacing. You can see how they are stack visually by click "Debug View Hierarchy". 
 
 <img src="./res/appcell2.png" alt="appcell2" width="60%" />
 
@@ -267,13 +275,24 @@ You can present `Alert` And `ActionSheet` using the chaining syntax as well.
 	Alert.title(@"Title").message(@"Message").action(@"OK",^{}), cancel(@"Cancel").show();
 	ActionSheet.title(@"Title").message(@"Message").action(@"OK",^{}), cancel(@"Cancel").show();
 	
+For NSArray, we also provide you `.forEach()`, `.map()`, `.filter()` and `.reduce()`. 
+
+	id result = @[@1, @2, @3, @4].map(^(NSInteger n) {
+        return n * 2;
+    }).filter(^(NSInteger n) {
+        return n < 5;
+    }).reduce(^(NSInteger ac, NSInteger n) {
+        return ac + n;
+    });
+	
 
 ##Something to mentions
-Inside `.onClick()`, `.onLink()`, `.onChange()` and `.onFinish()`, `self` has been weakified so you can use `self` directly without worrying retain cycle. Sometimes you may want to make a strong reference of `self` in order to prolong its life time.
+Inside `.onClick()`, `.onLink()`, `.onChange()` and `.onFinish()`, `self` has been weakified so you can use `self` directly without worrying retain cycle. Sometimes you may want to make a strong reference of `self` inside handler in order to prolong its life time.
 
 NerdyUI use a lot of macros and category methods. It's likely will clash with your own codes, so use with cautions.
 
-
+## Installation
+	pod "NerdyUI"
 
 	 
 

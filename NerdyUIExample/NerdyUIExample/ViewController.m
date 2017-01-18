@@ -18,9 +18,6 @@
 
 @implementation ViewController
 
-- (void)mooseTapped {
-    Alert.title(@"Alert").message(@"moose").cancelAction(@"OK").show();
-}
 
 - (void)demo1 {
     UIView *view1 = View.xywh(20, 30, 50, 50).bgColor(@"red").opacity(0.7).border(3, @"#3d3d3d");
@@ -45,13 +42,16 @@
     
     
     id pinField = TextField.x(button1.x).y(button1.maxY + 15).wh(170, 30).onChange(^(NSString *text) {
+        //self has been weakified, no need to warry about retain cycle.
         [(id)[self.view viewWithTag:101] setText:text];
     }).numberKeyboard.maxLength(4).pstr(@"pin code").fnt(15).roundStyle;
     
     id textView = TextView.xywh(20, 240, 170, 100).border(1).insets(8).pstr(@"placeholder").fnt([pinField font]).tg(101);
     
+    //Add multiply subviews at once.
     self.view.addChild(view1, view2, quiz, moose, button1, button2, pinField, textView);
 }
+
 
 - (void)demo2 {
     id str = @"Lorem ipsum 20 dolor sit er elit lamet, consectetaur cillium #adipisicing pecu, sed do #eiusmod tempor incididunt ut labore et 3.14 dolore magna aliqua.";
@@ -62,6 +62,7 @@
         Log(text);
     }).addTo(self.view).centerAlignment;
 }
+
 
 - (void)demo3 {
     ImageView.img(@"macbook").embedIn(self.view).centerMode;
@@ -89,15 +90,13 @@
     });
 }
 
+
 - (void)demo4 {
     AppStoreViewController *as = [AppStoreViewController new];
     [self.view addSubview:as.view.xywh(self.view.bounds)];
     [self addChildViewController:as];
 }
 
-- (void)row4Click {
-    Log(@"Row4");
-}
 
 - (void)demo5 {
     GroupTV(
@@ -131,6 +130,7 @@
             ).embedIn(self.view).tg(101);
 }
 
+
 - (void)demo6 {
     Style(@"h1").color(@"#333333").fnt(17);
     Style(@"button").fixHeight(30).insets(0, 10).cornerRadius(5);
@@ -152,21 +152,29 @@
             Log(@"Action2");
         }).destructiveAction(@"Delete", ^{
             Log(@"Delete");
-        }).cancelAction(@"Cancel").tint(@"brown").show();
+        }).cancelAction(@"Cancel").tint(@"cyan").show();
     });
     
     VerStack(text, alert, action).embedIn(self.view, 20, 20, NERNull, 20).gap(10);
 }
+
+
+- (void)row4Click {
+    Log(@"Row4");
+}
+
 
 - (void)clear {
     self.view.subviews.filter(^(id v) {return [v tag] != 999;}).forEach(@"removeFromSuperview");
     self.childViewControllers.forEach(@"removeFromParentViewController");
 }
 
+
 - (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
     [super touchesBegan:touches withEvent:event];
     [self.view endEditing:YES];
 }
+
 
 - (BOOL)prefersStatusBarHidden {
     return YES;
@@ -182,6 +190,8 @@
     
     Segmented(@"demo1", @"demo2", @"demo3", @"demo4", @"demo5", @"demo6").onChange(^(int index, id sc) {
         id methodName = @("demo").a(index + 1);
+        
+        //self has been weakified, no need to warry about retain cycle.
         [self clear];
         [self performSelector:NSSelectorFromString(methodName)];
         [self.view bringSubviewToFront:sc];

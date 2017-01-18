@@ -141,10 +141,19 @@ NER_PROP(v, Point)              cxy;
 
 /**
  * Setting frame value.
- * It support two kind of arguments:
+ * It support many kind of arguments:
     1) a CGRect
-    2) four CGFloat
- * Usages: .xywh(someView.frame), .xywh(10, 10, 50, 50)
+    2) a CGPoint and a CGSize
+    3) two CGFloat and a CGSize
+    4) a CGPoint and two CGFloat
+    5) four CGFloat
+ 
+ * Usages: 
+    .xywh(someView.frame), 
+    .xywh(CGPointZero, someView.frame.size), 
+    .xywh(CGPointZero, 50, 50),
+    .xywh(10, 10, WH(50, 50),
+    .xywh(10, 10, 50, 50)
  */
 #define xywh(...)               xywh((NERRect){__VA_ARGS__})
 
