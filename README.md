@@ -1,5 +1,6 @@
 # NerdyUI
 [![Platform](http://cocoapod-badges.herokuapp.com/p/NerdyUI/badge.png)](https://cocoapods.org/pods/NerdyUI)
+[![Language](https://camo.githubusercontent.com/329dad681452751ddf3fed2c8a32d2c4515ae03b/687474703a2f2f696d672e736869656c64732e696f2f62616467652f6c616e67756167652d4f626a432d627269676874677265656e2e7376673f7374796c653d666c6174)](https://cocoapods.org/pods/NerdyUI)
 [![Version](http://cocoapod-badges.herokuapp.com/v/NerdyUI/badge.png)](https://cocoapods.org/pods/NerdyUI)
 [![License](http://cocoapod-badges.herokuapp.com/l/NerdyUI/badge.png)](https://cocoapods.org/pods/NerdyUI)   
 An easy way to create and layout UI components for iOS 8 and above.    
@@ -74,7 +75,7 @@ You also can create CGPoint, CGSize, CGRect, NSRange and UIEdgeInsets with `XY()
 These macros exist not only because they simplify the process of creating common types, but also indicate a new way of setting properties as you will see soon.
 
 
-## Easy way to access frame property
+## Quick access to frame property and Screen size
 
 	someView.x = 10;
 	someView.y = someView.x;
@@ -91,6 +92,8 @@ These macros exist not only because they simplify the process of creating common
 	someView.maxX = 60;
 	someView.maxY = someView.maxX;
 	someView.maxXY = XY(60, 60);
+	
+	someView.wh = WH(Screen.width, Screen.height);
 
 
 ## Easy way to set up UI components
@@ -124,15 +127,13 @@ NerdyUI make it very easy to create UI components and config properties by using
     id pinField = TextField.x(button1.x).y(button1.maxY + 15).wh(170, 30).onChange(^(NSString *text) {
     	//self has been weakified, no need to warry about retain cycle.
         [(id)[self.view viewWithTag:101] setText:text];
-    }).numberKeyboard.maxLength(4).pstr(@"pin code").fnt(15).roundStyle;
+    }).numberKeyboard.maxLength(4).hint(@"pin code").fnt(15).roundStyle;
     
-    id textView = TextView.xywh(20, 240, 170, 100).border(1).insets(8).pstr(@"placeholder").fnt([pinField font]).tg(101);
+    id textView = TextView.xywh(20, 240, 170, 100).border(1).insets(8).hint(@"placeholder").fnt([pinField font]).tg(101);
 
 <img src="./res/input.gif" alt="input" width="50%" />
 
-First of all, `View` is just a Macro for `[UIView new]`, same as others.
-
-As you can see, most of the chainable properties are quite straight forward and self-explained. Some of them are very versatile and can take many kind of arguments.
+As you can see, most of the chainable properties are quite straight forward and self-explained. Some of them are very versatile and can take many kind of arguments. By the way, `View` is just a Macro for `[UIView new]`, same as others.
 
 You use `.opacity()` and `.tg()` to set view's alpha and tag.
 
@@ -152,7 +153,7 @@ You use `.fitWidth`, `.fitHeight` and `.fitSize` to change bounds to fit content
 
 You use `.onClick()` to add click handler to any UIView.
 
-For UITextField and UITextView, you use `.pstr()` to set placeholder, `.maxLength()` to limit the total length, `.onChange()` for adding text change handler.
+For UITextField and UITextView, you use `.hint()` to set placeholder, `.maxLength()` to limit the total length, `.onChange()` for adding text change handler.
 
 For UIButton, UITextField and UITextView, you use `.insets()` to add padding to contents.
 

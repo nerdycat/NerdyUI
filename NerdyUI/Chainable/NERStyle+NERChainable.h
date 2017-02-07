@@ -131,7 +131,7 @@ NER_STYLE_PROP(Insets)          insets;
 /**
  * UITextField
  */
-NER_STYLE_PROP(Object)          pstr;
+NER_STYLE_PROP(Object)          hint;
 NER_STYLE_PROP(Int)             maxLength;
 
 - (instancetype)secure;               

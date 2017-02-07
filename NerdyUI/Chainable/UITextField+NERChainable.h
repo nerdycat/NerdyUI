@@ -28,10 +28,10 @@ NER_TF_PROP(Object)     str;
 
 /**
  * Setting placeholder or attributedPlaceholder value.
- * Usages: .pstr(@"Enter your name"), .pstr(AttStr(@"Enter your name").fnt(20).underline)
+ * Usages: .hint(@"Enter your name"), .hint(AttStr(@"Enter your name").fnt(20).underline)
  * See NSAttributedString+NERChainable.h for more information.
  */
-NER_TF_PROP(Object)     pstr;
+NER_TF_PROP(Object)     hint;
 
 /**
  * font

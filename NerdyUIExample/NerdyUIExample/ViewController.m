@@ -44,9 +44,9 @@
     id pinField = TextField.x(button1.x).y(button1.maxY + 15).wh(170, 30).onChange(^(NSString *text) {
         //self has been weakified, no need to warry about retain cycle.
         [(id)[self.view viewWithTag:101] setText:text];
-    }).numberKeyboard.maxLength(4).pstr(@"pin code").fnt(15).roundStyle;
+    }).numberKeyboard.maxLength(4).hint(@"pin code").fnt(15).roundStyle;
     
-    id textView = TextView.xywh(20, 240, 170, 100).border(1).insets(8).pstr(@"placeholder").fnt([pinField font]).tg(101);
+    id textView = TextView.xywh(20, 240, 170, 100).border(1).insets(8).hint(@"placeholder").fnt([pinField font]).tg(101);
     
     //Add multiply subviews at once.
     self.view.addChild(view1, view2, quiz, moose, button1, button2, pinField, textView);

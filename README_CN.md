@@ -1,5 +1,6 @@
 # NerdyUI
 [![Platform](http://cocoapod-badges.herokuapp.com/p/NerdyUI/badge.png)](https://cocoapods.org/pods/NerdyUI)
+[![Language](https://camo.githubusercontent.com/329dad681452751ddf3fed2c8a32d2c4515ae03b/687474703a2f2f696d672e736869656c64732e696f2f62616467652f6c616e67756167652d4f626a432d627269676874677265656e2e7376673f7374796c653d666c6174)](https://cocoapods.org/pods/NerdyUI)
 [![Version](http://cocoapod-badges.herokuapp.com/v/NerdyUI/badge.png)](https://cocoapods.org/pods/NerdyUI)
 [![License](http://cocoapod-badges.herokuapp.com/l/NerdyUI/badge.png)](https://cocoapods.org/pods/NerdyUI)   
 一个快速布局 UI 库，适用于 iOS 8 及以上版本。
@@ -71,7 +72,7 @@
 	
 使用这些宏可以简化一些常见类型的创建过程，更重要的是你可以用同样的方式来设置视图的属性值，稍后你就会明白是什么意思。
 
-## 快速的访问frame属性
+## 快速访问frame属性和屏幕大小
 
 	someView.x = 10;
 	someView.y = someView.x;
@@ -88,8 +89,10 @@
 	someView.maxX = 60;
 	someView.maxY = someView.maxX;
 	someView.maxXY = XY(60, 60);
+	
+	someView.wh = WH(Screen.width, Screen.height);
 
-我猜大部分人都有类似的扩展吧 ^_^
+我猜大部分人都有类似的扩展吧
 
 ## 快速的创建UI控件
 NerdyUI 使用链式语法来快速的创建和设置 UI 控件。
@@ -122,13 +125,13 @@ NerdyUI 使用链式语法来快速的创建和设置 UI 控件。
     id pinField = TextField.x(button1.x).y(button1.maxY + 15).wh(170, 30).onChange(^(NSString *text) {
     	//self has been weakified, no need to warry about retain cycle.
         [(id)[self.view viewWithTag:101] setText:text];
-    }).numberKeyboard.maxLength(4).pstr(@"pin code").fnt(15).roundStyle;
+    }).numberKeyboard.maxLength(4).hint(@"pin code").fnt(15).roundStyle;
     
-    id textView = TextView.xywh(20, 240, 170, 100).border(1).insets(8).pstr(@"placeholder").fnt([pinField font]).tg(101);
+    id textView = TextView.xywh(20, 240, 170, 100).border(1).insets(8).hint(@"placeholder").fnt([pinField font]).tg(101);
 
 <img src="./res/input.gif" alt="input" width="50%" />
 
-正如你所看到的，大部分链式属性还是比较简单明了的。有一些属性非常的灵活，可以接受各种类型的参数。顺便说一下，`View` 只是 `[UIView new]` 的宏定义，其他也一样。
+正如你所看到的，大部分链式属性还是比较简单明了的。有一些属性非常的灵活，可以接受不同类型的参数。顺便说一下，`View` 只是 `[UIView new]` 的宏定义，其他的也一样。
 
 你可以用 `.opacity()` 和 `.tg()` 来设置视图的 alpha 和 tag 值.
 
@@ -148,7 +151,7 @@ NerdyUI 使用链式语法来快速的创建和设置 UI 控件。
 
 你可以用 `.onClick()` 来给任何视图添加一个单击事件。
 
-至于 UITextField and UITextView, 你可以用 `.pstr()` 来设置 placeholder, `.maxLength()` 来限制输入文本的长度, `.onChange()` 来添加一个文本改变事件。
+至于 UITextField and UITextView, 你可以用 `.hint()` 来设置 placeholder, `.maxLength()` 来限制输入文本的长度, `.onChange()` 来添加一个文本改变事件。
 
 如果是 UIButton, UITextField 和 UITextView, 你还可以使用 `.insets()` 来添加一些padding。
 
@@ -174,7 +177,7 @@ NerdyUI 使用链式语法来快速的创建和设置 UI 控件。
 
 你可以用 `.fixWidth()`, `.fixHeight()`, `.fixWH()` 来添加宽高约束。
 
-你可以用 `.embedIn()` 来把一个视图嵌入到它的父视图里， 并会设置上下左右的约束。
+你可以用 `.embedIn()` 来把一个视图嵌入到它的父视图里， 这会添加上下左右的约束。
 
 你可以用 `.horHugging()`, `.horResistance()`, `.verHugging()`, `.verResistance()`, `.lowHugging`, `.lowResistance`, `.highHugging` 和 `.highResistance` 来设置 contentHuggingPriority 和 contentCompressionResistancePriority。当有多个视图在 StackView 里时，可以用这些属性来设置允许哪些视图可以拉伸，哪些视图不可以拉伸。
 
@@ -241,7 +244,7 @@ NerdyUI 使用链式语法来快速的创建和设置 UI 控件。
 
 <img src="./res/appcell.png" alt="appcell" width="60%" />
 
-这里我们模仿 AppStore 排行榜来创建一个类似的 Cell 。可以看出 HorStack 和 VerStack 的用法非常的简单。你只需要找出最小的 Stack ，然后把它嵌到上一层的 Stack 里，重复这个过程直到最外层的 Stack 用 embedIn 来添加到它的父视图里。最后你还可以给这些视图加上一些间隙。
+这里我们模仿 AppStore 排行榜来创建一个类似的 Cell 。可以看出 HorStack 和 VerStack 的用法非常的简单。你只需要找出最小的 Stack ，然后把它嵌到上一层的 Stack 里，重复这个过程直到最外层的 Stack 用 embedIn 来添加到它的父视图里。最后你还可以给这些视图加上一些间隙（gap）。
 
 使用 "Debug View Hierarchy" 可以看到这些视图是怎么嵌套再一起的。
 
@@ -283,7 +286,7 @@ NerdyUI 使用链式语法来快速的创建和设置 UI 控件。
     });
 	
 
-##小提醒
+##注意
 当你使用 `.onClick()`, `.onLink()`, `.onChange()` 和 `.onFinish()` 时， 里面的 `self` 已经做了 weakify 处理了，所以你不需要担心会有引用循环问题。有时候你可能需要对它做个强引用来保证它不会被提前释放。
 
 NerdyUI 使用了非常多的宏定义和类别方法，而且为了方便使用没加任何前缀，这样导致它很有可能跟你自己的代码会有冲突，所以请小心使用。

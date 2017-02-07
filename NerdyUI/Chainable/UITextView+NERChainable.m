@@ -20,7 +20,7 @@
     NER_OBJECT_BLOCK([NERUtils setTextWithStringObject:value forView:self]);
 }
 
-- (NERChainableUITextViewObjectBlock)pstr {
+- (NERChainableUITextViewObjectBlock)hint {
     NER_OBJECT_BLOCK([self ner_setPlaceholderText:value]);
 }
 
