@@ -23,6 +23,10 @@
     NER_FLOAT_BLOCK(self.alpha = value);
 }
 
+- (NERChainableUIViewObjectBlock)tint {
+    NER_OBJECT_BLOCK(self.tintColor = Color(value));
+}
+
 - (NERChainableUIViewObjectBlock)bgColor {
     NER_OBJECT_BLOCK(self.backgroundColor = Color(value));
 }

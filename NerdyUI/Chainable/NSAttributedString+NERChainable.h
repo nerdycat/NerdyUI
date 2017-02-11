@@ -38,7 +38,7 @@
 /**
  * NSFontAttributeName
  * fnt use Fnt() internally, so it can take any kind of arguments that Fnt() supported.
- * Usages: .fnt(15), .fnt(@15), .fnt(@"headline"), .fnt(@"Helvetica,15"), etc.
+ * Usages: .fnt(15), .fnt(@15), .fnt(@"headline"), .fnt(@"Helvetica,15"), .fnt(fontObject), etc.
  * See UIFont+NERChainable.h for more information.
  */
 NER_ATT_PROP(Object)    fnt;
@@ -46,7 +46,7 @@ NER_ATT_PROP(Object)    fnt;
 /**
  * NSForegroundColorAttributeName
  * color use Color() internally, so it can take any kind of arguments that Color() supported.
- * Usages: .color(@"red"), .color(@"#F00"), .color(255,0,0), etc.
+ * Usages: .color(@"red"), .color(@"#F00"), .color(@"255,0,0"), .color(colorObject), etc.
  * See UIColor+NERChainable.h for more information.
  */
 NER_ATT_PROP(Object)    color;
@@ -54,7 +54,7 @@ NER_ATT_PROP(Object)    color;
 /**
  * NSBackgroundColorAttributeName
  * bgColor use Color() internally, so it can take any kind of arguments that Color() supported.
- * Usages: .bgColor(@"red"), .bgColor(@"#F00"), .bgColor(255,0,0), etc.
+ * Usages: .bgColor(@"red"), .bgColor(@"#F00"), .bgColor(@"255,0,0"), .bgColor(colorObject), etc.
  * See UIColor+NERChainable.h for more information.
  */
 NER_ATT_PROP(Object)    bgColor;

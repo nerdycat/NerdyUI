@@ -30,7 +30,7 @@ NER_BUTTON_PROP(Object)     str;
 /**
  * Setting title font.
  * fnt use Fnt() internally, so it can take any kind of arguments that Fnt() supported.
- * Usages: .fnt(15), .fnt(@15), .fnt(@"headline"), .fnt(@"Helvetica,15"), etc.
+ * Usages: .fnt(15), .fnt(@15), .fnt(@"headline"), .fnt(@"Helvetica,15"), .fnt(fontObject), etc.
  * See UIFont+NERChainable.h for more information.
  */
 NER_BUTTON_PROP(Object)     fnt;
@@ -40,7 +40,7 @@ NER_BUTTON_PROP(Object)     fnt;
 /**
  * Setting normal title color.
  * color use Color() internally, so it can take any kind of arguments that Color() supported.
- * Usages: .color(@"red"), .color(@"#F00"), .color(255,0,0), etc.
+ * Usages: .color(@"red"), .color(@"#F00"), .color(@"255,0,0"), .color(colorObject), etc.
  * See UIColor+NERChainable.h for more information.
  */
 NER_BUTTON_PROP(Object)     color;
@@ -48,7 +48,7 @@ NER_BUTTON_PROP(Object)     color;
 /**
  * Setting highlighted title color.
  * highColor use Color() internally, so it can take any kind of arguments that Color() supported.
- * Usages: .highColor(@"red"), .highColor(@"#F00"), .highColor(255,0,0), etc.
+ * Usages: .highColor(@"red"), .highColor(@"#F00"), .highColor(@"255,0,0"), .highColor(colorObject), etc.
  * See UIColor+NERChainable.h for more information.
  */
 NER_BUTTON_PROP(Object)     highColor;
@@ -56,7 +56,7 @@ NER_BUTTON_PROP(Object)     highColor;
 /**
  * Setting selected title color.
  * selectedColor use Color() internally, so it can take any kind of arguments that Color() supported.
- * Usages: .selectedColor(@"red"), .selectedColor(@"#F00"), .selectedColor(255,0,0), etc.
+ * Usages: .selectedColor(@"red"), .selectedColor(@"#F00"), .selectedColor(@"255,0,0"), .selectedColor(colorObject), etc.
  * See UIColor+NERChainable.h for more information.
  */
 NER_BUTTON_PROP(Object)     selectedColor;
@@ -64,7 +64,7 @@ NER_BUTTON_PROP(Object)     selectedColor;
 /**
  * Setting disabled title color.
  * disabledColor use Color() internally, so it can take any kind of arguments that Color() supported.
- * Usages: .disabledColor(@"red"), .disabledColor(@"#F00"), .disabledColor(255,0,0), etc.
+ * Usages: .disabledColor(@"red"), .disabledColor(@"#F00"), .disabledColor(@"255,0,0"), .disabledColor(colorObject), etc.
  * See UIColor+NERChainable.h for more information.
  */
 NER_BUTTON_PROP(Object)     disabledColor;

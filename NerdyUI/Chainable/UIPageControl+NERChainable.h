@@ -23,7 +23,7 @@ NER_PC_PROP(Int)        pages;
  * pageIndicatorTintColor
  * The tint color to be used for the page indicator.
  * color use Color() internally, so it can take any kind of arguments that Color() supported.
- * Usages: .color(@"red"), .color(@"#F00"), .color(255,0,0), etc.
+ * Usages: .color(@"red"), .color(@"#F00"), .color(@"255,0,0"), .color(colorObject), etc.
  * See UIColor+NERChainable.h for more information.
  */
 NER_PC_PROP(Object)     color;
@@ -32,7 +32,7 @@ NER_PC_PROP(Object)     color;
  * currentPageIndicatorTintColor
  * The tint color to be used for the current page indicator.
  * highColor use Color() internally, so it can take any kind of arguments that Color() supported.
- * Usages: .highColor(@"red"), .highColor(@"#F00"), .highColor(255,0,0), etc.
+ * Usages: .highColor(@"red"), .highColor(@"#F00"), .highColor(@"255,0,0"), .highColor(colorObject), etc.
  * See UIColor+NERChainable.h for more information.
  */
 NER_PC_PROP(Object)     highColor;

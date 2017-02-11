@@ -12,10 +12,6 @@
 
 @implementation UISegmentedControl (NERChainable)
 
-- (NERChainableUISegmentedControlObjectBlock)tint {
-    NER_OBJECT_BLOCK(self.tintColor = Color(value));
-}
-
 - (NERChainableUISegmentedControlCallbackBlock)onChange {
     NER_CALLBACK_BLOCK(return [self ner_registerOnChangeHandlerWithTarget:target object:object];;);
 }

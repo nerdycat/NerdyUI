@@ -35,32 +35,32 @@ NER_SLIDER_PROP(Float)      maxVal;
 /**
  * Setting minimumTrack with color or image.
  * Usages: 
-    .minTrack(@"red"), .minTrack(@"255,0,0")
-    .minTrack(Img(@"minImage")), minTrack(@"minImage")
+    .minTrack(@"red"), .minTrack(@"255,0,0"), etc.
+    .minTrack(Img(@"minImage")), .minTrack(@"minImage"), etc.
  */
 NER_SLIDER_PROP(Object)     minTrack;
 
 /**
  * Setting maximumTrack with color or image.
  * Usages: 
-    .maxTrack(@"red"), .maxTrack(@"255,0,0")
-    .maxTrack(Img(@"maxImage")), maxTrack(@"maxImage")
+    .maxTrack(@"red"), .maxTrack(@"255,0,0"), etc.
+    .maxTrack(Img(@"maxImage")), .maxTrack(@"maxImage"), etc.
  */
 NER_SLIDER_PROP(Object)     maxTrack;
 
 /**
  * Setting thumb with color or image.
  * Usages:
-    .thumb(@"red"), .thumb(@"255,0,0")
-    .thumb(Img(@"thumbImage")), thumb(@"thumbImage")
+    .thumb(@"red"), .thumb(@"255,0,0"), etc.
+    .thumb(Img(@"thumbImage")), .thumb(@"thumbImage"), etc.
  */
 NER_SLIDER_PROP(Object)     thumb;
 
 /**
  * Setting highlighted thumb with color or image.
  * Usages:
-    .highThumb(@"red"), .highThumb(@"255,0,0")
-    .highThumb(Img(@"thumbImage")), highThumb(@"thumbImage")
+    .highThumb(@"red"), .highThumb(@"255,0,0"), etc.
+    .highThumb(Img(@"thumbImage")), .highThumb(@"thumbImage"), etc.
  */
 NER_SLIDER_PROP(Object)     highThumb;
 

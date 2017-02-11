@@ -28,7 +28,6 @@
            Color(@"255,0,0,1"), 
            Color(@"#F00,0.5"),
            Color(@"random,0.5")
-           Color(imageObject)
  */
 #define Color(x)    [NERUtils colorWithColorObject:x]
 

@@ -20,14 +20,6 @@
 @interface UISegmentedControl (NERChainable)
 
 /**
- * tintColor
- * tint use Color() internally, so it can take any kind of arguments that Color() supported.
- * Usages: .tint(@"red"), .tint(@"#F00"), .tint(255,0,0), etc.
- * See UIColor+NERChainable.h for more information.
- */
-NER_SEGMENTED_PROP(Object)      tint;
-
-/**
  * Value did change callback.
  * Use UIControlEventValueChanged event internally.
  * It support two kind of arguments:

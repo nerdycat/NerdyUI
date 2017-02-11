@@ -64,7 +64,7 @@ NER_ALERT_PROP(Action)          destructiveAction;
  * tintColor
  * You can use tint to change action button's title color.
  * tint use Color() internally, so it can take any kind of arguments that Color() supported.
- * Usages: .tint(@"red"), .tint(@"#F00"), .tint(255,0,0), etc.
+ * Usages: .tint(@"red"), .tint(@"#F00"), .tint(@"255,0,0"), .tint(colorObject), etc.
  * See UIColor+NERChainable.h for more information.
  */
 NER_ALERT_PROP(Object)          tint;

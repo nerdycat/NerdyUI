@@ -55,7 +55,7 @@ You can create UIImage with `Img()` macro.
 	Img(@"#imageName");			//prefixed with # will return an stretchable image
 	Img(@"red");				//1x1 square image with red color
 	
-You also can create CGPoint, CGSize, CGRect, NSRange and UIEdgeInsets with `XY()`, `WH()`, `XYWH()`, `Range()`, `Insets()` macros.
+You can also create CGPoint, CGSize, CGRect, NSRange and UIEdgeInsets with `XY()`, `WH()`, `XYWH()`, `Range()`, `Insets()` macros.
 
 	CGPoint		p = XY(20, 20);
 	CGSize	 	s = WH(50, 50);
@@ -143,9 +143,9 @@ You use `.fnt()` to set font with the same format as `Fnt()`.
 
 You use `.str()` to set text or attribtedText with the same format as `Str()`.
 
-You use `.img()`, `.highImg()`, `.bgImg()` and `.highBgImg()` to set image, highlighted image, backgroundImage and highlighted backgroundImage, with the same format as `Img()`.
+You use `.img()`, `.highImg()`, `.bgImg()` and `.highBgImg()` to set image, highlightedImage, backgroundImage and highlightedBackgroundImage, with the same format as `Img()`.
 
-You use `.color()`, `.bgColor()`, `.highColor()` to set text color, background color and highlighted text color, with the same format as `Color()`.
+You use `.tint()`, `.color()`, `.bgColor()`, `.highColor()` to set tintColor, textColor, backgroundColor and highlightedTextColor, with the same format as `Color()`.
 
 You use `.border()`, `.cornerRadius()` and `.shadow()` to config border styles and drop shadows.
 

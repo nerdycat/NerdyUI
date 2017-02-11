@@ -29,10 +29,6 @@
     NER_FLOAT_BLOCK(self.stepValue = value);
 }
 
-- (NERChainableUIStepperObjectBlock)tint {
-    NER_OBJECT_BLOCK(self.tintColor = Color(value));
-}
-
 - (NERChainableUIStepperCallbackBlock)onChange {
     NER_CALLBACK_BLOCK(return [self ner_registerOnChangeHandlerWithTarget:target object:object];);
 }

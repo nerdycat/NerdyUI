@@ -104,7 +104,7 @@ NerdyUI 使用链式语法来快速的创建和设置 UI 控件。
 
 <img src="./res/view.png" alt="view" width="30%" />
 
-	UIView *moose = ImageView.img(@"moose").x(20).y(100).shadow(0.6, 2, -3, -1);
+	UIImageView *moose = ImageView.img(@"moose").x(20).y(100).shadow(0.6, 2, -3, -1);
     UILabel *quiz = Label.str(@"%d+%d=?", 1, 1).fnt(@17).color(@"66,66,66").fitSize.x(moose.maxX + 10).cy(moose.cy);
 
 <img src="./res/moose.png" alt="moose" width="30%" />
@@ -141,9 +141,9 @@ NerdyUI 使用链式语法来快速的创建和设置 UI 控件。
 
 你可以用 `.str()` 来设置 text 或者 attribtedText， 它能接受的参数跟 `Str()` 一样。
 
-你可以用 `.img()`, `.highImg()`, `.bgImg()` 和 `.highBgImg()` 来设置 image, highlighted image, backgroundImage 和 highlighted backgroundImage。 他们能接受的参数跟 `Img()` 一样。
+你可以用 `.img()`, `.highImg()`, `.bgImg()` 和 `.highBgImg()` 来设置 image, highlightedImage, backgroundImage 和 highlightedBackgroundImage。 他们能接受的参数跟 `Img()` 一样。
 
-你可以用 `.color()`, `.bgColor()`, `.highColor()` 来设置textColor, backgroundColor 和 highlighted textColor, 它们能接受的参数跟 `Color()` 一样。
+你可以用 `.tint()`, `.color()`, `.bgColor()`, `.highColor()` 来设置 tintColor, textColor, backgroundColor 和 highlightedTextColor, 它们能接受的参数跟 `Color()` 一样。
 
 你可以用 `.border()`, `.cornerRadius()` 和 `.shadow()` 来设置边框和阴影。
 

@@ -19,7 +19,11 @@
    4) @"headline", @"body", @"caption1", and any other UIFontTextStyle.
    5) @"Helvetica,15": fontName + fontSize, separated by comma.
  
- * Usages: Fnt(15), Fnt(@15), Fnt(@"body"), Fnt(@"Helvetica,15")
+ * Usages: Fnt([UIFont systemFontOfSize:15]),
+           Fnt(15),
+           Fnt(@15), 
+           Fnt(@"body"), 
+           Fnt(@"Helvetica,15")
  */
 #define Fnt(x)  [NERUtils fontWithFontObject:NER_CONVERT_INT_TO_STRING(x)]
 

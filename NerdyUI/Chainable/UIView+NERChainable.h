@@ -29,6 +29,14 @@ NER_PROP(v, Int)                tg;\
 NER_PROP(v, Float)              opacity;\
 \
 /**
+* tintColor
+* tint use Color() internally, so it can take any kind of arguments that Color() supported.
+* Usages: .tint(@"red"), .tint(@"#F00"), .tint(@"255,0,0"), .tint(colorObject), etc.
+* See UIColor+NERChainable.h for more information.
+*/\
+NER_PROP(v, Object)             tint;\
+\
+/**
  * backgroundColor
  * bgColor use Color() internally, so it can take any kind of arguments that Color() supported.
  * Usages: .bgColor([UIColor redColor]), .bgColor(@"red"), .bgColor(@"#F00"), .bgColor(@"255,0,0,1"), etc.

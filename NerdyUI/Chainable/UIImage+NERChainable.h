@@ -22,8 +22,11 @@
  * Prefixing image name with # character will create an stretchable image.
  * Passing a color value will create an 1x1 size image with specific color.
  
- * Usages: Img(@"cat"), Img(@"#button-background"), Img(@"33,33,33,0.5"),
-           Img(@"red").resize(100, 100)
+ * Usages:  Img([UIImage imageNamed:@"cat"],
+            Img(@"cat"), 
+            Img(@"#button-background"), 
+            Img(@"33,33,33,0.5"),
+            Img(@"red").resize(100, 100)
  */
 #define Img(x)      [NERUtils imageWithImageObject:x]
 

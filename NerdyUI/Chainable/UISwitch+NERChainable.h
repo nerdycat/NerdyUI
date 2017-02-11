@@ -17,7 +17,7 @@
  * onTintColor
  * The color used to tint the appearance of the switch when it is turned on.
  * onColor use Color() internally, so it can take any kind of arguments that Color() supported.
- * Usages: .onColor(@"red"), .onColor(@"#F00"), .onColor(255,0,0), etc.
+ * Usages: .onColor(@"red"), .onColor(@"#F00"), .onColor(@"255,0,0"), .onColor(colorObject), etc.
  * See UIColor+NERChainable.h for more information.
  */
 NER_SWITCH_PROP(Object)     onColor;
@@ -26,7 +26,7 @@ NER_SWITCH_PROP(Object)     onColor;
  * thumbTintColor
  * The color used to tint the appearance of the thumb.
  * thumbColor use Color() internally, so it can take any kind of arguments that Color() supported.
- * Usages: .thumbColor(@"red"), .thumbColor(@"#F00"), .thumbColor(255,0,0), etc.
+ * Usages: .thumbColor(@"red"), .thumbColor(@"#F00"), .thumbColor(@"255,0,0"), .thumbColor(colorObject), etc.
  * See UIColor+NERChainable.h for more information.
  */
 NER_SWITCH_PROP(Object)     thumbColor;
@@ -35,7 +35,7 @@ NER_SWITCH_PROP(Object)     thumbColor;
  * tintColor
  * The color used to tint the outline of the switch when it is turned off.
  * tintColor use Color() internally, so it can take any kind of arguments that Color() supported.
- * Usages: .tintColor(@"red"), .tintColor(@"#F00"), .tintColor(255,0,0), etc.
+ * Usages: .outlineColor(@"red"), .outlineColor(@"#F00"), .outlineColor(@"255,0,0"), .outlineColor(colorObject), etc.
  * See UIColor+NERChainable.h for more information.
  */
 NER_SWITCH_PROP(Object)     outlineColor;

@@ -39,14 +39,6 @@ NER_STEPPER_PROP(Float)     maxVal;
 NER_STEPPER_PROP(Float)     stepVal;
 
 /**
- * tintColor
- * tint use Color() internally, so it can take any kind of arguments that Color() supported.
- * Usages: .tint(@"red"), .tint(@"#F00"), .tint(255,0,0), etc.
- * See UIColor+NERChainable.h for more information.
- */
-NER_STEPPER_PROP(Object)    tint;
-
-/**
  * Value did change callback.
  * Use UIControlEventValueChanged event internally.
  * It support two kind of arguments:

@@ -42,6 +42,7 @@ NER_STYLE_PROP(Object)          styles;
  */
 NER_STYLE_PROP(Int)             tg;
 NER_STYLE_PROP(Float)           opacity;
+NER_STYLE_PROP(Object)          tint;
 NER_STYLE_PROP(Object)          bgColor;
 NER_STYLE_PROP(Float)           cornerRadius;
 NER_STYLE_PROP(FloatObjectList) border;
@@ -192,7 +193,6 @@ NER_STYLE_PROP(Insets)          thumbInsets;
  * UIStepper
  */
 NER_STYLE_PROP(Float)           stepVal;
-NER_STYLE_PROP(Object)          tint;
 
 
 
