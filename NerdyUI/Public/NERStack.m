@@ -173,7 +173,7 @@ NER_SYNTHESIZE(nerAttachSpace, setNerAttachSpace);
 }
 
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(UIView *)object
-                        change:(NSDictionary<NSKeyValueChangeKey,id> *)change
+                        change:(NSDictionary *)change
                        context:(void *)context {
     
     if ([keyPath isEqualToString:@"hidden"]) {

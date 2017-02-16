@@ -14,7 +14,7 @@
 	Str(3.14);					//@"3.14"
 	Str(@0.618);				//@"0.618"
 	Str(view.frame);			//@"{{0, 0}, {100, 100}}"
-	Str(view.center);			//@"50, 50}"
+	Str(view.center);			//@"{50, 50}"
 	Str(_cmd);					//@"viewDidLoad"
 	Str(NSString.class);		//@"NSString"
 	Str("c string");			//@"c string"

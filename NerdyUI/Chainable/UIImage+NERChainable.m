@@ -20,7 +20,9 @@
                    rect.size.height *= self.scale;
                    
                    CGImageRef ref = CGImageCreateWithImageInRect(self.CGImage, rect);
-                   return [UIImage imageWithCGImage:ref scale:self.scale orientation:self.imageOrientation];
+                   UIImage *image =  [UIImage imageWithCGImage:ref scale:self.scale orientation:self.imageOrientation];
+                   CGImageRelease(ref);
+                   return image;
                    );
 }
 
