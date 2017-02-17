@@ -5,20 +5,24 @@
 [![License](http://cocoapod-badges.herokuapp.com/l/NerdyUI/badge.png)](https://cocoapods.org/pods/NerdyUI)   
 一个快速布局 UI 库，适用于 iOS 8 及以上版本。
 
----
+##序言
+众所周知，UI在一个App中所占的比重是很大的，如果能快速的布局UI，则会大大的提高App整体的开发效率，NerdyUI正是基于这个理由创建的。
+
+NerdyUI使用非常紧凑的链式语法，提供一些常用但系统控件又缺失的功能，更为简便的约束创建方式和更好理解的布局系统，势必能大大减少您的代码量和开发时间。
+
 ## 快速创建 NSString, UIFont, UIColor, UIImage 和常用的 structs
 
 你可以用 `Str()` 来转换大部分类型到NSString。同理，你可以用 `Log()` 来打印大部分的变量。
 
-	Str(100);					//@"100"
-	Str(3.14);					//@"3.14"
-	Str(@0.618);				//@"0.618"
-	Str(view.frame);			//@"{{0, 0}, {100, 100}}"
-	Str(view.center);			//@"{50, 50}"
-	Str(_cmd);					//@"viewDidLoad"
-	Str(NSString.class);		//@"NSString"
-	Str("c string");			//@"c string"
-	Str(@"1 + 1 = %d", 1 + 1);	//@"1 + 1 = 2"
+	Str(100);				     	//@"100"
+	Str(3.14);						//@"3.14"
+	Str(@0.618);					//@"0.618"
+	Str(view.frame);				//@"{{0, 0}, {100, 100}}"
+	Str(view.center);				//@"{50, 50}"
+	Str(_cmd);						//@"viewDidLoad"
+	Str(NSString.class);			//@"NSString"
+	Str("C-String");				//@"C-String"
+	Str(@"1 + 1 = %d", 1 + 1);		//@"1 + 1 = 2
 
 	Log(100);
 	Log(3.14);
@@ -26,11 +30,14 @@
 	Log(view.frame);
 	...
 	Log(@"1 + 1 = %d", 1 + 1);
+
+    //拼接字符串
+    @"1".a(@"2").a(3).a(nil).a(4.0f).a(@5).a(@"%d", 6);    //@"123456"
 	
 你可以用 `AttStr()` 来创建NSAttributedString。
 
-	AttStr(@"hello, 101").match(@"[0-9]+").underline;
-	AttStr(@"A smile ", Img(@"smile"), @" !!");		//attributedString with image attachment
+	AttStr(@"hello, 101").match(@"[0-9]+").underline;	//给101加下划线
+	AttStr(@"A smile ", Img(@"smile"), @" !!");			//带图片的NSAttributedString
 	
 你可以用 `Fnt()` 来创建UIFont。
 
@@ -42,23 +49,29 @@
 你可以用 `Color()` 来创建UIColor。
 
 	Color(@"red");				//[UIColor redColor]
-	Color(@"green,0.5");		//green color with 0.5 alpha
-	Color(@"0,0,255");			//blue color
-	Color(@"#0000FF");			//blue color
+	Color(@"0,0,255");			//RGB color
+	Color(@"#0000FF");			//Hex color
 	Color(@"random");			//random color
+
+    //以上这些还可以有一个可选的alpha参数
+    Color(@"red,0.5");            //red color with alpha 0.5
+    Color(@"0,0,255,0.8");        //blue color with alpha 0.8
+    ...
+
+    Color(Img(@"pattern"));       //pattern image color
 	
 你可以用 `Img()` 来创建UIImage。
 
-	Img(@"imageName");			//[UIImage imageNamed:]
-	Img(@"#imageName");			//加上#号会返回一个可拉伸的图片
-	Img(@"red");				//返回一个 1x1 大小的红色图片
+	Img(@"imageName");			//[UIImage imageNamed:@"imageName"]
+	Img(@"#imageName");			//加上#号会返回一个可拉伸的图片，拉伸位置在图片中心
+	Img(@"red");				//返回一个 1x1 大小的红色图片，可用在某些需要纯色图片的地方
 	
-你可以用 `XY()`, `WH()`, `XYWH()`, `Range()`, `Insets()` 来创建CGPoint, CGSize, CGRect, NSRange, UIEdgeInsets。
+你可以用 `XY()`, `WH()`, `XYWH()`, `Range()`, `Insets()` 来创建CGPoint, CGSize, CGRect, NSRange, UIEdgeInsets。`XYWH()` 和 `Insets()` 支持多种创建方式。
 
 	CGPoint		p = XY(20, 20);
 	CGSize	 	s = WH(50, 50);
 	
-	CGRect	 	f1 = XYWH(20, 20, 50, 50);
+	CGRect	    f1 = XYWH(20, 20, 50, 50);
 	CGRect		f2 = XYWH(f1.origin, f1.size);
 	CGRect		f3 = XYWH(f2.origin, 50, 50);
 	CGRect		f4 = XYWH(20, 20, f3.size);
@@ -70,7 +83,7 @@
 	UIEdgeInsets i3 = Insets(10, 20, 30);		//{10, 20, 30, 20}
 	UIEdgeInsets i4 = Insets(10, 20, 30, 40);	//{10, 20, 30, 40}
 	
-使用这些宏可以简化一些常见类型的创建过程，更重要的是你可以用同样的方式来设置视图的属性值，稍后你就会明白是什么意思。
+使用这些宏可以简化一些常见类型的创建过程，更重要的是你可以用同样的方式来设置视图的属性值，稍后你就会明白这是什么意思。
 
 ## 快速访问frame属性和屏幕大小
 
@@ -90,6 +103,7 @@
 	someView.maxY = someView.maxX;
 	someView.maxXY = XY(60, 60);
 	
+    //Screen只是 [UIScreen mainScreen] 的宏定义
 	someView.wh = WH(Screen.width, Screen.height);
 
 我猜大部分人都有类似的扩展吧
@@ -109,21 +123,22 @@ NerdyUI 使用链式语法来快速的创建和设置 UI 控件。
 
 <img src="./res/moose.png" alt="moose" width="30%" />
 
+    //如果后续不需要再访问 title 的属性，定义为 id 可以减少一些代码量
 	id title = AttStr(@"TAP ME").fnt(15).underline.range(0, 3).fnt(@18).color(@"random");
     UIButton *button1 = Button.str(title).insets(5, 10).fitSize.border(1).xy(20, 150).onClick(^(UIButton *btn) {
-    	//Exp allows you to execute codes in any position.
+    	//Exp() 可在任何位置执行任意代码
         quiz.text = Str(@"%d+%d=%d", 1, 1, Exp(btn.tag += 1)); 
         [quiz sizeToFit];
     });
     
     UIButton *button2 = Button.str(@"HAT").highColor(@"brown").img(@"hat").gap(8);
     button2.xywh(button1.frame).x(button1.maxX + 10).cornerRadius(5).bgImg(@"blue,0.5").highBgImg(@"orange");
-    //highBgImg with color string is a very useful trick to set highlighted background color for UIButton.
+    //.highBgImg() 可以用来设置 UIButton 的 highlightedBackgroundColor，这是一个非常有用的功能
     
 <img src="./res/button.gif" alt="button" width="50%" />
 
     id pinField = TextField.x(button1.x).y(button1.maxY + 15).wh(170, 30).onChange(^(NSString *text) {
-    	//self has been weakified, no need to warry about retain cycle.
+    	//这里的 self 已经自动做了 weakify 处理, 不用担心会有引用循环
         [(id)[self.view viewWithTag:101] setText:text];
     }).numberKeyboard.maxLength(4).hint(@"pin code").fnt(15).roundStyle;
     
@@ -131,11 +146,17 @@ NerdyUI 使用链式语法来快速的创建和设置 UI 控件。
 
 <img src="./res/input.gif" alt="input" width="50%" />
 
-正如你所看到的，大部分链式属性还是比较简单明了的。有一些属性非常的灵活，可以接受不同类型的参数。顺便说一下，`View` 只是 `[UIView new]` 的宏定义，其他的也一样。
+正如你所看到的，大部分链式属性还是比较简单明了的。有一些属性非常的灵活，可以接受不同类型的参数。顺便说一下，`View` 只是 `[UIView new]` 的宏定义，`Label` 只是 `[UILabel new]` 的宏定义，其他几个UI类也一样（就是类名去掉 UI )。
 
 你可以用 `.opacity()` 和 `.tg()` 来设置视图的 alpha 和 tag 值.
 
-你可以用 `.x()`, `.y()`, `.xy()`, `.w()`, `.h()`, `.wh()`, `.xywh()`, `.cx()`, `.cy()`, `.cxy()`, `.maxX()`, `.maxY()`, `.maxXY()` 来设置视图的大小和位置。
+你可以用 `.x()`, `.y()`, `.xy()`, `.w()`, `.h()`, `.wh()`, `.xywh()`, `.cx()`, `.cy()`, `.cxy()`, `.maxX()`, `.maxY()`, `.maxXY()` 等来设置视图的大小和位置。
+
+你可以用 `.touchEnabled`, `.touchDisabled`, `.invisible` 来设置视图是否可点和是否可见。
+
+你可以用 `.flexibleLeft`, `.flexibleRight`, `.flexibleTop`, `.flexibleBottom`,   `.flexibleLR`, `.flexibleTB`, `.flexibleLRTB`, `.flexibleWidth`, `.flexibleHeight`, `.flexibleWH` 等来设置autoresizingMask。
+
+你可以用 `.centerAlignment`, `.rightAlignment` 等来设置对齐属性。
 
 你可以用 `.fnt()` 来设置字体，它能接受的参数跟 `Fnt()` 一样。
 
@@ -151,7 +172,7 @@ NerdyUI 使用链式语法来快速的创建和设置 UI 控件。
 
 你可以用 `.onClick()` 来给任何视图添加一个单击事件。
 
-至于 UITextField and UITextView, 你可以用 `.hint()` 来设置 placeholder, `.maxLength()` 来限制输入文本的长度, `.onChange()` 来添加一个文本改变事件。
+至于 UITextField  和 UITextView, 你可以用 `.hint()` 来设置 placeholder, `.maxLength()` 来限制输入文本的长度, `.onChange()` 来添加一个文本改变事件。
 
 如果是 UIButton, UITextField 和 UITextView, 你还可以使用 `.insets()` 来添加一些padding。
 
@@ -188,9 +209,9 @@ NerdyUI 使用链式语法来快速的创建和设置 UI 控件。
     id hello = Label.str(@"HELLO").fnt(@20).wh(80, 80).centerAlignment;
     id mac = Label.str(@"MAC").fnt(@20).wh(80, 80).centerAlignment;
     
-    //In order to use makeCons, the view must be in the view hierarchy.
+    //使用 .makeCons() 之前必须把当前视图加到父视图里，这里使用 .addTo() 来执行此操作
     EffectView.darkBlur.fixWH(80, 80).addTo(self.view).makeCons(^{
-    	//you can use 'make' directly without the need to declare it
+    	//在 .makeCons() 里你可以直接使用 make 变量，不需要显示的定义它
         make.right.equal.superview.centerX.constants(0);
         make.bottom.equal.superview.centerY.constants(0);
     }).addVibrancyChild(hello).tg(101);
@@ -212,12 +233,12 @@ NerdyUI 使用链式语法来快速的创建和设置 UI 控件。
 
 
 ##快速布局
-手动给每个视图添加约束稍微想一下就知道会很麻烦。幸好大部分的 UI 可以用 `HorStack()` 和 `VerStack()` 来实现。使用这两个简易版 StackView，加上上面介绍的那些属性，很多时候你根本不需要手动显示的创建任何约束。
+手动给每个视图添加约束稍微想一下就知道会很麻烦。幸好大部分的 UI 可以用 `HorStack()` 和 `VerStack()` 来实现。使用这两个简易版 StackView，加上上面介绍的那几个属性，很多时候你根本不需要手动显示的创建任何约束。
 
 	_indexLabel = Label.fnt(17).color(@"darkGray").fixWidth(44).centerAlignment;
     _iconView = ImageView.fixWH(64, 64).cornerRadius(10).border(Screen.onePixel, @"#CCCCCC");
     
-    //Setting preferWidth here will improve performance.
+    //用 .preferWidth() 来设置 preferredMaxLayoutWidth，有助于提高性能
     _titleLabel = Label.fnt(15).lines(2).preferWidth(Screen.width - 205);
     _categoryLabel = Label.fnt(13).color(@"darkGray");
     
@@ -228,7 +249,7 @@ NerdyUI 使用链式语法来快速的创建和设置 UI 控件。
     _actionButton.highColor(@"white").highBgImg(@"#0065F7").insets(5, 10);
     _iapLabel = Label.fnt(9).color(@"darkGray").lines(2).str(@"In-App\nPurchases").centerAlignment;
     
-    //.gap() will add spacing between all items.
+    //.gap() 会在每一个StackView Item 之间添加间隙
     id ratingStack = HorStack(_ratingLabel, _countLabel).gap(5);
     id midStack = VerStack(_titleLabel, _categoryLabel, ratingStack).gap(4);
     id actionStack = VerStack(_actionButton, _iapLabel).gap(4).centerAlignment;
@@ -236,15 +257,15 @@ NerdyUI 使用链式语法来快速的创建和设置 UI 控件。
     HorStack(
              _indexLabel,
              _iconView,
-             @10,           //Add spacing betweens two items.
+             @10,           //使用NSNumber可在两个 Item 之间添加间隙
              midStack,
-             NERSpring,     //Using spring to ensure actionStack always stay in the right most position.
+             NERSpring,     //NERSpring是一个特殊的变量，它相当于一个弹簧，保证actionStack始终停留在最右边
              actionStack
     ).embedIn(self.contentView, 10, 0, 10, 15);
 
 <img src="./res/appcell.png" alt="appcell" width="60%" />
 
-这里我们模仿 AppStore 排行榜来创建一个类似的 Cell 。可以看出 HorStack 和 VerStack 的用法非常的简单。你只需要找出最小的 Stack ，然后把它嵌到上一层的 Stack 里，重复这个过程直到最外层的 Stack 用 embedIn 来添加到它的父视图里。最后你还可以给这些视图加上一些间隙（gap）。
+这里我们模仿 AppStore 排行榜来创建一个类似的 Cell 。可以看出 HorStack (横向) 和 VerStack (竖向) 的用法非常的简单。你只需要找出最小的 Stack ，然后把它嵌到上一层的 Stack 里，重复这个过程直到最外层的 Stack 用 embedIn 来添加到它的父视图里。最后你还可以给这些视图加上一些间隙（gap）。
 
 使用 "Debug View Hierarchy" 可以看到这些视图是怎么嵌套再一起的。
 
@@ -255,22 +276,24 @@ NerdyUI 使用链式语法来快速的创建和设置 UI 控件。
 ##轻量级 Style
 大部分链式属性都可以设置为 style。
 
+    //全局Style
 	Style(@"h1").color(@"#333333").fnt(17);
-   	Style(@"button").fixHeight(30).insets(0, 10).cornerRadius(5);
-   	id actionButtonStyle = Style().styles(@"button h1").bgImg(@"red").highBgImg(@"blue").highColor(@"white");
+    Style(@"button").fixHeight(30).insets(0, 10).cornerRadius(5);
+    //局部Style
+    id actionButtonStyle = Style().styles(@"button h1").bgImg(@"red").highBgImg(@"blue").highColor(@"white");
 
-这里我们创建了两个全局 Style 和一个局部 Style。局部 Style 使用 `.styles()` 来继承那两个全局 Style。创建完之后，全局 Style 可以使用 Style 名来全局引用，局部 Style 只能使用变量名来引用。所有的 View 和 NSAttributedString 都可以引用这些 Style。
+这里我们创建了两个全局 Style 和一个局部 Style。局部 Style 使用 `.styles()` 来继承那两个全局 Style。创建完之后，全局 Style 可以使用 Style 名来全局引用，局部 Style 只能使用变量名来引用。所有的 UIView（及其子类） 和 NSAttributedString 都可以引用这些 Style。
 
 	id foo = Label.styles(@"h1").str(@"hello world");
-   	id bar = Button.styles(actionButtonStyle).str(@"Send Email");
+    id bar = Button.styles(actionButtonStyle).str(@"Send Email");
 
 ##其他
 
-你可以用 `PlainTV` 和 `GroupTV` 来创建静态的 TableView，比如说设置页面。
+你可以用 `PlainTV` 和 `GroupTV` 来创建静态的 UITableView，比如说设置页面。
 	
 	PlainTV(Row.str(@"Row1"), Row.str(@"Row2"), Row.str(@"Row3")).embedIn(self.view);
 
-你可以用 `Alert` 和 `ActionSheet` 来创建并显示 Alert 和 ActionSheet。
+你可以用 `Alert` 和 `ActionSheet` 来创建并显示 UIAlert 和 UIActionSheet。
 
 	Alert.title(@"Title").message(@"Message").action(@"OK",^{}), cancel(@"Cancel").show();
 	ActionSheet.title(@"Title").message(@"Message").action(@"OK",^{}), cancel(@"Cancel").show();
@@ -289,14 +312,12 @@ NerdyUI 使用链式语法来快速的创建和设置 UI 控件。
 ##注意
 在链式属性里直接使用中文字符串常量会导致后续的自动补全提示失效，一个解决方案是把中文字符串单独拿出来定义为一个变量，或者把 `.str()`, `.hint()` 等 放在最后面。
 
-当你使用 `.onClick()`, `.onLink()`, `.onChange()` 和 `.onFinish()` 时， 里面的 `self` 已经做了 weakify 处理了，所以你不需要担心会有引用循环问题。有时候你可能需要对它做个强引用来保证它不会被提前释放。
+当你使用 `.onClick()`, `.onLink()`, `.onChange()` 和 `.onFinish()` 时， 里面的 `self` 已经做了 weakify 处理了，所以你不需要担心会有引用循环问题。有时候你可能需要对它做个强引用来保证它不会被提前释放。这几个属性除了可以传一个 block 之外，还可以传一个方法名来作为回调方法。
 
-NerdyUI 使用了非常多的宏定义和类别方法，而且为了方便使用没加任何前缀，这样导致它很有可能跟你自己的代码会有冲突，所以请小心使用。
+NerdyUI 使用了非常多的宏定义和类别方法，而且为了方便使用没添加任何前缀。虽然所有的名字都是经过精心挑选的，不排除有跟您自己代码或其他第三方库冲突的可能，请注意。
 
 ## 用CocoaPods安装
-	pod "NerdyUI"
-
-	 
+	pod "NerdyUI"	 
 
 
 

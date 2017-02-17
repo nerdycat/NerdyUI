@@ -19,7 +19,7 @@ Similarly, you can log variables using `Log()` macro.
 	Str(view.center);			//@"{50, 50}"
 	Str(_cmd);					//@"viewDidLoad"
 	Str(NSString.class);		//@"NSString"
-	Str("c string");			//@"c string"
+	Str("C-String");			//@"C-String"
 	Str(@"1 + 1 = %d", 1 + 1);	//@"1 + 1 = 2"
 
 	Log(100);
@@ -29,10 +29,13 @@ Similarly, you can log variables using `Log()` macro.
 	...
 	Log(@"1 + 1 = %d", 1 + 1);
 	
+	//Appending String
+	@"1".a(@"2").a(3).a(nil).a(4.0f).a(@5).a(@"%d", 6);    //@"123456"
+	
 You can create NSAttributedString with `AttStr()` macro.
 
-	AttStr(@"hello, 101").match(@"[0-9]+").underline;
-	AttStr(@"A smile ", Img(@"smile"), @" !!");		//attributedString with image attachment
+	AttStr(@"hello, 101").match(@"[0-9]+").underline;	//mark 101 with underline
+	AttStr(@"A smile ", Img(@"smile"), @" !!");			//attributedString with image attachment
 	
 You can create UIFont with `Fnt()` macro.
 
@@ -44,10 +47,16 @@ You can create UIFont with `Fnt()` macro.
 You can create UIColor with `Color()` macro.
 
 	Color(@"red");				//[UIColor redColor]
-	Color(@"green,0.5");		//green color with 0.5 alpha
-	Color(@"0,0,255");			//blue color
-	Color(@"#0000FF");			//blue color
+	Color(@"0,0,255");			//RGB color
+	Color(@"#0000FF");			//Hex color
 	Color(@"random");			//random color
+
+    //also can have an optional alpha value
+    Color(@"red,0.5");            //red color with alpha 0.5
+    Color(@"0,0,255,0.8");        //blue color with alpha 0.8
+    ...
+
+    Color(Img(@"pattern"));       //pattern image color
 	
 You can create UIImage with `Img()` macro.
 
@@ -93,6 +102,7 @@ These macros exist not only because they simplify the process of creating common
 	someView.maxY = someView.maxX;
 	someView.maxXY = XY(60, 60);
 	
+	//qucik access screen size
 	someView.wh = WH(Screen.width, Screen.height);
 
 
@@ -106,7 +116,7 @@ NerdyUI make it very easy to create UI components and config properties by using
 
 <img src="./res/view.png" alt="view" width="30%" />
 
-	UIView *moose = ImageView.img(@"moose").x(20).y(100).shadow(0.6, 2, -3, -1);
+	UIImageView *moose = ImageView.img(@"moose").x(20).y(100).shadow(0.6, 2, -3, -1);
     UILabel *quiz = Label.str(@"%d+%d=?", 1, 1).fnt(@17).color(@"66,66,66").fitSize.x(moose.maxX + 10).cy(moose.cy);
 
 <img src="./res/moose.png" alt="moose" width="30%" />
@@ -138,6 +148,12 @@ As you can see, most of the chainable properties are quite straight forward and 
 You use `.opacity()` and `.tg()` to set view's alpha and tag.
 
 You use `.x()`, `.y()`, `.xy()`, `.w()`, `.h()`, `.wh()`, `.xywh()`, `.cx()`, `.cy()`, `.cxy()`, `.maxX()`, `.maxY()`, `.maxXY()` to set view's position and size. 
+
+You use `.touchEnabled`, `.touchDisabled` to enable or disable touch.
+
+You use `.flexibleLeft`, `.flexibleRight`, `.flexibleTop`, `.flexibleBottom`,   `.flexibleLR`, `.flexibleTB`, `.flexibleLRTB`, `.flexibleWidth`, `.flexibleHeight`, `.flexibleWH` to set autoresizingMask.
+
+You use `.centerAlignment`, `.rightAlignment` to set alignment.
 
 You use `.fnt()` to set font with the same format as `Fnt()`.
 
@@ -257,8 +273,10 @@ After creation, all you have to do is setting item's values. Their appearance wi
 ##Lightweight Styling
 Nearly all the chainable properties can be set as style.
 
+	//global style
 	Style(@"h1").color(@"#333333").fnt(17);
    	Style(@"button").fixHeight(30).insets(0, 10).cornerRadius(5);
+   	//local style
    	id actionButtonStyle = Style().styles(@"button h1").bgImg(@"red").highBgImg(@"blue").highColor(@"white");
 
 Here you create two global styles (which can be referred globally by name later) and a local style. The local style is inherit from both two global styles with `.styles()` properties. After creation, you can apply styles to any UIView or NSAttributedString using the same syntax. 
@@ -291,7 +309,7 @@ For NSArray, we also provide you `.forEach()`, `.map()`, `.filter()` and `.reduc
 ##Cautions
 Inside `.onClick()`, `.onLink()`, `.onChange()` and `.onFinish()`, `self` has been weakified so you can use `self` directly without worrying retain cycle. Sometimes you may want to make a strong reference of `self` inside handler in order to prolong its life time.
 
-NerdyUI use a lot of macros and category methods. It's likely will clash with your own codes, so use carefully.
+NerdyUI use a lot of macros and category methods without prefixing. It's likely will clash with your own codes or third party frameworks, so use carefully.
 
 ## Installation
 	pod "NerdyUI"
