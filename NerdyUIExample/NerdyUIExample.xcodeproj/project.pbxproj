@@ -332,6 +332,7 @@
 				TargetAttributes = {
 					84F72E731E1BB3D300930622 = {
 						CreatedOnToolsVersion = 8.1;
+						DevelopmentTeam = 3V7BG274RR;
 						ProvisioningStyle = Automatic;
 					};
 				};
@@ -531,7 +532,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = 3V7BG274RR;
 				INFOPLIST_FILE = NerdyUIExample/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -544,7 +545,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = 3V7BG274RR;
 				INFOPLIST_FILE = NerdyUIExample/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";

@@ -270,12 +270,9 @@ static CGFloat nerPrivateDefaultLinkSelectedCornerRadius = 0;
 - (CGFloat)calculateTextYOffset {
     NSLayoutManager *layoutManager = self.nerLayoutManager;
     NSTextContainer *textContainer = layoutManager.textContainers.firstObject;
-    CGRect textRect = [layoutManager usedRectForTextContainer:textContainer];
     
     NSRange textRange = [layoutManager glyphRangeForTextContainer:textContainer];
-    textRect = [layoutManager boundingRectForGlyphRange:textRange inTextContainer:textContainer];
-    
-    
+    CGRect textRect = [layoutManager boundingRectForGlyphRange:textRange inTextContainer:textContainer];
     
     if (self.bounds.size.height > textRect.size.height) {
         return (self.bounds.size.height - textRect.size.height) / 2;

@@ -25,7 +25,7 @@
            Fnt(@"body"), 
            Fnt(@"Helvetica,15")
  */
-#define Fnt(x)  [NERUtils fontWithFontObject:NER_CONVERT_INT_TO_STRING(x)]
+#define Fnt(x)  [NERUtils fontWithFontObject:NER_CONVERT_VALUE_TO_STRING(x)]
 
 
 @interface UIFont (NERChainable)

@@ -95,7 +95,7 @@
         return object;
         
     } else if ([object isKindOfClass:[NSNumber class]]) {
-        return [UIFont boldSystemFontOfSize:[object integerValue]];
+        return [UIFont boldSystemFontOfSize:[object floatValue]];
         
     } else if ([object isKindOfClass:[NSString class]]) {
         static NSMutableDictionary *fontStyles = nil;
@@ -128,11 +128,11 @@
         NSArray *elements = [object componentsSeparatedByString:@","];
         if (elements.count == 2) {
             NSString *fontName = elements[0];
-            NSInteger fontSize = [elements[1] integerValue];
+            CGFloat fontSize = [elements[1] floatValue];
             return [UIFont fontWithName:fontName size:fontSize];
         }
         
-        NSInteger fontSize = [fontString integerValue];
+        CGFloat fontSize = [fontString floatValue];
         if (fontSize > 0) {
             return [UIFont systemFontOfSize:fontSize];
         }

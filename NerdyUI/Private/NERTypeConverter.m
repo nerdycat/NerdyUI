@@ -8,50 +8,61 @@
 
 #import "NERTypeConverter.h"
 
-@implementation NERTypeConverter
 
-+ (id)convertIntToStringIfNeed:(void *)p isInt:(BOOL)isInt {
-    if (isInt) {
-        return [@((NSInteger)p) description];
-    } else {
-        return (__bridge id)p;
-    }
-}
-
-+ (id)convertIntToNumberIfNeed:(void *)p isInt:(BOOL)isInt {
-    if (isInt) {
-        return @((NSInteger)p);
-    } else {
-        return (__bridge id)p;
-    }
-}
-
-+ (BOOL)isString:(id)object {
-    return [object isKindOfClass:[NSString class]];
-}
-
-+ (BOOL)isAttributedString:(id)object {
-    return [object isKindOfClass:[NSAttributedString class]];
-}
-
-+ (id)simplyReturnObject:(id)object {
-    return object;
-}
-
-+ (NSString *)stringWithArgumentsCount:(NSInteger)count format:(NSString *)format, ... {
-    if (count <= 1) {
-        return format;
-    }
+id NERConvertValueToString(char *type, ...) {
+    id result = nil;
     
     va_list argList;
-    va_start(argList, format);
-    NSString *result = [[NSString alloc] initWithFormat:format arguments:argList];
-    va_end(argList);
+    va_start(argList, type);
     
+    if (NER_CHECK_IS_INT(type[0])) {
+        NSInteger n = va_arg(argList, NSInteger);
+        result = [@(n) description];
+    } else if (NER_CHECK_IS_FLOAT(type[0])) {
+        double n = va_arg(argList, double);
+        result = [@(n) description];
+    } else {
+        result = va_arg(argList, id);
+    }
+    
+    va_end(argList);
     return result;
 }
 
-+ (UIEdgeInsets)convertNEREdgeInsetsToUIEdgeInsets:(NEREdgeInsets)insets numberOfValidElements:(NSInteger)number {
+BOOL NERObjectIsKindOfClass(NSString *className, ...) {
+    va_list argList;
+    va_start(argList, className);
+    id object = va_arg(argList, id);
+    va_end(argList);
+    return [object isKindOfClass:NSClassFromString(className)];
+}
+
+id NERObjectFromVariadicFunction(NSString *placeholder, ...) {
+    va_list argList;
+    va_start(argList, placeholder);
+    id object = va_arg(argList, id);
+    va_end(argList);
+    return object;
+}
+
+NSString *NERFormatedStringWithArgumentsCount(NSInteger count, ...) {
+    va_list argList;
+    va_start(argList, count);
+    
+    NSString *result = nil;
+    NSString *format = va_arg(argList, id);
+    
+    if (count <= 1) {
+        result = format;
+    } else {
+        result = [[NSString alloc] initWithFormat:format arguments:argList];
+    }
+    
+    va_end(argList);
+    return result;
+}
+
+UIEdgeInsets NERConvertNEREdgeInsetsToUIEdgeInsets(NEREdgeInsets insets, NSInteger number) {
     UIEdgeInsets newInsets;
     CGFloat a = insets.value.top;
     CGFloat b = insets.value.left;
@@ -70,13 +81,6 @@
     
     return newInsets;
 }
-
-@end
-
-
-
-
-
 
 NSString *NERStringRepresentationOfValue(char *type, const void *value) {
     #define VALUE_OF_TYPE(t)    (*(t *)value)
