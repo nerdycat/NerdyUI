@@ -159,5 +159,9 @@
     return self;
 }
 
+- (void (^)())End {
+    return ^{};
+}
+
 @end
 

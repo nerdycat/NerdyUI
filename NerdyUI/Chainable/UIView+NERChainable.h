@@ -131,6 +131,13 @@ NER_VIEW_PROPS(UIView);
 
 //Usages: .clip.touchDisable.invisible
 
+
+/*
+ * Use to suppress getter side effects warning. Optional.
+ * Usages: someButton.str(@"hello").fitSize.End();
+ */
+- (void(^)())End;
+
 @end
 
 

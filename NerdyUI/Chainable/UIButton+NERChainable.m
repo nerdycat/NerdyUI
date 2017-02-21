@@ -112,6 +112,12 @@
                      );
 }
 
-
+- (instancetype)reversed {
+    CATransform3D t = CATransform3DMakeScale(-1, 1, 1);
+    self.layer.sublayerTransform = t;
+    self.imageView.layer.transform = t;
+    self.titleLabel.layer.transform = t;
+    return self;
+}
 
 @end

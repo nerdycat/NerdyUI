@@ -64,7 +64,7 @@ NER_CONSTRAINT_PROP(Object)     view;
  */
 NER_CONSTRAINT_PROP(Object)     identifier;
 
-#define constants(...)      constants(NER_MAKE_FLOAT_LIST(__VA_ARGS__))
+#define constants(...)          constants(NER_MAKE_FLOAT_LIST(__VA_ARGS__))
 
 
 /**
@@ -135,9 +135,17 @@ NER_CONSTRAINT_PROP(Object)     identifier;
  */
 - (instancetype)And;                        //chaining constraints making progress together.
 
+
+/*
+ * Use to suppress getter side effects warning. Optional.
+ * Usages: make.left.top.equal.view(view).left.bottom.End();
+ */
+- (void(^)())End;
+
+
 /**
  * Install constraints
- * You have to call make/remake/update in the end in order the install the constraints.
+ * You have to call make/remake/update in the end in order the install the constraints if you use Constraint() macro.
  * Usages:
     .width.constants(10).make();
     .width.constants(20).update();

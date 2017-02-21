@@ -107,6 +107,10 @@ SYNTHESIZE_CONSTRAINT_PROP(centerYWithinMargins, CenterYWithinMargins);
     return [self saveConstraintsAndReset:nil];
 }
 
+- (void (^)())End {
+    return ^{};
+}
+
 - (NSArray *(^)())make {
     return ^{
         return [self makeConstraints:nil];

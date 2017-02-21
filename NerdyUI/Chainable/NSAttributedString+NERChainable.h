@@ -199,6 +199,13 @@ NER_ATT_PROP(Object)    styles;
  */
 - (instancetype)ifNotExists;
 
+
+/*
+ * Use to suppress getter side effects warning. Optional.
+ * Usages: someAttStr.matchURL.underline.End();
+ */
+- (void(^)())End;
+
 @end
 
 

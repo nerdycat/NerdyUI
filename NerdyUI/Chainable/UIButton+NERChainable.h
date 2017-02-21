@@ -172,6 +172,10 @@ NER_BUTTON_PROP(Float)      gap;
  */
 NER_BUTTON_PROP(Insets)     insets;
 
+
+//Reverse image and title's position
+- (instancetype)reversed;
+
 @end
 
 

@@ -120,6 +120,10 @@
     return self.bounds.size.height;
 }
 
+- (CGSize)size {
+    return self.bounds.size;
+}
+
 - (CGFloat)onePixel {
     return 1.0f / self.scale;
 }

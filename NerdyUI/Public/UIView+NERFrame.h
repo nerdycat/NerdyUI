@@ -64,6 +64,7 @@
 
 @property (nonatomic, readonly) CGFloat width;
 @property (nonatomic, readonly) CGFloat height;
+@property (nonatomic, readonly) CGSize  size;
 
 //one pixel width, equals to 1 point / screen scale.
 @property (nonatomic, readonly) CGFloat onePixel;
