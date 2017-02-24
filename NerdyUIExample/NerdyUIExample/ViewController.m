@@ -132,32 +132,69 @@
 
 
 - (void)demo6 {
-    Style(@"h1").color(@"#333333").fnt(17);
-    Style(@"button").fixHeight(30).insets(0, 10).cornerRadius(5);
-    id actionButtonStyle = Style().styles(@"button h1").bgImg(@"red").highBgImg(@"blue").highColor(@"white");
+    id s1 = Style().fnt(@15).fixWH(100, 44).cornerRadius(4);
     
-    id text = Label.styles(@"h1").str(@"Style Example:");
-    
-    id alert = Button.styles(actionButtonStyle).str(@"Alert").onClick(^{
-        id message = @"You have to call .show() in the end in order to make Alert visible.";
-        Alert.title(@"Alert").message(message).action(@"OK", ^{
-            Log(@"OK");
-        }).cancelAction(@"Cancel").show();
+    id b1 = Button.str(@"Alert").styles(s1).bgImg(@"#178BFB").highBgImg(@"#1F71DC").color(@"white").onClick(@"showAlert");
+    id b2 = Button.str(@"ActionSheet").styles(s1).highBgImg(@"#DDD").border(1, @"lightGray").onClick(^{
+        [self showActionSheet];
     });
     
-    id action = Button.styles(actionButtonStyle).bgImg(@"orange").str(@"ActionSheet").onClick(^{
-        ActionSheet.title(@"ActionSheet").message(@"ActionSheet use the same syntax as Alert.").action(@"Action1", ^{
-            Log(@"Action1");
-        }).action(@"Action2", ^{
-            Log(@"Action2");
-        }).destructiveAction(@"Delete", ^{
-            Log(@"Delete");
-        }).cancelAction(@"Cancel").tint(@"cyan").show();
-    });
+    id s2 = Style().cornerRadius(8).bgImg(@"#1EC659").insets(10, 6);
+    id s3 = Style().str(@"moose").img(@"moose").gap(10);
     
-    VerStack(text, alert, action).embedIn(self.view, 20, 20, NERNull, 20).gap(10);
+    id b3 = Button.styles(@[s2, s3]);
+    id b4 = Button.styles(@[s2, s3]).reversed.adjustDisabled;
+    
+    id att5 = AttStr(Img(@"moose"), @"\nmoose").centerAlignment;
+    id b5 = Button.str(att5).multiline.styles(s2);
+    
+    id att6 = AttStr(@"moose\n", Img(@"moose")).centerAlignment.lineGap(20);
+    id b6 = Button.str(att6).multiline.styles(s2).bgImg(@"#40AFFC");
+    id b7 = Button.str(att6).multiline.styles(s2).bgImg(@"#40AFFC").img(Img(@"hat").template).tint(@"#EC4F51").gap(20);
+    
+    id att8 = AttStr(@"A hat ", Img(@"hat"), @" and a moose", Img(@"moose").template);
+    id b8 = Button.str(att8).bgImg(@"#40AFFC");
+    
+    id s4 = Style().fnt(13).color(@"darkGray").matchNumber.fnt(@17).color(@"black").centerAlignment;
+    
+    id att9 = AttStr(@"1024\n#followers").styles(s4);
+    id b9 = Button.str(att9).fixWH(90, 44).multiline.border(1);
+    
+    id att10 = AttStr(@"2048\n#following").styles(s4);
+    id b10 = Button.str(att10).fixWH(90, 44).multiline.highBgImg(@"#EEE");
+    
+    id att11 = AttStr(
+                      AttStr(@"Super Mario Run\n").fnt(15),
+                      AttStr(@"Games\n").fnt(13).color(@"darkGray"),
+                      AttStr(@"★★★☆☆").fnt(11).color(@"orange"),
+                      AttStr(@"（6053）").fnt(11).color(@"darkGray")
+                      ).lineGap(3);
+    id b11 = Button.str(att11).multiline.border(1).highBgImg(@"#EEE").img(Img(@"mario").resize(64, 64)).gap(10);
+    
+    id b12 = Button.str(@"⚽︎♠︎♣︎☁︎☃☆★⚾︎\n◼︎▶︎✔︎✖︎♚✎✿✪").fnt(25).multiline;
+    id b13 = Button.str(@"♣︎").fnt(100).color(@"red");
+    
+    id title = Label.str(@"Button + Style + AttStr:");
+    id scrollView = [UIScrollView new].embedIn(self.view);
+    VerStack(title, b1, b2, b3, b4, b5, b6, b7, b8, b9, b10, b11, b12, b13).gap(10).embedIn(scrollView, 20, 20, 80);
 }
 
+- (void)showAlert {
+    id message = @"You have to call .show() in the end in order to make Alert visible.";
+    Alert.title(@"Alert").message(message).action(@"OK", ^{
+        Log(@"OK");
+    }).cancelAction(@"Cancel").show();
+}
+
+- (void)showActionSheet {
+    ActionSheet.title(@"ActionSheet").message(@"ActionSheet use the same syntax as Alert.").action(@"Action1", ^{
+        Log(@"Action1");
+    }).action(@"Action2", ^{
+        Log(@"Action2");
+    }).destructiveAction(@"Delete", ^{
+        Log(@"Delete");
+    }).cancelAction(@"Cancel").tint(@"cyan").show();
+}
 
 - (void)row4Click {
     Log(@"Row4");

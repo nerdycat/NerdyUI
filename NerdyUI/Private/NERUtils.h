@@ -28,6 +28,7 @@
 + (BOOL)limitTextInput:(id<UITextInput>)textInput withLength:(NSInteger)maxLength;
 
 + (void)applyStyleObject:(id)value toItem:(id)item;
++ (NSArray *)numberArrayFromFLoatList:(NERFloatList)value;
 
 + (UIViewController *)getVisibleViewController;
 

@@ -7,6 +7,7 @@
 //
 
 #import "NERConstraint+NERChainable.h"
+#import "NERUtils.h"
 
 
 #define SYNTHESIZE_CONSTRAINT_PROP(x, y)\
@@ -51,19 +52,12 @@ SYNTHESIZE_CONSTRAINT_PROP(centerYWithinMargins, CenterYWithinMargins);
 }
 
 
-- (NERChainableNERConstraintFloatBlock)multiplier {
-    NER_FLOAT_BLOCK([self updateMultiplier:value]);
+- (NERChainableNERConstraintFloatListBlock)multipliers {
+    NER_FLOAT_LIST_BLOCK([self updateMultipliers:[NERUtils numberArrayFromFLoatList:value]]);
 }
 
 - (NERChainableNERConstraintFloatListBlock)constants {
-    NER_FLOAT_LIST_BLOCK(
-                         id values = @[@(value.f1), @(value.f2),
-                                       @(value.f3), @(value.f4),
-                                       @(value.f5), @(value.f6),
-                                       @(value.f7), @(value.f8),
-                                       @(value.f9), @(value.f10)];
-                         [self updateConstants:values];
-    );
+    NER_FLOAT_LIST_BLOCK([self updateConstants:[NERUtils numberArrayFromFLoatList:value]]);
 }
 
 - (NERChainableNERConstraintFloatBlock)priority {

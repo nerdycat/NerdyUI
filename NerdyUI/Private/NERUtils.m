@@ -319,6 +319,13 @@
     }
 }
 
++ (NSArray *)numberArrayFromFLoatList:(NERFloatList)value {
+    id values = @[@(value.f1), @(value.f2), @(value.f3), @(value.f4), @(value.f5),
+                  @(value.f6), @(value.f7), @(value.f8), @(value.f9), @(value.f10)];
+    
+    return [values subarrayWithRange:NSMakeRange(0, value.validCount)];
+}
+
 + (UIViewController *)getVisibleViewController {
     UIWindow *window = [UIApplication sharedApplication ].delegate.window;
     UIViewController *rootViewController = window.rootViewController;

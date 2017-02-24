@@ -66,11 +66,11 @@
 @property (nonatomic, strong) NSMutableArray *firstItemAttributes;
 @property (nonatomic, strong) NSMutableArray *secondItemAttributes;
 
+@property (nonatomic, strong) NSArray *multiplierValues;
 @property (nonatomic, strong) NSArray *constantValues;
 @property (nonatomic, strong) NSString *identifierValue;
 
 @property (nonatomic, assign) NSLayoutRelation relationValue;
-@property (nonatomic, assign) CGFloat multiplierValue;
 @property (nonatomic, assign) CGFloat priorityValue;
 
 @property (nonatomic, strong) NSMutableArray *layoutConstraints;
@@ -125,8 +125,22 @@
         }
         
         CGFloat constant = 0;
+        CGFloat multiplier = 1;
+        
         if (i < self.constantValues.count) {
             constant = [self.constantValues[i] floatValue];
+        } else if (self.constantValues.lastObject) {
+            constant = [self.constantValues.lastObject floatValue];
+        }
+        
+        if (i < self.multiplierValues.count) {
+            multiplier = [self.multiplierValues[i] floatValue];
+        } else if (self.multiplierValues.count) {
+            multiplier = [self.multiplierValues.lastObject floatValue];
+        }
+        
+        if (multiplier == 0) {
+            multiplier = 1;    //multiplier can not be 0
         }
         
         id secondItem = self.secondItem;
@@ -150,7 +164,7 @@
                                                              relatedBy:self.relationValue
                                                                 toItem:secondItem
                                                              attribute:att2
-                                                            multiplier:self.multiplierValue
+                                                            multiplier:multiplier
                                                               constant:constant];
         
         c.priority = self.priorityValue;
@@ -186,8 +200,8 @@
     self.identifierValue = identifier;
 }
 
-- (void)updateMultiplier:(CGFloat)multiplier {
-    self.multiplierValue = multiplier;
+- (void)updateMultipliers:(NSArray *)multipliers {
+    self.multiplierValues = multipliers;
 }
 
 - (void)updatePriority:(CGFloat)priority {
@@ -212,7 +226,6 @@
     self.secondItemAttributes = nil;
     self.firstItemAttributes = [NSMutableArray array];
     
-    self.multiplierValue = 1;
     self.relationValue = NSLayoutRelationEqual;
     self.priorityValue = UILayoutPriorityRequired;
 }

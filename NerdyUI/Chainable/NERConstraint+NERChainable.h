@@ -30,15 +30,10 @@
 
 /**
  * Setting multiplier value, default: 1.
- * Usages: .multiplier(0.5)
+ * Can take multiply values if you are configure mulitply attributes at the same time.
+ * Usages: .multiplier(0.5), .size.equal.view(view2).multiply(1, 2)
  */
-NER_CONSTRAINT_PROP(Float)      multiplier;
-
-/**
- * Setting priority value, default: UILayoutPriorityRequired (1000).
- * Usages: .priority(900)
- */
-NER_CONSTRAINT_PROP(Float)      priority;
+NER_CONSTRAINT_PROP(FloatList)  multipliers;
 
 /**
  * Setting constant value, default: 0.
@@ -59,11 +54,18 @@ NER_CONSTRAINT_PROP(FloatList)  constants;
 NER_CONSTRAINT_PROP(Object)     view;
 
 /**
+ * Setting priority value, default: UILayoutPriorityRequired (1000).
+ * Usages: .priority(900)
+ */
+NER_CONSTRAINT_PROP(Float)      priority;
+
+/**
  * Setting identifier value.
  * Usages: .identifier(@"top constraint")
  */
 NER_CONSTRAINT_PROP(Object)     identifier;
 
+#define multipliers(...)        multipliers(NER_MAKE_FLOAT_LIST(__VA_ARGS__))
 #define constants(...)          constants(NER_MAKE_FLOAT_LIST(__VA_ARGS__))
 
 

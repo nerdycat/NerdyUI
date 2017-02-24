@@ -22,9 +22,9 @@
 
 - (void)updateSecondItem:(UIView *)item;
 - (void)updateRelation:(NSLayoutRelation)relation;
+- (void)updateMultipliers:(NSArray *)multipliers;
 - (void)updateConstants:(NSArray *)array;
 - (void)updateIdentifier:(NSString *)identifier;
-- (void)updateMultiplier:(CGFloat)multiplier;
 - (void)updatePriority:(CGFloat)priority;
 
 - (NSArray *)makeConstraints:(id)null;
