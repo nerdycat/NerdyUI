@@ -106,8 +106,8 @@ NER_STRING_PROP(TwoObject)      subReplace;
 
 #define a(...)                  a(Str(__VA_ARGS__))
 #define ap(...)                 ap(Str(__VA_ARGS__))
-#define subFrom(x)              subFrom(NER_CONVERT_INT_TO_NUMBER(x))
-#define subTo(x)                subTo(NER_CONVERT_INT_TO_NUMBER(x))
+#define subFrom(x)              subFrom(NER_CONVERT_VALUE_TO_NUMBER(x))
+#define subTo(x)                subTo(NER_CONVERT_VALUE_TO_NUMBER(x))
 
 
 /**

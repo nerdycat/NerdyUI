@@ -35,15 +35,24 @@
                    handler:(void (^ __nullable)(UIAlertAction *action))handler {
     
     NSString *title = nil;
+    UIColor *titleColor = nil;
     
     if ([titleObject isKindOfClass:NSAttributedString.class]) {
         NSAttributedString *as = (NSAttributedString *)titleObject;
         title = as.string;
+        titleColor = [as attribute:NSForegroundColorAttributeName atIndex:0 effectiveRange:NULL];
     } else {
         title = titleObject;
     }
     
     UIAlertAction *action = [UIAlertAction actionWithTitle:title style:style handler:handler];
+    
+    if (titleColor) {
+        @try {
+            [action setValue:titleColor forKey:@"titleTextColor"];
+        } @catch(id e) {}
+    }
+    
     [self.actions addObject:action];
 }
 
@@ -60,7 +69,7 @@
         NSAttributedString *as = (NSAttributedString *)self.titleObject;
         @try {
             [alert setValue:as forKey:@"attributedTitle"];
-        } @catch (NSException *exception) {
+        } @catch (id e) {
             alert.title = as.string;
         }
     }
@@ -69,7 +78,7 @@
         NSAttributedString *as = (NSAttributedString *)self.messageObject;
         @try {
             [alert setValue:as forKey:@"attributedMessage"];
-        } @catch (NSException *exception) {
+        } @catch (id e) {
             alert.message = as.string;
         }
     }

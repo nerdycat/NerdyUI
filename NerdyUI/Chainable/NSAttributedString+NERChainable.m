@@ -116,6 +116,10 @@
     return self;
 }
 
+- (instancetype)matchNumber {
+    return self.match(@"\\d+(\\.\\d+)?");
+}
+
 - (instancetype)matchURL {
     NSDataDetector *urlDetector = [NSDataDetector dataDetectorWithTypes:NSTextCheckingTypeLink error:nil];
     return self.match(urlDetector);

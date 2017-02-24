@@ -29,6 +29,26 @@ id NERConvertValueToString(char *type, ...) {
     return result;
 }
 
+id NERConvertValueToNumber(char *type, ...) {
+    id result = nil;
+    
+    va_list argList;
+    va_start(argList, type);
+    
+    if (NER_CHECK_IS_INT(type[0])) {
+        NSInteger n = va_arg(argList, NSInteger);
+        result = @(n);
+    } else if (NER_CHECK_IS_FLOAT(type[0])) {
+        double n = va_arg(argList, double);
+        result = @(n);
+    } else {
+        result = va_arg(argList, id);
+    }
+    
+    va_end(argList);
+    return result;
+}
+
 BOOL NERObjectIsKindOfClass(NSString *className, ...) {
     va_list argList;
     va_start(argList, className);

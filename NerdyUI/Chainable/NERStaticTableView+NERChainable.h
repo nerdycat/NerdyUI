@@ -15,7 +15,7 @@
 #define PlainTV(...)        [NERStaticTableView plainStyleWithSections:@[__VA_ARGS__]]
 #define GroupTV(...)        [NERStaticTableView groupedStyleWithSections:@[__VA_ARGS__]]
 
-#define detailFnt(x)        detailFnt(NER_CONVERT_INT_TO_STRING(x))
+#define detailFnt(x)        detailFnt(NER_CONVERT_VALUE_TO_STRING(x))
 
 
 @interface NERStaticTableView (NERChainable)

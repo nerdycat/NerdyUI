@@ -12,6 +12,7 @@
 
 
 #define NER_CONVERT_VALUE_TO_STRING(x)  NERConvertValueToString(NER_TYPE(x), x)
+#define NER_CONVERT_VALUE_TO_NUMBER(x)  NERConvertValueToNumber(NER_TYPE(x), x)
 
 #define NER_IS_STRING(x)                (NER_IS_OBJECT(x) && NERObjectIsKindOfClass(@"NSString", x))
 #define NER_CHECK_IS_STRING(x, ...)     NER_IS_STRING(x)
@@ -29,9 +30,11 @@
 #define NER_NORMALIZE_INSETS(...)       NERConvertNEREdgeInsetsToUIEdgeInsets((NEREdgeInsets){__VA_ARGS__}, NER_NUMBER_OF_VA_ARGS(__VA_ARGS__))
 
 
-id              NERConvertValueToString(char *type, ...);
-BOOL            NERObjectIsKindOfClass(NSString *className, ...);
-id              NERObjectFromVariadicFunction(NSString *placeholder, ...);
+id      NERConvertValueToString(char *type, ...);
+id      NERConvertValueToNumber(char *type, ...);
+id      NERObjectFromVariadicFunction(NSString *placeholder, ...);
+BOOL    NERObjectIsKindOfClass(NSString *className, ...);
+
 NSString *      NERFormatedStringWithArgumentsCount(NSInteger count, ...);
 UIEdgeInsets    NERConvertNEREdgeInsetsToUIEdgeInsets(NEREdgeInsets insets, NSInteger number);
 NSString *      NERStringRepresentationOfValue(char *type, const void *value);

@@ -60,7 +60,7 @@ NER_PROP(v, Float)              cornerRadius;\
 NER_PROP(v, FloatObjectList)    border;\
 \
 /**
- * Setting layer.shadowOpacity, layer.shadowRadius(Optional), layer.shadowOffset(Optional) at the same time.
+ * Setting layer.shadowOpacity, layer.shadowRadius(default: 3), layer.shadowOffset(default: 0, 3) at the same time.
  * Usages: .shadow(1), .shadow(0.8, 1), .shadow(1, 2, 2, 2);
  */\
 NER_PROP(v, FloatList)          shadow;\

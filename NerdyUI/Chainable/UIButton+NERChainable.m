@@ -120,4 +120,15 @@
     return self;
 }
 
+- (instancetype)multiline {
+    self.titleLabel.lineBreakMode = NSLineBreakByWordWrapping;
+    self.titleLabel.textAlignment = NSTextAlignmentCenter;
+    return self;
+}
+
+- (instancetype)adjustDisabled {
+    self.adjustsImageWhenHighlighted = NO;
+    return self;
+}
+
 @end

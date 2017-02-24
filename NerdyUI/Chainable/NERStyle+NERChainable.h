@@ -127,6 +127,9 @@ NER_STYLE_PROP(Object)          disabledBgImg;
 NER_STYLE_PROP(Float)           gap;
 NER_STYLE_PROP(Insets)          insets;
 
+- (instancetype)reversed;
+- (instancetype)adjustDisabled;
+
 
 
 /**
@@ -265,6 +268,7 @@ NER_STYLE_PROP(Float)           baselineOffset;
 NER_STYLE_PROP(Float)           indent;
 NER_STYLE_PROP(Object)          match;
 
+- (instancetype)matchNumber;
 - (instancetype)matchURL;
 - (instancetype)matchHashTag;
 - (instancetype)matchNameTag;

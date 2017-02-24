@@ -149,6 +149,8 @@ NER_ATT_PROP(Object)    styles;
  * Usages: AttStr(@"@Tim at #Apple").matchHashTag.matchNameTag.color(@"red")
  */
 
+//Select all numbers (e.g. 1024, 3.14)
+- (instancetype)matchNumber;
 //Select all URLs
 - (instancetype)matchURL;
 //Select all # Tags

@@ -418,6 +418,8 @@ NER_SYNTHESIZE_STRUCT(nerInsets, setNerInsets, UIEdgeInsets);
 
 + (instancetype)ner_littleHigherHuggingAndResistanceButton {
     UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
+    [button setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+    
     [button setContentHuggingPriority:251 forAxis:UILayoutConstraintAxisHorizontal];
     [button setContentHuggingPriority:251 forAxis:UILayoutConstraintAxisVertical];
     [button setContentCompressionResistancePriority:751 forAxis:UILayoutConstraintAxisHorizontal];

@@ -176,6 +176,12 @@ NER_BUTTON_PROP(Insets)     insets;
 //Reverse image and title's position
 - (instancetype)reversed;
 
+//Enable multilines
+- (instancetype)multiline;
+
+//adjustsImageWhenHighlighted = NO
+- (instancetype)adjustDisabled;
+
 @end
 
 
