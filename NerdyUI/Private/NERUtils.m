@@ -305,6 +305,11 @@
 + (void)applyStyleObject:(id)value toItem:(id)item {
     if ([value isKindOfClass:NERStyle.class]) {
         [value applyToItem:item];
+    
+    } else if ([value isKindOfClass:NSArray.class]) {
+        for (NERStyle *style in value) {
+            [style applyToItem:item];
+        }
         
     } else if ([value isKindOfClass:NSString.class]) {
         NSArray *styles = [value componentsSeparatedByString:@" "];

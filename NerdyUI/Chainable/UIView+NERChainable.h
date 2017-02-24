@@ -68,9 +68,11 @@ NER_PROP(v, FloatList)          shadow;\
 /**
  * Apply styles to the view.
  * It support two kind of arguments:
-    1) NERStyle instance
-    2) NSString contain a list of style names(separated by white space).
- * Usages: .styles(someStyle), .styles(@"style1"), .styles(@"style1 style2 style3")
+    1) Local styles: NERStyle instance or Array of NERStyle instances.
+    2) Global styles: NSString contain a list of style names(separated by white space).
+
+ * Usages: .styles(style), .styles(@[style1, style2, style3]),
+           .styles(@"style1"), .styles(@"style1 style2 style3")
  * See NERStyle+NERChainable.h for more information.
  */\
 NER_PROP(v, Object)             styles;\

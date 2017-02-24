@@ -14,30 +14,22 @@ static NSMutableDictionary *ner_styleDict = nil;
 
 @interface NERStyle ()
 
-@property (nonatomic, strong) NSMutableDictionary *objectProperties;
-@property (nonatomic, strong) NSMutableArray *methods;
+@property (nonatomic, strong) NSMutableArray *chainableProperties;
 
 @end
 
 @implementation NERStyle
 
-- (NSMutableDictionary *)objectProperties {
-    if (!_objectProperties) {
-        _objectProperties = [NSMutableDictionary dictionary];
+- (NSMutableArray *)chainableProperties {
+    if (!_chainableProperties) {
+        _chainableProperties = [NSMutableArray array];
     }
-    return _objectProperties;
-}
-
-- (NSMutableArray *)methods {
-    if (!_methods) {
-        _methods = [NSMutableArray array];
-    }
-    return _methods;
+    return _chainableProperties;
 }
 
 - (void)setObjectValue:(id)value forKey:(NSString *)key {
     if (value && key) {
-        self.objectProperties[key] = value;
+        [self.chainableProperties addObject:@{@"key": key, @"value": value}];
     }
 }
 
@@ -68,13 +60,24 @@ static NSMutableDictionary *ner_styleDict = nil;
 
 - (void)addMethodWithName:(NSString *)name {
     if (name) {
-        [self.methods addObject:name];
+        [self.chainableProperties addObject:@{@"method": name}];
     }
 }
 
 - (void)applyToItem:(id)item {
-    for (NSString *key in self.objectProperties) {
-        id object = self.objectProperties[key];
+    for (NSDictionary *dict in self.chainableProperties) {
+        id key = dict[@"key"];
+        id object = dict[@"value"];
+        id methodName = dict[@"method"];
+        
+        if (methodName) {
+            SEL sel = NSSelectorFromString(methodName);
+            if ([item respondsToSelector:sel]) {
+                [item performSelector:sel withObject:nil];
+            }
+            continue;
+        }
+        
         SEL sel = NSSelectorFromString(key);
         
         if ([key isEqualToString:@"layer.borderWidth"]) {
@@ -138,13 +141,6 @@ static NSMutableDictionary *ner_styleDict = nil;
                     ((NERObjectBlock)block)(object);
                 }
             }
-        }
-    }
-    
-    for (NSString *name in self.methods) {
-        SEL sel = NSSelectorFromString(name);
-        if ([item respondsToSelector:sel]) {
-            [item performSelector:sel withObject:nil];
         }
     }
 }
