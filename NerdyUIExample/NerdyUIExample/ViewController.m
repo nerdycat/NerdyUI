@@ -150,9 +150,9 @@
     
     id att6 = AttStr(@"moose\n", Img(@"moose")).centerAlignment.lineGap(20);
     id b6 = Button.str(att6).multiline.styles(s2).bgImg(@"#40AFFC");
-    id b7 = Button.str(att6).multiline.styles(s2).bgImg(@"#40AFFC").img(Img(@"hat").template).tint(@"#EC4F51").gap(20);
+    id b7 = Button.str(att6).multiline.styles(s2).bgImg(@"#40AFFC").img(Img(@"hat").templates).tint(@"#EC4F51").gap(20);
     
-    id att8 = AttStr(@"A hat ", Img(@"hat"), @" and a moose", Img(@"moose").template);
+    id att8 = AttStr(@"A hat ", Img(@"hat"), @" and a moose", Img(@"moose").templates);
     id b8 = Button.str(att8).bgImg(@"#40AFFC");
     
     id s4 = Style().fnt(13).color(@"darkGray").matchNumber.fnt(@17).color(@"black").centerAlignment;

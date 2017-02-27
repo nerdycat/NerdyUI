@@ -55,7 +55,7 @@
     return [self ner_stretchableImage];
 }
 
-- (instancetype)template {
+- (instancetype)templates {
     return [self imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
 }
 

@@ -7,6 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+    
 #import "NERPrivates.h"
 
 #import "UIImage+NERChainable.h"
@@ -38,3 +43,7 @@
 #import "UILabel+NERLink.h"
 
 #import "NERStyle+NERChainable.h"
+
+#ifdef __cplusplus
+}
+#endif

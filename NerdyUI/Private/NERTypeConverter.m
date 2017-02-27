@@ -9,7 +9,7 @@
 #import "NERTypeConverter.h"
 
 
-id NERConvertValueToString(char *type, ...) {
+id NERConvertValueToString(const char *type, ...) {
     id result = nil;
     
     va_list argList;
@@ -29,7 +29,7 @@ id NERConvertValueToString(char *type, ...) {
     return result;
 }
 
-id NERConvertValueToNumber(char *type, ...) {
+id NERConvertValueToNumber(const char *type, ...) {
     id result = nil;
     
     va_list argList;
@@ -102,7 +102,7 @@ UIEdgeInsets NERConvertNEREdgeInsetsToUIEdgeInsets(NEREdgeInsets insets, NSInteg
     return newInsets;
 }
 
-NSString *NERStringRepresentationOfValue(char *type, const void *value) {
+NSString *NERStringRepresentationOfValue(const char *type, const void *value) {
     #define VALUE_OF_TYPE(t)    (*(t *)value)
     
     //http://www.dribin.org/dave/blog/archives/2008/09/22/convert_to_nsstring/

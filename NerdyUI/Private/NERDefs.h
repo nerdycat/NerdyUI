@@ -6,7 +6,8 @@
 //  Copyright © 2016 nerdycat. All rights reserved.
 //
 
-@import ObjectiveC;
+#import <objc/objc.h>
+#import <objc/runtime.h>
 #import <UIKit/UIKit.h>
 
 /*

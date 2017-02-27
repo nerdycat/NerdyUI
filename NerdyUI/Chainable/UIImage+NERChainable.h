@@ -75,7 +75,7 @@ NER_IMG_PROP(Float)     blur;
 - (instancetype)stretchable;
 
 //return a template image (UIImageRenderingModeAlwaysTemplate)
-- (instancetype)template;
+- (instancetype)templates;
 
 //return a origina image (UIImageRenderingModeAlwaysOriginal)
 - (instancetype)original;

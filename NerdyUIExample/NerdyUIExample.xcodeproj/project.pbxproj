@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		84C4ABB91E2610080071069F /* AppStoreViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 84C4ABB81E2610080071069F /* AppStoreViewController.m */; };
-		84C4ABBF1E2610560071069F /* AppStoreCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 84C4ABBE1E2610560071069F /* AppStoreCell.m */; };
+		84C4ABBF1E2610560071069F /* AppStoreCell.mm in Sources */ = {isa = PBXBuildFile; fileRef = 84C4ABBE1E2610560071069F /* AppStoreCell.mm */; };
 		84C4ABC11E2621F50071069F /* appList.plist in Resources */ = {isa = PBXBuildFile; fileRef = 84C4ABC01E2621F50071069F /* appList.plist */; };
 		84F72E791E1BB3D300930622 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 84F72E781E1BB3D300930622 /* main.m */; };
 		84F72E7C1E1BB3D300930622 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 84F72E7B1E1BB3D300930622 /* AppDelegate.m */; };
@@ -56,7 +56,7 @@
 		84C4ABB71E2610080071069F /* AppStoreViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppStoreViewController.h; sourceTree = "<group>"; };
 		84C4ABB81E2610080071069F /* AppStoreViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppStoreViewController.m; sourceTree = "<group>"; };
 		84C4ABBD1E2610560071069F /* AppStoreCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppStoreCell.h; sourceTree = "<group>"; };
-		84C4ABBE1E2610560071069F /* AppStoreCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppStoreCell.m; sourceTree = "<group>"; };
+		84C4ABBE1E2610560071069F /* AppStoreCell.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = AppStoreCell.mm; sourceTree = "<group>"; };
 		84C4ABC01E2621F50071069F /* appList.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = appList.plist; sourceTree = "<group>"; };
 		84F72E741E1BB3D300930622 /* NerdyUIExample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NerdyUIExample.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		84F72E781E1BB3D300930622 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -177,7 +177,7 @@
 				84F72E7D1E1BB3D300930622 /* ViewController.h */,
 				84F72E7E1E1BB3D300930622 /* ViewController.m */,
 				84C4ABBD1E2610560071069F /* AppStoreCell.h */,
-				84C4ABBE1E2610560071069F /* AppStoreCell.m */,
+				84C4ABBE1E2610560071069F /* AppStoreCell.mm */,
 				84C4ABB71E2610080071069F /* AppStoreViewController.h */,
 				84C4ABB81E2610080071069F /* AppStoreViewController.m */,
 				84F72E801E1BB3D300930622 /* Main.storyboard */,
@@ -390,7 +390,7 @@
 				84F72EF21E1BBA7C00930622 /* NERTypeConverter.m in Sources */,
 				84F72EEC1E1BBA7C00930622 /* UIVisualEffectView+NERChainable.m in Sources */,
 				84F72EF41E1BBA7C00930622 /* NERStack.m in Sources */,
-				84C4ABBF1E2610560071069F /* AppStoreCell.m in Sources */,
+				84C4ABBF1E2610560071069F /* AppStoreCell.mm in Sources */,
 				84F72EF31E1BBA7C00930622 /* NERUtils.m in Sources */,
 				84F72EE21E1BBA7C00930622 /* UIImageView+NERChainable.m in Sources */,
 				84F72EEF1E1BBA7C00930622 /* NERConstraintMaker.m in Sources */,
