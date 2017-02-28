@@ -39,7 +39,7 @@
 
 - (void)setupUI {
     _indexLabel = Label.fnt(17).color(@"darkGray").fixWidth(44).centerAlignment;
-    _iconView = ImageView.fixWH(64, 64).cornerRadius(10).border(Screen.onePixel, @"#CCCCCC");
+    _iconView = ImageView.fixWH(64, 64).borderRadius(10).border(Screen.onePixel, @"#CCCCCC");
     
     //Setting preferWidth here will improve performance.
     _titleLabel = Label.fnt(15).lines(2).preferWidth(Screen.width - 205);
@@ -48,7 +48,7 @@
     _ratingLabel = Label.fnt(11).color(@"orange");
     _countLabel = Label.fnt(11).color(@"darkGray");
     
-    _actionButton = Button.fnt(@15).color(@"#0065F7").border(1, @"#0065F7").cornerRadius(3);
+    _actionButton = Button.fnt(@15).color(@"#0065F7").border(1, @"#0065F7").borderRadius(3);
     _actionButton.highColor(@"white").highBgImg(@"#0065F7").insets(5, 10);
     _iapLabel = Label.fnt(9).color(@"darkGray").lines(2).str(@"In-App\nPurchases").centerAlignment;
     

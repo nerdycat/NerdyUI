@@ -18,7 +18,7 @@
  
  * Example:
     Style(@"h1").color(@"#333333").fnt(17);
-    Style(@"button").fixHeight(30).insets(0, 10).cornerRadius(5);
+    Style(@"button").fixHeight(30).insets(0, 10).borderRadius(5);
     id actionStyle = Style().styles(@"button h1").bgImg(@"red").highBgImg(@"blue").highColor(@"white");
  
     id foo = Label.styles(@"h1").str(@"hello world");
@@ -44,7 +44,7 @@ NER_STYLE_PROP(Int)             tg;
 NER_STYLE_PROP(Float)           opacity;
 NER_STYLE_PROP(Object)          tint;
 NER_STYLE_PROP(Object)          bgColor;
-NER_STYLE_PROP(Float)           cornerRadius;
+NER_STYLE_PROP(Float)           borderRadius;
 NER_STYLE_PROP(FloatObjectList) border;
 NER_STYLE_PROP(FloatList)       shadow;
 NER_STYLE_PROP(Rect)            xywh;

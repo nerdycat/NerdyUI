@@ -75,7 +75,7 @@ NER_##type2##_BLOCK([self set##type1##Value:value.value forKey:@#name]);\
 
 SYNTHSIZE_INT_METHOD(tg);
 SYNTHSIZE_FLOAT_METHOD(opacity);
-SYNTHSIZE_FLOAT_METHOD(cornerRadius);
+SYNTHSIZE_FLOAT_METHOD(borderRadius);
 SYNTHSIE_FLOAT_LIST_METHOD(shadow);
 SYNTHSIZE_OBJECT_METHOD(tint);
 SYNTHSIZE_OBJECT_METHOD(bgColor);

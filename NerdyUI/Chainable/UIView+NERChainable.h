@@ -45,11 +45,11 @@ NER_PROP(v, Object)             tint;\
 NER_PROP(v, Object)             bgColor;\
 \
 /**
- * layer.cornerRadius
+ * Setting layer.cornerRadius value.
  * Will set masksToBounds to YES if there are not shadows existed.
- * Usages: .cornerRadius(10)
+ * Usages: .borderRadius(10)
  */\
-NER_PROP(v, Float)              cornerRadius;\
+NER_PROP(v, Float)              borderRadius;\
 \
 /**
  * Setting layer.borderWidth and layer.borderColor(optional) at the same time.

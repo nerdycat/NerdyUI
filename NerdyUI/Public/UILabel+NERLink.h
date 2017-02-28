@@ -22,8 +22,8 @@ typedef void (^NERLinkHandler)(NSString *text, NSRange range);
  * Setting link selection style
  */
 @property (nonatomic, strong)   UIColor *nerLinkSelectedColor;
-@property (nonatomic, assign)   CGFloat nerLinkSelectedCornerRadius;
+@property (nonatomic, assign)   CGFloat nerLinkSelectedBorderRadius;
 
-+ (void)setDefaultLinkSelectedBackgroundColor:(UIColor *)color corderRadius:(CGFloat)cornerRadius;
++ (void)setDefaultLinkSelectedBackgroundColor:(UIColor *)color borderRadius:(CGFloat)borderRadius;
 
 @end

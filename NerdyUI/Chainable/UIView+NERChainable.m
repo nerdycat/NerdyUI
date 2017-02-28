@@ -31,7 +31,7 @@
     NER_OBJECT_BLOCK(self.backgroundColor = Color(value));
 }
 
-- (NERChainableUIViewFloatBlock)cornerRadius {
+- (NERChainableUIViewFloatBlock)borderRadius {
     NER_FLOAT_BLOCK(
                     self.layer.cornerRadius = value;
                     if (self.layer.shadowOpacity == 0) {

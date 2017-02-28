@@ -100,24 +100,24 @@ NER_SYNTHESIZE(nerLinkSelectedColor, setNerLinkSelectedColor);
 NER_SYNTHESIZE(nerSelectedLinkInfo, setNerSelectedLinkInfo);
 NER_SYNTHESIZE(nerSelectedLayers, setNerSelectedLayers);
 
-NER_SYNTHESIZE_FLOAT(nerLinkSelectedCornerRadius, setNerLinkSelectedCornerRadius);
+NER_SYNTHESIZE_FLOAT(nerLinkSelectedBorderRadius, setNerLinkSelectedBorderRadius);
 NER_SYNTHESIZE_STRUCT(nerTouchBeginPoint, setNerTouchBeginPoint, CGPoint);
 NER_SYNTHESIZE_BLOCK(nerLinkHandler, setNerLinkHandler, NERLinkHandler);
 
 static char *nerPrivateTextStorageKey;
 static UIColor *nerPrivateDefaultLinkSelectedBackgroundColor = nil;
-static CGFloat nerPrivateDefaultLinkSelectedCornerRadius = 0;
+static CGFloat nerPrivateDefaultLinkSelectedBorderRadius = 0;
 
 
-+ (void)setDefaultLinkSelectedBackgroundColor:(UIColor *)color corderRadius:(CGFloat)cornerRadius {
++ (void)setDefaultLinkSelectedBackgroundColor:(UIColor *)color borderRadius:(CGFloat)borderRadius {
     nerPrivateDefaultLinkSelectedBackgroundColor = color;
-    nerPrivateDefaultLinkSelectedCornerRadius = cornerRadius;
+    nerPrivateDefaultLinkSelectedBorderRadius = borderRadius;
 }
 
 + (void)load {
     [self ner_swizzleMethod:@selector(setText:) withMethod:@selector(ner_setText:)];
     [self ner_swizzleMethod:@selector(setUserInteractionEnabled:) withMethod:@selector(ner_setUserInteractionEnabled:)];
-    [self setDefaultLinkSelectedBackgroundColor:[UIColor darkGrayColor] corderRadius:4];
+    [self setDefaultLinkSelectedBackgroundColor:[UIColor darkGrayColor] borderRadius:4];
 }
 
 - (void)ner_updateAttributedString {
@@ -199,10 +199,10 @@ static CGFloat nerPrivateDefaultLinkSelectedCornerRadius = 0;
     layer.frame = rect;
     
     UIColor *color = self.nerLinkSelectedColor?: nerPrivateDefaultLinkSelectedBackgroundColor;
-    CGFloat cornerRadius = nerPrivateDefaultLinkSelectedCornerRadius;
+    CGFloat borderRadius = nerPrivateDefaultLinkSelectedBorderRadius;
     
-    if (objc_getAssociatedObject(self, @selector(nerLinkSelectedCornerRadius))) {
-        cornerRadius = self.nerLinkSelectedCornerRadius;
+    if (objc_getAssociatedObject(self, @selector(nerLinkSelectedBorderRadius))) {
+        borderRadius = self.nerLinkSelectedBorderRadius;
     }
     
     if (CGColorGetAlpha(color.CGColor) == 1) {
@@ -211,7 +211,7 @@ static CGFloat nerPrivateDefaultLinkSelectedCornerRadius = 0;
     
     [self.layer addSublayer:layer];
         
-    layer.cornerRadius = cornerRadius;
+    layer.cornerRadius = borderRadius;
     layer.backgroundColor = color.CGColor;
     [self.nerSelectedLayers addObject:layer];
 }

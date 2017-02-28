@@ -21,7 +21,7 @@
 
 - (void)demo1 {
     UIView *view1 = View.xywh(20, 30, 50, 50).bgColor(@"red").opacity(0.7).border(3, @"#3d3d3d");
-    UIView *view2 = View.xy(80, 30).wh(view1.wh).bgColor(@"blue,0.7").cornerRadius(25).shadow(0.8).onClick(^{
+    UIView *view2 = View.xy(80, 30).wh(view1.wh).bgColor(@"blue,0.7").borderRadius(25).shadow(0.8).onClick(^{
         Log(@"view2");
     });
     
@@ -37,7 +37,7 @@
     });
     
     UIButton *button2 = Button.str(@"HAT").highColor(@"brown").img(@"hat").gap(8);
-    button2.xywh(button1.frame).x(button1.maxX + 10).cornerRadius(5).bgImg(@"blue,0.5").highBgImg(@"orange");
+    button2.xywh(button1.frame).x(button1.maxX + 10).borderRadius(5).bgImg(@"blue,0.5").highBgImg(@"orange");
     //highBgImg with color string is a very useful trick to set highlighted background color for UIButton.
     
     
@@ -132,14 +132,14 @@
 
 
 - (void)demo6 {
-    id s1 = Style().fnt(@15).fixWH(100, 44).cornerRadius(4);
+    id s1 = Style().fnt(@15).fixWH(100, 44).borderRadius(4);
     
     id b1 = Button.str(@"Alert").styles(s1).bgImg(@"#178BFB").highBgImg(@"#1F71DC").color(@"white").onClick(@"showAlert");
     id b2 = Button.str(@"ActionSheet").styles(s1).highBgImg(@"#DDD").border(1, @"lightGray").onClick(^{
         [self showActionSheet];
     });
     
-    id s2 = Style().cornerRadius(8).bgImg(@"#1EC659").insets(10, 6);
+    id s2 = Style().borderRadius(8).bgImg(@"#1EC659").insets(10, 6);
     id s3 = Style().str(@"moose").img(@"moose").gap(10);
     
     id b3 = Button.styles(@[s2, s3]);
