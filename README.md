@@ -4,7 +4,10 @@
 [![Version](http://cocoapod-badges.herokuapp.com/v/NerdyUI/badge.png)](https://cocoapods.org/pods/NerdyUI)
 [![License](http://cocoapod-badges.herokuapp.com/l/NerdyUI/badge.png)](https://cocoapods.org/pods/NerdyUI)   
 An easy way to create and layout UI components for iOS 8 and above.    
-[查看中文版](./README_CN.md)
+
+相关文章：  
+[中文说明](http://www.jianshu.com/p/ac47c4826a19)     
+[NerdyUI 使用小技巧](http://www.jianshu.com/p/c9ac29fb634e)
 
 ---
 ## Macros for create NSString, UIFont, UIColor, UIImage and Common structs
