@@ -110,7 +110,7 @@ These macros exist not only because they simplify the process of creating common
 NerdyUI make it very easy to create UI components and config properties by using a chaining syntax.
 
 	UIView *view1 = View.xywh(20, 30, 50, 50).bgColor(@"red").opacity(0.7).border(3, @"3d3d3d");
-    UIView *view2 = View.xy(80, 30).wh(view1.wh).bgColor(@"blue,0.7").cornerRadius(25).shadow(0.8).onClick(^{
+    UIView *view2 = View.xy(80, 30).wh(view1.wh).bgColor(@"blue,0.7").borderRadius(25).shadow(0.8).onClick(^{
         Log(@"view2");
     });
 
@@ -129,7 +129,7 @@ NerdyUI make it very easy to create UI components and config properties by using
     });
     
     UIButton *button2 = Button.str(@"HAT").highColor(@"brown").img(@"hat").gap(8);
-    button2.xywh(button1.frame).x(button1.maxX + 10).cornerRadius(5).bgImg(@"blue,0.5").highBgImg(@"orange");
+    button2.xywh(button1.frame).x(button1.maxX + 10).borderRadius(5).bgImg(@"blue,0.5").highBgImg(@"orange");
     //highBgImg with color string is a very useful trick to set highlighted background color for UIButton.
     
 <img src="./res/button.gif" alt="button" width="50%" />
@@ -163,7 +163,7 @@ You use `.img()`, `.highImg()`, `.bgImg()` and `.highBgImg()` to set image, high
 
 You use `.tint()`, `.color()`, `.bgColor()`, `.highColor()` to set tintColor, textColor, backgroundColor and highlightedTextColor, with the same format as `Color()`.
 
-You use `.border()`, `.cornerRadius()` and `.shadow()` to config border styles and drop shadows.
+You use `.border()`, `.borderRadius()` and `.shadow()` to config border styles and drop shadows.
 
 You use `.fitWidth`, `.fitHeight` and `.fitSize` to change bounds to fit content.
 
@@ -235,7 +235,7 @@ For more complicated constraints, you use `.makeCons()`, `.remakeCons()` and `.u
 Adding constraints for every views by hand could be tedious. Luckily, you can build most of the layouts by simply using `HorStack` and `VerStack` (which are similar to UIStackView) and hopefully without creating any explicit constirants. 
 
 	_indexLabel = Label.fnt(17).color(@"darkGray").fixWidth(44).centerAlignment;
-    _iconView = ImageView.fixWH(64, 64).cornerRadius(10).border(Screen.onePixel, @"#CCCCCC");
+    _iconView = ImageView.fixWH(64, 64).borderRadius(10).border(Screen.onePixel, @"#CCCCCC");
     
     //Setting preferWidth here will improve performance.
     _titleLabel = Label.fnt(15).lines(2).preferWidth(Screen.width - 205);
@@ -244,7 +244,7 @@ Adding constraints for every views by hand could be tedious. Luckily, you can bu
     _ratingLabel = Label.fnt(11).color(@"orange");
     _countLabel = Label.fnt(11).color(@"darkGray");
     
-    _actionButton = Button.fnt(@15).color(@"#0065F7").border(1, @"#0065F7").cornerRadius(3);
+    _actionButton = Button.fnt(@15).color(@"#0065F7").border(1, @"#0065F7").borderRadius(3);
     _actionButton.highColor(@"white").highBgImg(@"#0065F7").insets(5, 10);
     _iapLabel = Label.fnt(9).color(@"darkGray").lines(2).str(@"In-App\nPurchases").centerAlignment;
     
@@ -275,7 +275,7 @@ Nearly all the chainable properties can be set as style.
 
 	//global style
 	Style(@"h1").color(@"#333333").fnt(17);
-   	Style(@"button").fixHeight(30).insets(0, 10).cornerRadius(5);
+   	Style(@"button").fixHeight(30).insets(0, 10).borderRadius(5);
    	//local style
    	id actionButtonStyle = Style().styles(@"button h1").bgImg(@"red").highBgImg(@"blue").highColor(@"white");
 

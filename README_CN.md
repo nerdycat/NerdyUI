@@ -5,6 +5,10 @@
 [![License](http://cocoapod-badges.herokuapp.com/l/NerdyUI/badge.png)](https://cocoapods.org/pods/NerdyUI)   
 一个快速布局 UI 库，适用于 iOS 8 及以上版本。
 
+相关文章：  
+[本文Blog](http://www.jianshu.com/p/ac47c4826a19)     
+[NerdyUI 使用小技巧](http://www.jianshu.com/p/c9ac29fb634e)
+
 ##序言
 众所周知，UI在一个App中所占的比重是很大的，如果能快速的布局UI，则会大大的提高App整体的开发效率，NerdyUI正是基于这个理由创建的。
 
@@ -112,7 +116,7 @@ NerdyUI使用非常紧凑的链式语法，提供一些常用但系统控件又�
 NerdyUI 使用链式语法来快速的创建和设置 UI 控件。
 
 	UIView *view1 = View.xywh(20, 30, 50, 50).bgColor(@"red").opacity(0.7).border(3, @"3d3d3d");
-    UIView *view2 = View.xy(80, 30).wh(view1.wh).bgColor(@"blue,0.7").cornerRadius(25).shadow(0.8).onClick(^{
+    UIView *view2 = View.xy(80, 30).wh(view1.wh).bgColor(@"blue,0.7").borderRadius(25).shadow(0.8).onClick(^{
         Log(@"view2");
     });
 
@@ -132,7 +136,7 @@ NerdyUI 使用链式语法来快速的创建和设置 UI 控件。
     });
     
     UIButton *button2 = Button.str(@"HAT").highColor(@"brown").img(@"hat").gap(8);
-    button2.xywh(button1.frame).x(button1.maxX + 10).cornerRadius(5).bgImg(@"blue,0.5").highBgImg(@"orange");
+    button2.xywh(button1.frame).x(button1.maxX + 10).borderRadius(5).bgImg(@"blue,0.5").highBgImg(@"orange");
     //.highBgImg() 可以用来设置 UIButton 的 highlightedBackgroundColor，这是一个非常有用的功能
     
 <img src="./res/button.gif" alt="button" width="50%" />
@@ -166,7 +170,7 @@ NerdyUI 使用链式语法来快速的创建和设置 UI 控件。
 
 你可以用 `.tint()`, `.color()`, `.bgColor()`, `.highColor()` 来设置 tintColor, textColor, backgroundColor 和 highlightedTextColor, 它们能接受的参数跟 `Color()` 一样。
 
-你可以用 `.border()`, `.cornerRadius()` 和 `.shadow()` 来设置边框和阴影。
+你可以用 `.border()`, `.borderRadius()` 和 `.shadow()` 来设置边框和阴影。
 
 你可以用 `.fitWidth`, `.fitHeight` 和 `.fitSize` 来改变视图的大小，使它的大小刚好能包含视图的内容。
 
@@ -236,7 +240,7 @@ NerdyUI 使用链式语法来快速的创建和设置 UI 控件。
 手动给每个视图添加约束稍微想一下就知道会很麻烦。幸好大部分的 UI 可以用 `HorStack()` 和 `VerStack()` 来实现。使用这两个简易版 StackView，加上上面介绍的那几个属性，很多时候你根本不需要手动显示的创建任何约束。
 
 	_indexLabel = Label.fnt(17).color(@"darkGray").fixWidth(44).centerAlignment;
-    _iconView = ImageView.fixWH(64, 64).cornerRadius(10).border(Screen.onePixel, @"#CCCCCC");
+    _iconView = ImageView.fixWH(64, 64).borderRadius(10).border(Screen.onePixel, @"#CCCCCC");
     
     //用 .preferWidth() 来设置 preferredMaxLayoutWidth，有助于提高性能
     _titleLabel = Label.fnt(15).lines(2).preferWidth(Screen.width - 205);
@@ -245,7 +249,7 @@ NerdyUI 使用链式语法来快速的创建和设置 UI 控件。
     _ratingLabel = Label.fnt(11).color(@"orange");
     _countLabel = Label.fnt(11).color(@"darkGray");
     
-    _actionButton = Button.fnt(@15).color(@"#0065F7").border(1, @"#0065F7").cornerRadius(3);
+    _actionButton = Button.fnt(@15).color(@"#0065F7").border(1, @"#0065F7").borderRadius(3);
     _actionButton.highColor(@"white").highBgImg(@"#0065F7").insets(5, 10);
     _iapLabel = Label.fnt(9).color(@"darkGray").lines(2).str(@"In-App\nPurchases").centerAlignment;
     
@@ -278,7 +282,7 @@ NerdyUI 使用链式语法来快速的创建和设置 UI 控件。
 
     //全局Style
 	Style(@"h1").color(@"#333333").fnt(17);
-    Style(@"button").fixHeight(30).insets(0, 10).cornerRadius(5);
+    Style(@"button").fixHeight(30).insets(0, 10).borderRadius(5);
     //局部Style
     id actionButtonStyle = Style().styles(@"button h1").bgImg(@"red").highBgImg(@"blue").highColor(@"white");
 
