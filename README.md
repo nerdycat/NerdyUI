@@ -3,11 +3,13 @@
 [![Language](https://camo.githubusercontent.com/329dad681452751ddf3fed2c8a32d2c4515ae03b/687474703a2f2f696d672e736869656c64732e696f2f62616467652f6c616e67756167652d4f626a432d627269676874677265656e2e7376673f7374796c653d666c6174)](https://cocoapods.org/pods/NerdyUI)
 [![Version](http://cocoapod-badges.herokuapp.com/v/NerdyUI/badge.png)](https://cocoapods.org/pods/NerdyUI)
 [![License](http://cocoapod-badges.herokuapp.com/l/NerdyUI/badge.png)](https://cocoapods.org/pods/NerdyUI)   
-An easy way to create and layout UI components for iOS 8 and above.    
+An easy way to create and layout UI components for iOS 8 and above.   
+There is also a [Swift version](https://github.com/nerdycat/Cupcake) available.
 
 相关文章：  
 [中文说明](http://www.jianshu.com/p/ac47c4826a19)     
 [NerdyUI 使用小技巧](http://www.jianshu.com/p/c9ac29fb634e)
+
 
 ---
 ## Macros for create NSString, UIFont, UIColor, UIImage and Common structs
@@ -15,14 +17,14 @@ An easy way to create and layout UI components for iOS 8 and above.
 You can convert nearly everything to NSString by using `Str()` macro.  
 Similarly, you can log variables using `Log()` macro.
 
-	Str(100);					//@"100"
-	Str(3.14);					//@"3.14"
-	Str(@0.618);				//@"0.618"
-	Str(view.frame);			//@"{{0, 0}, {100, 100}}"
-	Str(view.center);			//@"{50, 50}"
-	Str(_cmd);					//@"viewDidLoad"
+	Str(100);			//@"100"
+	Str(3.14);			//@"3.14"
+	Str(@0.618);			//@"0.618"
+	Str(view.frame);		//@"{{0, 0}, {100, 100}}"
+	Str(view.center);		//@"{50, 50}"
+	Str(_cmd);			//@"viewDidLoad"
 	Str(NSString.class);		//@"NSString"
-	Str("C-String");			//@"C-String"
+	Str("C-String");		//@"C-String"
 	Str(@"1 + 1 = %d", 1 + 1);	//@"1 + 1 = 2"
 
 	Log(100);
@@ -38,34 +40,34 @@ Similarly, you can log variables using `Log()` macro.
 You can create NSAttributedString with `AttStr()` macro.
 
 	AttStr(@"hello, 101").match(@"[0-9]+").underline;	//mark 101 with underline
-	AttStr(@"A smile ", Img(@"smile"), @" !!");			//attributedString with image attachment
+	AttStr(@"A smile ", Img(@"smile"), @" !!");		//attributedString with image attachment
 	
 You can create UIFont with `Fnt()` macro.
 
-	Fnt(15);					//[UIFont systemFontOfSize:15]
-	Fnt(@15);					//[UIFont boldSystemFontOfSize:15]
-	Fnt(@"body");				//UIFontTextStyleBody
+	Fnt(15);			//[UIFont systemFontOfSize:15]
+	Fnt(@15);			//[UIFont boldSystemFontOfSize:15]
+	Fnt(@"body");			//UIFontTextStyleBody
 	Fnt(@"Helvetica,15");		//helvetica font with size 15
 	
 You can create UIColor with `Color()` macro.
 
-	Color(@"red");				//[UIColor redColor]
-	Color(@"0,0,255");			//RGB color
-	Color(@"#0000FF");			//Hex color
-	Color(@"random");			//random color
+	Color(@"red");			//[UIColor redColor]
+	Color(@"0,0,255");		//RGB color
+	Color(@"#0000FF");		//Hex color
+	Color(@"random");		//random color
 
     //also can have an optional alpha value
-    Color(@"red,0.5");            //red color with alpha 0.5
-    Color(@"0,0,255,0.8");        //blue color with alpha 0.8
+    Color(@"red,0.5");            	//red color with alpha 0.5
+    Color(@"0,0,255,0.8");        	//blue color with alpha 0.8
     ...
 
-    Color(Img(@"pattern"));       //pattern image color
+    Color(Img(@"pattern"));       	//pattern image color
 	
 You can create UIImage with `Img()` macro.
 
-	Img(@"imageName");			//[UIImage imageNamed:]
-	Img(@"#imageName");			//prefixed with # will return an stretchable image
-	Img(@"red");				//1x1 square image with red color
+	Img(@"imageName");		//[UIImage imageNamed:]
+	Img(@"#imageName");		//prefixed with # will return an stretchable image
+	Img(@"red");			//1x1 square image with red color
 	
 You can also create CGPoint, CGSize, CGRect, NSRange and UIEdgeInsets with `XY()`, `WH()`, `XYWH()`, `Range()`, `Insets()` macros.
 
@@ -79,8 +81,8 @@ You can also create CGPoint, CGSize, CGRect, NSRange and UIEdgeInsets with `XY()
 	
 	NSRange		r = Range(10, 20);
 	
-	UIEdgeInsets i1 = Insets(10);				//{10, 10, 10, 10}
-	UIEdgeInsets i2 = Insets(10, 20);			//{10, 20, 10, 20}
+	UIEdgeInsets i1 = Insets(10);			//{10, 10, 10, 10}
+	UIEdgeInsets i2 = Insets(10, 20);		//{10, 20, 10, 20}
 	UIEdgeInsets i3 = Insets(10, 20, 30);		//{10, 20, 30, 20}
 	UIEdgeInsets i4 = Insets(10, 20, 30, 40);	//{10, 20, 30, 40}
 	
@@ -92,7 +94,7 @@ These macros exist not only because they simplify the process of creating common
 	someView.x = 10;
 	someView.y = someView.x;
 	someView.xy = XY(10, 10);
-	someView.w = 50;				//width
+	someView.w = 50;			//width
 	someView.h = someView.w;		//height
 	someView.wh = WH(50, 50);
 	someView.frame = XYWH(10, 10, 50, 50);
@@ -126,7 +128,7 @@ NerdyUI make it very easy to create UI components and config properties by using
 
 	id title = AttStr(@"TAP ME").fnt(15).underline.range(0, 3).fnt(@18).color(@"random");
     UIButton *button1 = Button.str(title).insets(5, 10).fitSize.border(1).xy(20, 150).onClick(^(UIButton *btn) {
-    	//Exp allows you to execute codes in any position.
+        //Exp allows you to execute codes in any position.
         quiz.text = Str(@"%d+%d=%d", 1, 1, Exp(btn.tag += 1)); 
         [quiz sizeToFit];
     });
@@ -138,7 +140,7 @@ NerdyUI make it very easy to create UI components and config properties by using
 <img src="./res/button.gif" alt="button" width="50%" />
 
     id pinField = TextField.x(button1.x).y(button1.maxY + 15).wh(170, 30).onChange(^(NSString *text) {
-    	//self has been weakified, no need to warry about retain cycle.
+        //self has been weakified, no need to warry about retain cycle.
         [(id)[self.view viewWithTag:101] setText:text];
     }).numberKeyboard.maxLength(4).hint(@"pin code").fnt(15).roundStyle;
     
@@ -212,7 +214,7 @@ For more complicated constraints, you use `.makeCons()`, `.remakeCons()` and `.u
     
     //In order to use makeCons, the view must be in the view hierarchy.
     EffectView.darkBlur.fixWH(80, 80).addTo(self.view).makeCons(^{
-    	//you can use 'make' directly without the need to declare it
+        //you can use 'make' directly without the need to declare it
         make.right.equal.superview.centerX.constants(0);
         make.bottom.equal.superview.centerY.constants(0);
     }).addVibrancyChild(hello).tg(101);
