@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
 
   s.name         = "NerdyUI"
-  s.version      = "1.1.0"
+  s.version      = "1.2.0"
   s.summary      = "An easy way to create and layout UI components for iOS."
 
   s.description  = <<-DESC

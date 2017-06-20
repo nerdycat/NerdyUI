@@ -16,7 +16,7 @@
                                         [a addObjectsFromArray:obj]: \
                                         [a addObject:obj]; a;  })
 
-#define ITEM_AT_INDEX(index)            (index < 0 || index >= self.arrangedSubviews.count? \
+#define ITEM_AT_INDEX(index)            (index < 0 || index >= (NSInteger)self.arrangedSubviews.count? \
                                         self:\
                                         self.arrangedSubviews[index])
 
@@ -67,6 +67,8 @@ NER_SYNTHESIZE(nerAttachSpace, setNerAttachSpace);
 @property (nonatomic, strong) NSMutableArray *spacingConstraints;
 @property (nonatomic, strong) NSMutableArray *enclosureConstraints;
 @property (nonatomic, strong) NSMutableArray *springConstraints;
+
+@property (nonatomic, strong) NSNumber *headAttachSpace;
 
 @end
 
@@ -121,7 +123,7 @@ NER_SYNTHESIZE(nerAttachSpace, setNerAttachSpace);
         CGFloat spacing = [view floatValue];
         
         if (index == 0) {
-            self.nerAttachSpace = @(spacing);
+            self.headAttachSpace = @(spacing);
             [self attachSpaceDidChangeForViewAtIndex:-1];
         } else {
             UIView *previousView = self.arrangedSubviews[index - 1];
@@ -230,7 +232,7 @@ NER_SYNTHESIZE(nerAttachSpace, setNerAttachSpace);
 }
 
 - (NSInteger)nextVisibleViewIndexForIndex:(NSInteger)index {
-    for (NSInteger i = index + 1; i < self.arrangedSubviews.count; ++i) {
+    for (NSInteger i = index + 1; i < (NSInteger)self.arrangedSubviews.count; ++i) {
         UIView *item = ITEM_AT_INDEX(i);
         if (!item.hidden) return i;
     }
@@ -271,9 +273,22 @@ NER_SYNTHESIZE(nerAttachSpace, setNerAttachSpace);
     [self addAndActivateAlignmentConstraintsForAll];
     [self addAndActivateSpacingConstraintsForAll];
     [self addAndActivateEnclosureConstraintsForAll];
+    
+    for (int i = 0; i < self.arrangedSubviews.count; ++i) {
+        id item = self.arrangedSubviews[i];
+        if ([item isKindOfClass:[NERStackSpring class]]) {
+            NERStackSpring *spring = (NERStackSpring *)item;
+            spring.axis = self.axis;
+            [self addAndActivateSpringConstraintsForSpringAtIndex:i];
+        }
+    }
 }
 
 - (void)addAndActivateConstraintsForViewAtIndex:(NSInteger)index {
+    if ([ITEM_AT_INDEX(index) isHidden]) {
+        return;
+    }
+    
     NSMutableArray *oldConstriants = [NSMutableArray array];
     NSMutableArray *newConstraints = [NSMutableArray array];
     
@@ -321,7 +336,9 @@ NER_SYNTHESIZE(nerAttachSpace, setNerAttachSpace);
 
 - (void)addAndActivateAlignmentConstraintsForAll {
     for (int i = 0; i < self.arrangedSubviews.count; ++i) {
-        [self addAlignmentConstraintForIndex:i];
+        if (![self.arrangedSubviews[i] isHidden]) {
+            [self addAlignmentConstraintForIndex:i];
+        }
     }
     
     [NSLayoutConstraint activateConstraints:self.alignmentConstraints];
@@ -374,7 +391,9 @@ NER_SYNTHESIZE(nerAttachSpace, setNerAttachSpace);
 
 - (void)addAndActivateEnclosureConstraintsForAll {
     for (int i = 0; i < self.arrangedSubviews.count; ++i) {
-        [self addEnclosureConstraintsForIndex:i];
+        if (![self.arrangedSubviews[i] isHidden]) {
+            [self addEnclosureConstraintsForIndex:i];
+        }
     }
     
     [NSLayoutConstraint activateConstraints:self.enclosureConstraints];
@@ -425,8 +444,12 @@ NER_SYNTHESIZE(nerAttachSpace, setNerAttachSpace);
 
 - (void)addAndActivateSpacingConstraintsForAll {
     if (self.arrangedSubviews.count) {
-        for (int i = 0; i <= self.arrangedSubviews.count; ++i) {
-            [self addSpacingConstraintBetweenIndex1:i - 1 index2:i];
+        NSInteger index1 = -1;
+        
+        while (index1 < (NSInteger)self.arrangedSubviews.count) {
+            NSInteger index2 = [self nextVisibleViewIndexForIndex:index1];
+            [self addSpacingConstraintBetweenIndex1:index1 index2:index2];
+            index1 = index2;
         }
         
         [NSLayoutConstraint activateConstraints:self.spacingConstraints];
@@ -450,12 +473,12 @@ NER_SYNTHESIZE(nerAttachSpace, setNerAttachSpace);
     }
     
     CGFloat spacing = 0;
-    if (item1.nerAttachSpace) {
+    if (item1 == self && self.headAttachSpace) {
+        spacing = -[self.headAttachSpace floatValue];
+    } else if (item1.nerAttachSpace) {
         spacing = -[item1.nerAttachSpace floatValue];
     } else if (item1 != self && item2 != self) {
         spacing = -self.spacing;
-    } else {
-        
     }
     
     id c = [self makeConstraint:index1 :att1 :NSLayoutRelationEqual :index2 :att2 :1 :spacing :1000];
@@ -506,9 +529,14 @@ NER_SYNTHESIZE(nerAttachSpace, setNerAttachSpace);
     UIView *item2 = ITEM_AT_INDEX(index + 1);
     
     for (NSLayoutConstraint *c in self.spacingConstraints) {
-        if ((c.firstItem == item1 && c.secondItem == item2) && item1.nerAttachSpace) {
-            c.constant = -[item1.nerAttachSpace floatValue];
-            break;
+        if (c.firstItem == item1 && c.secondItem == item2) {
+            if (item1 == self && self.headAttachSpace) {
+                c.constant = -[self.headAttachSpace floatValue];
+                break;
+            } else if (item1.nerAttachSpace) {
+                c.constant = -[item1.nerAttachSpace floatValue];
+                break;
+            }
         }
     }
 }
@@ -535,10 +563,11 @@ NER_SYNTHESIZE(nerAttachSpace, setNerAttachSpace);
 - (void)removeAndDeactivateSpringConstriantsForSpringAtIndex:(NSInteger)index {
     id item = ITEM_AT_INDEX(index);
     
-    for (NSLayoutConstraint *c in self.springConstraints) {
+    for (int i = (int)self.springConstraints.count - 1; i >= 0; --i) {
+        NSLayoutConstraint *c = self.springConstraints[i];
         if (c.firstItem == item || c.secondItem == item) {
-            [self.springConstraints removeObject:c];
             c.active = NO;
+            [self.springConstraints removeObject:c];
         }
     }
 }

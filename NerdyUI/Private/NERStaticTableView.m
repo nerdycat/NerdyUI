@@ -252,6 +252,10 @@
 
 @implementation NERStaticTableView
 
+- (CGSize)intrinsicContentSize {
+    return CGSizeMake(-1, self.contentSize.height + self.contentInset.top + self.contentInset.bottom);
+}
+
 - (NSArray *)checkedIndexPaths {
     NSMutableArray *indexPaths = [NSMutableArray array];
     

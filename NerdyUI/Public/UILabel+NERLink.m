@@ -166,6 +166,7 @@ static CGFloat nerPrivateDefaultLinkSelectedBorderRadius = 0;
     
     NSMutableAttributedString *att = [[NSMutableAttributedString alloc] initWithAttributedString:self.attributedText];
     [att ner_addAttributeIfNotExist:NSFontAttributeName value:self.font range:[att.string ner_fullRange]];
+    [att ner_setParagraphStyleValue:@(self.textAlignment) forKey:@"alignment" range:NSMakeRange(0, att.string.length)];
     
     if (self.numberOfLines != 1 && self.lineBreakMode != NSLineBreakByCharWrapping && self.lineBreakMode != NSLineBreakByWordWrapping) {
         [att ner_setParagraphStyleValue:@(NSLineBreakByWordWrapping) forKey:@"lineBreakMode" range:NSMakeRange(0, att.string.length)];

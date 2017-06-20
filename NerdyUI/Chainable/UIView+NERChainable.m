@@ -79,6 +79,10 @@
     NER_OBJECT_BLOCK([NERUtils applyStyleObject:value toItem:self];);
 }
 
+- (NERChainableUIViewInsetsBlock)touchInsets {
+    NER_INSETS_BLOCK( self.nerTouchInsets = value );
+}
+
 - (NERChainableUIViewCallbackBlock)onClick {
     NER_CALLBACK_BLOCK(
                         if (NER_IS_BLOCK(object)) {

@@ -324,6 +324,18 @@ NER_SYNTHESIZE(nerEffectedRanges, setNerEffectedRanges);
 
 @implementation UIView (NERPriavte)
 
+NER_SYNTHESIZE_STRUCT(nerTouchInsets, setNerTouchInsets, UIEdgeInsets);
+
++ (void)load {
+    [self ner_swizzleMethod:@selector(pointInside:withEvent:) withMethod:@selector(ner_pointInside:withEvent:)];
+}
+
+- (BOOL)ner_pointInside:(CGPoint)point withEvent:(UIEvent *)event {
+    UIEdgeInsets touchInsets = self.nerTouchInsets;
+    CGRect rect = UIEdgeInsetsInsetRect(self.bounds, touchInsets);
+    return CGRectContainsPoint(rect, point);
+}
+
 - (CGSize)ner_fittingSize {
     return [self systemLayoutSizeFittingSize:UILayoutFittingCompressedSize];
 }

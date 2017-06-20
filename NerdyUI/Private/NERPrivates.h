@@ -67,6 +67,8 @@
 
 @interface UIView (NERPriavte)
 
+@property (nonatomic, assign) UIEdgeInsets nerTouchInsets;
+
 - (CGSize)ner_fittingSize;
 - (UIImage *)ner_snapShot;
 

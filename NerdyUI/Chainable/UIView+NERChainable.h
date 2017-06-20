@@ -91,6 +91,18 @@ NER_PROP(v, Object)             styles;\
 NER_PROP(v, Callback)           onClick;\
 \
 /**
+ * Setting touch insets.
+ * Very useful for extending touch area.
+
+ * Usages:
+    .touchInsets(10)                top/left/bottom/right = 10
+    .touchInsets(10, 20)            top/bottom = 10, left/right = 20
+    .touchInsets(10, 20, 30),       top = 10, left/right = 20, bottom = 30
+    .touchInsets(10, 20, 30, 40)    top = 10, left = 20, bottom = 30, right = 40
+ */\
+NER_PROP(v, Insets)             touchInsets;\
+\
+/**
  * Add self to superview.
  * Usages: .addTo(superview)
  */\
@@ -106,6 +118,7 @@ NER_PROP(v, Object)             addChild;
 
 #define border(...)             border(__VA_ARGS__, nil)
 #define shadow(...)             shadow(NER_MAKE_FLOAT_LIST(__VA_ARGS__))
+#define touchInsets(...)        touchInsets(NER_NORMALIZE_INSETS(__VA_ARGS__))
 #define addChild(...)           addChild(@[__VA_ARGS__])
 
 
