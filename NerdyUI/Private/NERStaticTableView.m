@@ -398,6 +398,8 @@
     self.delegate = self;
     self.dataSource = self;
     self.estimatedRowHeight = 44;
+    self.estimatedSectionHeaderHeight = 0;
+    self.estimatedSectionFooterHeight = 0;
     self.sections = realSections;
     return self;
 }
