@@ -6,10 +6,6 @@
 An easy way to create and layout UI components for iOS 8 and above.   
 There is also a [Swift version](https://github.com/nerdycat/Cupcake) available.
 
-相关文章：  
-[中文说明](http://www.jianshu.com/p/ac47c4826a19)     
-[NerdyUI 使用小技巧](http://www.jianshu.com/p/c9ac29fb634e)
-
 
 ---
 ## Macros for create NSString, UIFont, UIColor, UIImage and Common structs
