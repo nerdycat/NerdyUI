@@ -7,7 +7,7 @@
 //
 
 
-#import <UIkit/UIGestureRecognizerSubclass.h>
+#import <UIKit/UIGestureRecognizerSubclass.h>
 #import "UILabel+NERLink.h"
 #import "NERDefs.h"
 #import "NERPrivates.h"
